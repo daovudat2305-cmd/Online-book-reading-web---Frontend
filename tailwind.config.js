@@ -4,10 +4,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "hsl(215, 71%, 58%)",
-        "primary-content": "hsl(0, 0%, 100%)",
-        "primary-dark": "hsl(215, 71%, 48%)",
-        "primary-light": "hsl(215, 71%, 68%)",
+        p: {
+            50: '#f0f8ff',
+            100: '#dff0ff',
+            200: '#b9e2fe',
+            300: '#7bcdfe',
+            400: '#47bbfc',
+            500: '#0a9bed',
+            600: '#007acb',
+            700: '#0062a4',
+            800: '#055387',
+            900: '#0a4670',
+            950: '#072c4a',
+        },
+
+        n: {
+          50: "hsl(210, 14%, 98%)", // #F7F8F9
+          100: "hsl(210, 20%, 93%)", // #E7EAEE
+          200: "hsl(210, 22%, 85%)", // #D0D5DD
+          500: "hsl(217, 20%, 58%)", // #64748B
+          600: "hsl(217, 18%, 54%)", // #4B5768
+          700: "hsl(217, 17%, 40%)", // #323A46
+          800: "hsl(220, 14%, 12%)", // #191D23
+        },
 
         secondary: "hsl(275, 71%, 58%)",
         "secondary-content": "hsl(0, 0%, 100%)",
@@ -29,6 +48,7 @@ module.exports = {
         "success-content": "hsl(120, 69%, 8%)",
         "warning-content": "hsl(60, 69%, 8%)",
         "error-content": "hsl(0, 0%, 100%)"
+
       },
     },
   },

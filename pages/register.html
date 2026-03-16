@@ -13,38 +13,38 @@
     <!-- Script -->
 </head>
 <body>
-    <div class="flex justify-center items-center min-h-screen gap-20">
+    <div class="flex items-center justify-center min-h-screen gap-20 bg-gradient-to-t from-p-200 to-white">
         <!-- Image -->
         <div>
             <img src="../assets/logo.svg" class="w-72">
         </div>
         
         <!-- Register Form -->
-        <div class="bg-primary w-[480px] h-[540px] rounded-lg flex flex-col p-8">
-            <h2 class="text-2xl font-semibold text-center mb-8 text-primary-content">Đăng ký</h2>
+        <div class="bg-p-400 w-[480px] h-[540px] rounded-lg flex flex-col p-8 shadow-xl">
+            <h2 class="mb-8 text-2xl font-semibold text-center text-n-800">Đăng ký</h2>
             <div>
                 <form action="" class="flex flex-col space-y-6">
 
                     <div class="flex flex-col">
-                        <label for="" class="mb-2 font-medium text-primary-content">Email</label> 
-                        <input type="email" placeholder="Nhập email" class="bg-white border rounded-md p-2 w-full">
+                        <label for="" class="mb-2 font-medium text-n-800">Email</label> 
+                        <input type="email" placeholder="Nhập email" class="w-full p-2 bg-white border rounded-md">
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="" class="mb-2 font-medium text-primary-content">Tên đăng nhập</label> 
-                        <input type="text" placeholder="Nhập tên đăng nhập" class="bg-white border rounded-md p-2 w-full">
+                        <label for="" class="mb-2 font-medium text-n-800">Tên đăng nhập</label> 
+                        <input type="text" placeholder="Nhập tên đăng nhập" class="w-full p-2 bg-white border rounded-md">
                     </div>
 
                     <div class="flex flex-col">
-                        <label for="" class="mb-2 font-medium text-primary-content">Mật khẩu</label>
-                        <input type="password" placeholder="Nhập mật khẩu" class="bg-white border rounded-md p-2 w-full">
+                        <label for="" class="mb-2 font-medium text-n-800">Mật khẩu</label>
+                        <input type="password" placeholder="Nhập mật khẩu" class="w-full p-2 bg-white border rounded-md">
                     </div>
 
                     <div class="text-right">
-                        <a href="login.html" class="text-primary-content hover:underline">Đăng nhập</a>
+                        <span class="text-n-700">Bạn đã có tài khoản?</span> <a href="login.html" class="font-bold text-p-700 hover:underline hover:text-n-50">Đăng nhập ngay</a>
                     </div>
 
-                    <button class="bg-background font-bold py-2 rounded-md w-full transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                    <button class="w-full py-2 font-bold transition duration-200 rounded-md bg-background hover:-translate-y-1 hover:shadow-lg">
                         Đăng ký
                     </button>
                 </form>
