@@ -788,13 +788,6 @@
       margin-inline-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
-  .space-x-12 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 12) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 12) * calc(1 - var(--tw-space-x-reverse)));
-    }
-  }
   .gap-y-6 {
     row-gap: calc(var(--spacing) * 6);
   }
@@ -881,6 +874,18 @@
   .border-gray-700 {
     border-color: var(--color-gray-700);
   }
+  .border-n-50 {
+    border-color: hsl(210, 14%, 98%);
+  }
+  .border-n-200 {
+    border-color: hsl(210, 22%, 85%);
+  }
+  .border-n-600 {
+    border-color: hsl(217, 18%, 54%);
+  }
+  .border-p-400 {
+    border-color: #47bbfc;
+  }
   .border-secondary-light {
     border-color: hsl(275, 71%, 68%);
   }
@@ -943,6 +948,30 @@
   .bg-green-100 {
     background-color: var(--color-green-100);
   }
+  .bg-n-50 {
+    background-color: hsl(210, 14%, 98%);
+  }
+  .bg-n-50\/10 {
+    background-color: color-mix(in oklab, hsl(210, 14%, 98%) 10%, transparent);
+  }
+  .bg-n-50\/50 {
+    background-color: color-mix(in oklab, hsl(210, 14%, 98%) 50%, transparent);
+  }
+  .bg-n-50\/60 {
+    background-color: color-mix(in oklab, hsl(210, 14%, 98%) 60%, transparent);
+  }
+  .bg-n-100 {
+    background-color: hsl(210, 20%, 93%);
+  }
+  .bg-n-200 {
+    background-color: hsl(210, 22%, 85%);
+  }
+  .bg-n-500 {
+    background-color: hsl(217, 20%, 58%);
+  }
+  .bg-n-800 {
+    background-color: hsl(220, 14%, 12%);
+  }
   .bg-p-50 {
     background-color: #f0f8ff;
   }
@@ -961,11 +990,17 @@
   .bg-red-100 {
     background-color: var(--color-red-100);
   }
+  .bg-red-400 {
+    background-color: var(--color-red-400);
+  }
   .bg-red-500 {
     background-color: var(--color-red-500);
   }
   .bg-success {
     background-color: hsl(120, 85%, 60%);
+  }
+  .bg-transparent {
+    background-color: transparent;
   }
   .bg-warning {
     background-color: hsl(60, 85%, 60%);
@@ -1196,6 +1231,12 @@
   .text-green-700 {
     color: var(--color-green-700);
   }
+  .text-n-500 {
+    color: hsl(217, 20%, 58%);
+  }
+  .text-n-600 {
+    color: hsl(217, 18%, 54%);
+  }
   .text-n-700 {
     color: hsl(217, 17%, 40%);
   }
@@ -1235,6 +1276,11 @@
   .placeholder-gray-600 {
     &::placeholder {
       color: var(--color-gray-600);
+    }
+  }
+  .placeholder-n-600 {
+    &::placeholder {
+      color: hsl(217, 18%, 54%);
     }
   }
   .opacity-0 {
@@ -1302,6 +1348,20 @@
       }
     }
   }
+  .group-hover\:text-p-300 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: #7bcdfe;
+      }
+    }
+  }
+  .group-hover\:text-p-400 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: #47bbfc;
+      }
+    }
+  }
   .group-hover\:shadow-lg {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1342,6 +1402,13 @@
       }
     }
   }
+  .hover\:bg-error {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(0, 85%, 60%);
+      }
+    }
+  }
   .hover\:bg-gray-50 {
     &:hover {
       @media (hover: hover) {
@@ -1370,10 +1437,52 @@
       }
     }
   }
+  .hover\:bg-n-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(210, 20%, 93%);
+      }
+    }
+  }
+  .hover\:bg-n-200 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(210, 22%, 85%);
+      }
+    }
+  }
+  .hover\:bg-n-500 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(217, 20%, 58%);
+      }
+    }
+  }
+  .hover\:bg-p-100 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #dff0ff;
+      }
+    }
+  }
   .hover\:bg-p-200 {
     &:hover {
       @media (hover: hover) {
         background-color: #b9e2fe;
+      }
+    }
+  }
+  .hover\:bg-p-300 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #7bcdfe;
+      }
+    }
+  }
+  .hover\:bg-p-400 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #47bbfc;
       }
     }
   }
@@ -1395,6 +1504,20 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-red-600);
+      }
+    }
+  }
+  .hover\:bg-red-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-red-700);
+      }
+    }
+  }
+  .hover\:bg-success {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(120, 85%, 60%);
       }
     }
   }

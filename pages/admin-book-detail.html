@@ -8,49 +8,49 @@
     <link rel="icon" type="image/png" href="../assets/logo.png">
     <link href="../dist/output.css" rel="stylesheet">
 </head>
-<body class="bg-white min-h-screen font-sans text-gray-800 relative">
+<body class="relative min-h-screen font-sans bg-gradient-to-t from-p-200 to-white text-n-800">
 
-    <div class="w-full bg-white">
+    <div class="w-full">
         
-        <div class="p-6 flex items-center space-x-4">
-            <h1 class="text-3xl font-bold text-black">Logo</h1>
-            <img src="../assets/logo.png" alt="Logo Icon" class="w-12 h-12 inline-block">
+        <div class="flex items-center p-6 space-x-4">
+            <img src="../assets/logo.png" alt="Logo Icon" class="inline-block w-12 h-12">
+            <h1 class="text-3xl font-bold text-n-800">Book Online - Quản lý</h1>
         </div>
 
-        <nav class="bg-[#00c6d7] flex items-center text-black font-medium">
-            <a href="admin-home.html" class="bg-[#40dbe5] px-6 py-4 block">
+        <nav class="flex items-center font-medium text-n-800 bg-p-400">
+            <a href="admin-home.html" class="block px-6 py-4 bg-p-200">
                 Quản lý sách
             </a>
-            <a href="admin-author.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+            <a href="admin-author.html" class="block px-6 py-4 transition duration-300 hover:bg-p-200">
                 Tác giả
             </a>
-            <a href="admin-author-register.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+            <a href="admin-author-register.html" class="block px-6 py-4 transition duration-300 hover:bg-p-200">
                 Danh sách đăng ký tác giả
             </a>
-            <a href="admin-transaction.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+            <a href="admin-transaction.html" class="block px-6 py-4 transition duration-300 hover:bg-p-200">
                 Quản lý giao dịch
             </a>
         </nav>
 
         <div class="p-6">
             
-            <div class="flex items-center space-x-3 mb-10">
-                <button class="bg-[#d1d5db] px-6 py-2 rounded-full font-bold shadow-sm hover:bg-gray-400 transition">
+            <div class="flex items-center mb-10 space-x-3">
+                <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
                     Tìm kiếm
                 </button>
-                <input type="text" placeholder="Bạn muốn tìm sách gì" class="bg-[#d1d5db] px-6 py-2 rounded-full w-[300px] outline-none focus:ring-2 focus:ring-[#00c6d7] placeholder-gray-600 font-medium shadow-sm">
+                <input type="text" placeholder="Bạn muốn tìm sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
             </div>
 
-            <div class="flex flex-col md:flex-row gap-10 mt-12 pl-4">
+            <div class="flex flex-col gap-10 pl-4 mt-12 md:flex-row">
                 
                 <div class="w-56 shrink-0">
                     <div class="w-full aspect-[2/3] bg-[#d9d9d9] shadow-sm"></div>
                 </div>
 
                 <div class="flex flex-col">
-                    <h2 class="text-xl font-bold text-black mb-4">Tên sách</h2>
+                    <h2 class="mb-4 text-xl font-bold text-n-800">Tên sách</h2>
                     
-                    <div class="space-y-1 text-[15px] font-medium text-gray-800 mb-8">
+                    <div class="space-y-1 text-[15px] font-medium text-n-800 mb-8">
                         <p>Tác giả</p>
                         <p>Ngày đăng</p>
                         <p>Số trang</p>
@@ -61,11 +61,11 @@
                         <p>Các thể loại</p>
                     </div>
 
-                    <div class="flex space-x-4 mt-auto">
-                        <button class="bg-[#d1d5db] px-6 py-2 text-sm font-medium shadow-sm hover:bg-gray-400 transition">
-                            Đọc ngay
+                    <div class="flex mt-auto space-x-4">
+                        <button class="px-8 py-2 font-medium transition shadow-sm bg-n-100 hover:bg-success hover:text-white text-n-800">
+                            Đọc sách
                         </button>
-                        <button id="btn-delete" class="bg-[#d1d5db] px-6 py-2 text-sm font-medium shadow-sm hover:bg-red-400 hover:text-white transition">
+                        <button id="btn-delete" class="px-8 py-2 font-medium transition shadow-sm bg-n-100 hover:bg-error hover:text-white text-n-800">
                             Xóa sách
                         </button>
                     </div>
@@ -76,17 +76,17 @@
         </div>
     </div>
 
-    <div id="delete-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div id="delete-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-n-50/60">
         <div class="bg-white w-[400px] rounded-lg shadow-xl p-6">
-            <h3 class="text-xl font-bold text-black mb-4">Lý do xóa sách</h3>
+            <h3 class="mb-4 text-xl font-bold text-n-800">Lý do xóa sách</h3>
             
             <textarea placeholder="Nhập lý do xóa cuốn sách này..." class="w-full bg-[#f3f4f6] border border-gray-300 rounded-md p-3 h-32 outline-none focus:ring-2 focus:ring-red-400 resize-none mb-6"></textarea>
             
             <div class="flex justify-end space-x-3">
-                <button id="btn-cancel" class="bg-gray-300 px-5 py-2 rounded font-medium hover:bg-gray-400 transition">
+                <button id="btn-cancel" class="px-5 py-2 font-medium transition bg-gray-300 rounded hover:bg-gray-400">
                     Hủy
                 </button>
-                <button id="btn-submit" class="bg-red-500 text-white px-5 py-2 rounded font-medium hover:bg-red-600 transition">
+                <button id="btn-submit" class="px-5 py-2 font-medium text-white transition bg-red-500 rounded hover:bg-red-700">
                     Gửi
                 </button>
             </div>

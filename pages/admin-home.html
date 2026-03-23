@@ -12,42 +12,42 @@
 
     <!-- Script -->
 </head>
-<body class="bg-white min-h-screen font-sans text-gray-800">
+<body class="min-h-screen font-sans text-n-800 bg-gradient-to-t from-p-200 to-white">
 
-    <div class="w-full bg-white">
+    <div class="w-full">
         
-        <div class="p-6 flex items-center space-x-4">
-            <h1 class="text-3xl font-bold text-black">Logo</h1>
-            <img src="../assets/logo.png" alt="Logo Icon" class="w-12 h-12 inline-block">
+        <div class="flex items-center p-6 space-x-4">
+            <img src="../assets/logo.png" alt="Logo Icon" class="inline-block w-12 h-12">
+            <h1 class="text-3xl font-bold text-n-800">Book Online - Quản lý</h1>
         </div>
 
-        <nav class="bg-[#00c6d7] flex items-center text-black font-medium">
-            <a href="admin-home.html" class="bg-[#40dbe5] px-6 py-4 block">
+        <nav class="flex items-center font-medium bg-p-400 text-n-800">
+            <a href="admin-home.html" class="block px-6 py-4 bg-p-200">
                 Quản lý sách
             </a>
-            <a href="admin-author.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+            <a href="admin-author.html" class="block px-6 py-4 transition duration-300 hover:bg-p-200">
                 Tác giả
             </a>
-            <a href="admin-author-register.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+            <a href="admin-author-register.html" class="block px-6 py-4 transition duration-300 hover:bg-p-200">
                 Danh sách đăng ký tác giả
             </a>
-            <a href="admin-transaction.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+            <a href="admin-transaction.html" class="block px-6 py-4 transition duration-300 hover:bg-p-200">
                 Quản lý giao dịch
             </a>
         </nav>
 
         <div class="p-6">
             
-            <div class="flex items-center space-x-3 mb-10">
-                <button id="btn-search" class="bg-[#d1d5db] px-6 py-2 rounded-full font-bold shadow-sm hover:bg-gray-400 transition">
+            <div class="flex items-center mb-10 space-x-3">
+                <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
                     Tìm kiếm
                 </button>
-                <input type="text" placeholder="Bạn muốn tìm sách gì" class="bg-[#d1d5db] px-6 py-2 rounded-full w-[300px] outline-none focus:ring-2 focus:ring-[#00c6d7] placeholder-gray-600 font-medium shadow-sm">
+                <input type="text" placeholder="Bạn muốn tìm sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
             </div>
 
-            <div class="relative border border-gray-600 bg-[#cccaca] p-6 mb-12 mt-4 shadow-inner">
-                <span class="absolute -top-4 left-4 bg-white px-3 py-1 text-xl font-bold border border-white">Thể loại</span>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-6 gap-x-4 mt-4">
+            <div class="relative p-6 mt-4 mb-12 border shadow-inner border-n-600 bg-n-100">
+                <span class="absolute px-3 py-1 text-xl font-bold border border-n-50 bg-n-50 -top-4 left-4">Thể loại</span>
+                <div class="grid grid-cols-2 mt-4 md:grid-cols-4 lg:grid-cols-7 gap-y-6 gap-x-4">
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
                         <input type="checkbox" class="custom-checkbox">
                         <span class="text-sm font-bold">Tiên hiệp</span>
@@ -99,9 +99,9 @@
                 </div>
             </div>
 
-            <div class="relative border border-gray-600 bg-[#cccaca] p-6 mb-12 mt-8 shadow-inner">
-                <span class="absolute -top-4 left-4 bg-white px-3 py-1 text-xl font-bold border border-white">Sắp xếp</span>
-                <div class="grid grid-cols-3 gap-6 mt-4 max-w-2xl">
+            <div class="relative p-6 mt-8 mb-12 border shadow-inner border-n-600 bg-n-100">
+                <span class="absolute px-3 py-1 text-xl font-bold border border-n-50 bg-n-50 -top-4 left-4">Sắp xếp</span>
+                <div class="grid max-w-2xl grid-cols-3 gap-6 mt-4">
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
                         <input type="checkbox" class="custom-checkbox">
                         <span class="text-sm font-bold">Lượt xem</span>
@@ -117,33 +117,33 @@
                 </div>
             </div>
 
-            <div id="empty-state" class="flex justify-center pb-12 pt-4">
-                <div class="bg-[#d1d5db] px-8 py-3 rounded-full font-bold shadow-sm">
+            <div id="empty-state" class="flex justify-center pt-4 pb-12">
+                <div class="px-8 py-3 font-bold rounded-full shadow-sm bg-n-50">
                     Khu vực hiển thị kết quả
                 </div>
             </div>
 
-            <div id="search-results" class="hidden mt-10 pb-12">
+            <div id="search-results" class="hidden pb-12 mt-10">
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-10">
                     
-                    <a href="admin-book-detail.html" class="book-approved flex flex-col items-center group cursor-pointer block">
+                    <a href="admin-book-detail.html" class="flex flex-col items-center block cursor-pointer book-approved group">
                         <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
-                        <span class="mt-3 text-sm font-medium text-gray-800 group-hover:text-[#00c6d7] transition text-center">
+                        <span class="mt-3 text-sm font-medium text-n-800 group-hover:text-[#00c6d7] transition text-center">
                             Tên sách (Đã duyệt)
                         </span>
                     </a>
 
-                    <a href="admin-approve-book.html" class="book-pending hidden flex flex-col items-center group cursor-pointer block relative">
-                        <span class="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">Chờ duyệt</span>
+                    <a href="admin-approve-book.html" class="relative flex flex-col items-center hidden block cursor-pointer book-pending group">
+                        <span class="absolute px-2 py-1 text-xs font-bold bg-yellow-400 rounded top-2 right-2">Chờ duyệt</span>
                         <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
-                        <span class="mt-3 text-sm font-medium text-gray-800 group-hover:text-[#00c6d7] transition text-center">
+                        <span class="mt-3 text-sm font-medium text-n-800 group-hover:text-[#00c6d7] transition text-center">
                             Tên sách (Chờ duyệt)
                         </span>
                     </a>
 
-                    <a href="admin-book-detail.html" class="book-approved flex flex-col items-center group cursor-pointer block">
+                    <a href="admin-book-detail.html" class="flex flex-col items-center block cursor-pointer book-approved group">
                         <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
-                        <span class="mt-3 text-sm font-medium text-gray-800 group-hover:text-[#00c6d7] transition text-center">
+                        <span class="mt-3 text-sm font-medium text-n-800 group-hover:text-[#00c6d7] transition text-center">
                             Tên sách (Đã duyệt)
                         </span>
                     </a>
@@ -151,12 +151,12 @@
                 </div>
             </div>
             
-            <div class="mt-8 flex justify-center space-x-2">
-                <button class="px-4 py-2 border border-gray-300 bg-gray-100 hover:bg-gray-200 font-medium">Trước</button>
-                <button class="px-4 py-2 bg-[#00c6d7] text-white font-bold">1</button>
-                <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100 font-medium">2</button>
-                <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100 font-medium">3</button>
-                <button class="px-4 py-2 border border-gray-300 bg-gray-100 hover:bg-gray-200 font-medium">Sau</button>
+            <div class="flex justify-center mt-8 space-x-2">
+                <button class="px-4 py-2 font-medium border border-gray-300 bg-n-100 hover:bg-n-200">Trước</button>
+                <button class="px-4 py-2 font-bold text-white bg-p-400">1</button>
+                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">2</button>
+                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">3</button>
+                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">Sau</button>
             </div>
 
         </div>
