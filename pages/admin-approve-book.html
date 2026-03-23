@@ -1,0 +1,88 @@
+<!-- Duyệt sách-->>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Online</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+   
+    <!-- CSS -->
+
+    <link href="../dist/output.css" rel="stylesheet">
+
+    <!-- Script -->
+</head>
+<body class="bg-white min-h-screen font-sans text-gray-800">
+
+    <div class="w-full bg-white">
+        
+        <div class="p-6 flex items-center space-x-4">
+            <h1 class="text-3xl font-bold text-black">Logo</h1>
+            <img src="../assets/logo.png" alt="Logo Icon" class="w-12 h-12 inline-block">
+        </div>
+
+        <nav class="bg-[#00c6d7] flex items-center text-black font-medium">
+            <a href="admin-home.html" class="bg-[#40dbe5] px-6 py-4 block">
+                Quản lý sách
+            </a>
+            <a href="admin-author.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Tác giả
+            </a>
+            <a href="admin-author-register.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Danh sách đăng ký tác giả
+            </a>
+            <a href="admin-transaction.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Quản lý giao dịch
+            </a>
+        </nav>
+
+        <div class="p-6 mt-4">
+            
+            <div class="flex items-center space-x-3 mb-16 pl-4">
+                <button class="bg-[#d1d5db] px-6 py-2 rounded-full font-bold shadow-sm hover:bg-gray-400 transition">
+                    Tìm kiếm
+                </button>
+                <input type="text" placeholder="Bạn muốn tìm sách gì" class="bg-[#d1d5db] px-6 py-2 rounded-full w-[300px] outline-none placeholder-gray-600 font-medium shadow-sm">
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-16 pl-8">
+                
+                <div class="w-[200px] shrink-0">
+                    <div class="w-full aspect-[2/3] bg-[#d9d9d9] shadow-sm"></div>
+                </div>
+
+                <div class="flex flex-col pt-2">
+                    <h2 class="text-2xl font-bold text-black mb-10">Tên sách</h2>
+                    
+                    <div class="space-y-1 text-[16px] font-medium text-black mb-12">
+                        <p>Tác giả</p>
+                        <p>Số trang</p>
+                        <p>Các thể loại</p>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-[#d9d9d9] px-6 py-2 font-medium shadow-sm hover:bg-gray-400 transition text-black">
+                            Đọc ngay
+                        </button>
+                        <button class="bg-[#d9d9d9] px-6 py-2 font-medium shadow-sm hover:bg-gray-400 transition text-black">
+                            Đồng ý
+                        </button>
+                        <button class="bg-[#d9d9d9] px-6 py-2 font-medium shadow-sm hover:bg-gray-400 transition text-black">
+                            Từ chối
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 pl-8 pb-20">
+                <h3 class="text-xl font-bold text-black mb-6">Giới thiệu nội dung</h3>
+                <div class="max-w-4xl text-gray-700 leading-relaxed">
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

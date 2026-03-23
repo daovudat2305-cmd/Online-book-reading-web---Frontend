@@ -1,0 +1,119 @@
+<!--admin xóa sách-->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Online</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link href="../dist/output.css" rel="stylesheet">
+</head>
+<body class="bg-white min-h-screen font-sans text-gray-800 relative">
+
+    <div class="w-full bg-white">
+        
+        <div class="p-6 flex items-center space-x-4">
+            <h1 class="text-3xl font-bold text-black">Logo</h1>
+            <img src="../assets/logo.png" alt="Logo Icon" class="w-12 h-12 inline-block">
+        </div>
+
+        <nav class="bg-[#00c6d7] flex items-center text-black font-medium">
+            <a href="admin-home.html" class="bg-[#40dbe5] px-6 py-4 block">
+                Quản lý sách
+            </a>
+            <a href="admin-author.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Tác giả
+            </a>
+            <a href="admin-author-register.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Danh sách đăng ký tác giả
+            </a>
+            <a href="admin-transaction.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Quản lý giao dịch
+            </a>
+        </nav>
+
+        <div class="p-6">
+            
+            <div class="flex items-center space-x-3 mb-10">
+                <button class="bg-[#d1d5db] px-6 py-2 rounded-full font-bold shadow-sm hover:bg-gray-400 transition">
+                    Tìm kiếm
+                </button>
+                <input type="text" placeholder="Bạn muốn tìm sách gì" class="bg-[#d1d5db] px-6 py-2 rounded-full w-[300px] outline-none focus:ring-2 focus:ring-[#00c6d7] placeholder-gray-600 font-medium shadow-sm">
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-10 mt-12 pl-4">
+                
+                <div class="w-56 shrink-0">
+                    <div class="w-full aspect-[2/3] bg-[#d9d9d9] shadow-sm"></div>
+                </div>
+
+                <div class="flex flex-col">
+                    <h2 class="text-xl font-bold text-black mb-4">Tên sách</h2>
+                    
+                    <div class="space-y-1 text-[15px] font-medium text-gray-800 mb-8">
+                        <p>Tác giả</p>
+                        <p>Ngày đăng</p>
+                        <p>Số trang</p>
+                        <p>Lượt yêu thích</p>
+                        <p>Lượt đọc</p>
+                        <p>Số bình luận</p>
+                        <br>
+                        <p>Các thể loại</p>
+                    </div>
+
+                    <div class="flex space-x-4 mt-auto">
+                        <button class="bg-[#d1d5db] px-6 py-2 text-sm font-medium shadow-sm hover:bg-gray-400 transition">
+                            Đọc ngay
+                        </button>
+                        <button id="btn-delete" class="bg-[#d1d5db] px-6 py-2 text-sm font-medium shadow-sm hover:bg-red-400 hover:text-white transition">
+                            Xóa sách
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="delete-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white w-[400px] rounded-lg shadow-xl p-6">
+            <h3 class="text-xl font-bold text-black mb-4">Lý do xóa sách</h3>
+            
+            <textarea placeholder="Nhập lý do xóa cuốn sách này..." class="w-full bg-[#f3f4f6] border border-gray-300 rounded-md p-3 h-32 outline-none focus:ring-2 focus:ring-red-400 resize-none mb-6"></textarea>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="btn-cancel" class="bg-gray-300 px-5 py-2 rounded font-medium hover:bg-gray-400 transition">
+                    Hủy
+                </button>
+                <button id="btn-submit" class="bg-red-500 text-white px-5 py-2 rounded font-medium hover:bg-red-600 transition">
+                    Gửi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Bắt lấy các phần tử HTML bằng ID
+        const btnDelete = document.getElementById('btn-delete');
+        const btnCancel = document.getElementById('btn-cancel');
+        const deleteModal = document.getElementById('delete-modal');
+
+        // Khi bấm nút "Xóa sách" -> Xóa class 'hidden' để hiện Modal
+        btnDelete.addEventListener('click', function() {
+            deleteModal.classList.remove('hidden');
+        });
+
+        // Khi bấm nút "Hủy" -> Thêm class 'hidden' để giấu Modal đi
+        btnCancel.addEventListener('click', function() {
+            deleteModal.classList.add('hidden');
+        });
+
+        // Tùy chọn: Khi bấm "Gửi" -> Hiện thông báo và ẩn Modal
+        document.getElementById('btn-submit').addEventListener('click', function() {
+            alert('Đã gửi lý do xóa sách thành công!');
+            deleteModal.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

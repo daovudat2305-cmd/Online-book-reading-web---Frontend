@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Online</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+   
+    <!-- CSS -->
+
+    <link href="../dist/output.css" rel="stylesheet">
+
+    <!-- Script -->
+</head>
+<body class="bg-white min-h-screen font-sans text-gray-800">
+
+    <div class="w-full bg-white">
+        
+        <div class="p-6 flex items-center space-x-4">
+            <h1 class="text-3xl font-bold text-black">Logo</h1>
+            <img src="../assets/logo.png" alt="Logo Icon" class="w-12 h-12 inline-block">
+        </div>
+
+        <nav class="bg-[#00c6d7] flex items-center text-black font-medium">
+            <a href="admin-home.html" class="bg-[#40dbe5] px-6 py-4 block">
+                Quản lý sách
+            </a>
+            <a href="admin-author.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Tác giả
+            </a>
+            <a href="admin-author-register.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Danh sách đăng ký tác giả
+            </a>
+            <a href="admin-transaction.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Quản lý giao dịch
+            </a>
+        </nav>
+
+        <div class="p-6">
+            
+            <div class="flex items-center space-x-3 mb-10">
+                <button id="btn-search" class="bg-[#d1d5db] px-6 py-2 rounded-full font-bold shadow-sm hover:bg-gray-400 transition">
+                    Tìm kiếm
+                </button>
+                <input type="text" placeholder="Bạn muốn tìm sách gì" class="bg-[#d1d5db] px-6 py-2 rounded-full w-[300px] outline-none focus:ring-2 focus:ring-[#00c6d7] placeholder-gray-600 font-medium shadow-sm">
+            </div>
+
+            <div class="relative border border-gray-600 bg-[#cccaca] p-6 mb-12 mt-4 shadow-inner">
+                <span class="absolute -top-4 left-4 bg-white px-3 py-1 text-xl font-bold border border-white">Thể loại</span>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-6 gap-x-4 mt-4">
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Tiên hiệp</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Kiếm hiệp</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Hành động</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Ngôn tình</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Trinh thám</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Kinh dị</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Linh dị</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Viễn tưởng</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Học đường</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Hài hước</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">lịch sử</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Thể thao</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="relative border border-gray-600 bg-[#cccaca] p-6 mb-12 mt-8 shadow-inner">
+                <span class="absolute -top-4 left-4 bg-white px-3 py-1 text-xl font-bold border border-white">Sắp xếp</span>
+                <div class="grid grid-cols-3 gap-6 mt-4 max-w-2xl">
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Lượt xem</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" class="custom-checkbox">
+                        <span class="text-sm font-bold">Ngày cập nhật</span>
+                    </label>
+                    <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
+                        <input type="checkbox" id="filter-pending" class="custom-checkbox">
+                        <span class="text-sm font-bold">Danh sách sách chờ duyệt đăng</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="empty-state" class="flex justify-center pb-12 pt-4">
+                <div class="bg-[#d1d5db] px-8 py-3 rounded-full font-bold shadow-sm">
+                    Khu vực hiển thị kết quả
+                </div>
+            </div>
+
+            <div id="search-results" class="hidden mt-10 pb-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-10">
+                    
+                    <a href="admin-book-detail.html" class="book-approved flex flex-col items-center group cursor-pointer block">
+                        <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
+                        <span class="mt-3 text-sm font-medium text-gray-800 group-hover:text-[#00c6d7] transition text-center">
+                            Tên sách (Đã duyệt)
+                        </span>
+                    </a>
+
+                    <a href="admin-approve-book.html" class="book-pending hidden flex flex-col items-center group cursor-pointer block relative">
+                        <span class="absolute top-2 right-2 bg-yellow-400 text-xs font-bold px-2 py-1 rounded">Chờ duyệt</span>
+                        <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
+                        <span class="mt-3 text-sm font-medium text-gray-800 group-hover:text-[#00c6d7] transition text-center">
+                            Tên sách (Chờ duyệt)
+                        </span>
+                    </a>
+
+                    <a href="admin-book-detail.html" class="book-approved flex flex-col items-center group cursor-pointer block">
+                        <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
+                        <span class="mt-3 text-sm font-medium text-gray-800 group-hover:text-[#00c6d7] transition text-center">
+                            Tên sách (Đã duyệt)
+                        </span>
+                    </a>
+
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-center space-x-2">
+                <button class="px-4 py-2 border border-gray-300 bg-gray-100 hover:bg-gray-200 font-medium">Trước</button>
+                <button class="px-4 py-2 bg-[#00c6d7] text-white font-bold">1</button>
+                <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100 font-medium">2</button>
+                <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100 font-medium">3</button>
+                <button class="px-4 py-2 border border-gray-300 bg-gray-100 hover:bg-gray-200 font-medium">Sau</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/mainn.js"></script>
+    <script>
+    // --- Code cũ của bạn cho nút tìm kiếm ---
+    const btnSearch = document.getElementById("btn-search");
+    const emptyState = document.getElementById("empty-state");
+    const searchResults = document.getElementById("search-results");
+
+    btnSearch.addEventListener("click", function() {
+        emptyState.classList.add("hidden");
+        searchResults.classList.remove("hidden");
+    });
+
+    // --- CODE MỚI CHO CHECKBOX LỌC SÁCH ---
+    const filterPending = document.getElementById('filter-pending');
+    const approvedBooks = document.querySelectorAll('.book-approved');
+    const pendingBooks = document.querySelectorAll('.book-pending');
+
+    filterPending.addEventListener('change', function() {
+        if (this.checked) {
+            // Nếu tích chọn -> Giấu sách đã duyệt, hiện sách chờ duyệt
+            approvedBooks.forEach(book => book.classList.add('hidden'));
+            pendingBooks.forEach(book => book.classList.remove('hidden'));
+        } else {
+            // Nếu bỏ tích -> Hiện lại sách đã duyệt, giấu sách chờ duyệt
+            approvedBooks.forEach(book => book.classList.remove('hidden'));
+            pendingBooks.forEach(book => book.classList.add('hidden'));
+        }
+    });
+</script>
+</body>
+</html>
