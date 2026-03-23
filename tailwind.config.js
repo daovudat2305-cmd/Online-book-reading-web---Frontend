@@ -41,9 +41,9 @@ module.exports = {
         "copy-light": "hsl(215, 18%, 40%)",
         "copy-lighter": "hsl(215, 17%, 55%)",
 
-        success: "hsl(120, 71%, 58%)",
-        warning: "hsl(60, 71%, 58%)",
-        error: "hsl(0, 71%, 58%)",
+        success: "hsl(120, 85%, 60%)",
+        warning: "hsl(60, 85%, 60%)",
+        error: "hsl(0, 85%, 60%)",
 
         "success-content": "hsl(120, 69%, 8%)",
         "warning-content": "hsl(60, 69%, 8%)",

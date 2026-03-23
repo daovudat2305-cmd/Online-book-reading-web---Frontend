@@ -13,8 +13,6 @@
 
     <!-- Script -->
     <script defer src="../js/home.js"></script>
-    <script defer src="../js/main.js"></script>
-
 </head>
 <body class="bg-gradient-to-t from-p-100 to-p-50">
     <div class="flex min-h-screen">
@@ -26,12 +24,12 @@
 
             <nav class="flex flex-col gap-6">
                 
-                <a href="home.html" href="home.html" onclick="event.preventDefault(); goTo('home.html')" class="home-btn home-btn-active">
+                <a href="home.html" class="home-btn">
                     <i class="text-center fa-solid fa-house"></i>
                     <span class="font-medium home-label">Trang chủ</span>
                 </a>
                 
-                <a href="home-category.html" class="home-btn">
+                <a href="home-category.html" onclick="event.preventDefault(); goTo('home-category.html')" class="home-btn home-btn-active">
                     <i class="fa-solid fa-layer-group"></i>
                     <span class="font-medium home-label">Thể loại</span>
                 </a>
@@ -78,7 +76,42 @@
                         </button>
                     </div>
                 </div>
-    
+                
+                <!-- Category -->
+                <div class="p-2 mb-6 shadow-md bg-p-200 rounded-2xl w-xl">
+                    <table class="text-left border-separate border-spacing-x-6 border-spacing-y-3">
+                        <tbody>
+                            <tr>
+                                <th>Thể loại</th>
+                                <td>
+                                    <select class="p-1 border rounded-lg w-fit bg-p-50">
+                                        <option>Thể loại 1</option>
+                                        <option>Thể loại 2</option>
+                                        <option>Thể loại 3</option>
+                                        <option>Thể loại 4</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Loại truyện</th>
+                                <td>
+                                    <button class="type-btn">Miễn phí</button>
+                                    <button class="type-btn">VIP</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Sắp xếp</th>
+                                <td>
+                                    <select class="p-1 border rounded-lg w-fit bg-p-50">
+                                        <option>Ngày đăng giảm dần</option>
+                                        <option>Ngày đăng tăng dần</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <!-- Content -->
                 <div class="grid grid-cols-4 gap-4">
                     <!-- card sách -->
@@ -155,11 +188,11 @@
                 </div>
     
             </main>
-            
+
             <!-- Footer -->
             <footer class="mt-16 text-n-800 bg-p-200">
                 <div class="flex justify-around gap-8 px-10 py-10">
-
+    
                     <!-- Cột 1: Logo + mô tả -->
                     <div>
                         <h2 class="mb-3 text-xl font-bold">Book Online</h2>
@@ -168,13 +201,13 @@
                             Đọc mọi lúc, mọi nơi.
                         </p>
                     </div>
-
+    
                     <!-- Cột 2: Liên hệ -->
                     <div>
                         <h3 class="mb-3 font-semibold">Liên hệ</h3>
                         <p class="text-sm text-n-700">Email: support@book.com</p>
                         <p class="text-sm text-n-700">Hotline: 0123 456 789</p>
-
+    
                         <!-- Social -->
                         <div class="flex gap-4 mt-3 text-lg">
                             <i class="cursor-pointer fa-brands fa-facebook hover:text-blue-500"></i>
@@ -183,7 +216,7 @@
                         </div>
                     </div>
                 </div>
-
+    
                 <!-- Copyright -->
                 <div class="py-4 text-sm text-center text-gray-500 border-t border-gray-700">
                     © 2026 Book Online. All rights reserved.
@@ -192,8 +225,5 @@
         </div>
 
     </div>
-
-    <!-- toast message -->
-    <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
 </body>
 </html>
