@@ -1,3 +1,104 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+@utility menu-btn {
+    text-align: left;
+    padding-inline: 8px;
+    padding-block: 12px;
+    margin-bottom: 16px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+@utility menu-btn-active {
+    @apply bg-p-700 text-n-50;
+}
+
+/* hover chỉ khi KHÔNG active */
+.menu-btn:not(.menu-btn-active):hover {
+    @apply bg-p-200;
+}
+
+
+/* các nút navbar menu home */
+/* ===== base ===== */
+@utility home-btn {
+    @apply relative flex items-center justify-center gap-3 overflow-hidden rounded-full;
+
+    padding-inline: 8px;
+    padding-block: 8px;
+    margin-bottom: 16px;
+
+    width: 48px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+/* label */
+@utility home-label {
+    @apply whitespace-nowrap;
+
+    position: absolute;
+    left: 48px;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+/* ===== hover: LUÔN giãn (kể cả active) ===== */
+.home-btn:hover {
+    width: 160px;
+    justify-content: flex-start;
+}
+
+.home-btn:hover .home-label {
+    opacity: 1;
+}
+
+/* ===== màu hover: CHỈ khi không active ===== */
+.home-btn:not(.home-btn-active):hover {
+    @apply bg-p-200;
+}
+
+/* ===== active ===== */
+@utility home-btn-active {
+    @apply bg-p-700 text-n-50;
+}
+
+
+
+/* book btn */
+@utility book-btn {
+    @apply font-medium text-center rounded-xl bg-secondary-light hover:cursor-pointer hover:-translate-y-1 hover:shadow-lg;
+    padding-inline: 8px;
+    padding-block: 12px;
+    margin-bottom: 16px;
+    width: 100%;
+    transition: all 0.25s ease;
+}
+
+
+
+/* category btn */
+@utility type-btn {
+    @apply p-1 mr-2 text-center border rounded-md border-n-800;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+@utility type-btn-active {
+    @apply bg-secondary;
+}
+
+/* hover chỉ khi KHÔNG active */
+.type-btn:not(.type-btn-active):hover {
+    @apply bg-secondary-light;
+}
+
+@utility btn {
+    @apply px-6 py-2 mt-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer;
+}
+
+@utility input-box {
+    @apply w-full max-w-sm p-2 border rounded-lg bg-foreground;
+}

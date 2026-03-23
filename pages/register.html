@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Online</title>
     <link rel="icon" type="image/png" href="../assets/logo.png">
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- CSS -->
 
     <link href="../dist/output.css" rel="stylesheet">
 
     <!-- Script -->
+     <script defer src="../js/login.js"></script>
 </head>
 <body>
-    <div class="flex items-center justify-center min-h-screen gap-20 bg-gradient-to-t from-p-200 to-white">
+    <div class="flex items-center justify-center min-h-screen gap-20 bg-gradient-to-t from-p-200 to-50">
         <!-- Image -->
         <div>
             <img src="../assets/logo.svg" class="w-72">
@@ -35,9 +37,14 @@
                         <input type="text" placeholder="Nhập tên đăng nhập" class="w-full p-2 bg-white border rounded-md">
                     </div>
 
-                    <div class="flex flex-col">
+                    <div class="relative flex flex-col">
                         <label for="" class="mb-2 font-medium text-n-800">Mật khẩu</label>
-                        <input type="password" placeholder="Nhập mật khẩu" class="w-full p-2 bg-white border rounded-md">
+                        <input id="password" type="password" placeholder="Nhập mật khẩu" class="w-full p-2 bg-white border rounded-md">
+                        
+                        <!-- icon mat -->
+                        <span id="togglePassword" class="absolute right-3 top-[40px] cursor-pointer select-none">
+                            <i class="fa-regular fa-eye"></i>
+                        </span>
                     </div>
 
                     <div class="text-right">

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Online</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- CSS -->
+
+    <link href="../dist/output.css" rel="stylesheet">
+
+    <!-- Script -->
+    <script defer src="../js/main.js"></script>
+</head>
+<body class="bg-gradient-to-t from-p-100 to-p-50">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="fixed flex flex-col items-center p-2 m-auto ml-4 -translate-y-1/2 shadow-md w-fit h-fit bg-p-300 rounded-2xl top-1/2 left-4">
+            <div class="mt-6 mb-6">
+                <img src="../assets/logo.png" class="w-10 h-10 rounded-full">
+            </div>
+
+            <nav class="flex flex-col gap-6">
+                
+                <a href="home.html" href="home.html" class="home-btn home-btn-active">
+                    <i class="text-center fa-solid fa-house"></i>
+                    <span class="font-medium home-label">Trang chủ</span>
+                </a>
+                
+                <a href="home-category.html" class="home-btn">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span class="font-medium home-label">Thể loại</span>
+                </a>
+
+                <a href="home-rank.html" class="home-btn">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <span class="font-medium home-label">Xếp hạng</span>
+                </a>
+
+                <a href="home-history.html" class="home-btn">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span class="font-medium home-label">Lịch sử đọc</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="flex flex-col w-full">
+            <!-- Main -->
+            <main class="flex-col flex-1 p-4 ml-50">
+                
+                <!-- Header -->
+                <div class="sticky z-50 flex items-center justify-around mb-8 top-2">
+                    <!-- Search -->
+                    <div class="w-1/2">
+                        <input type="text" placeholder="Tìm kiếm sách" class="w-full px-4 py-2 bg-white border rounded-full shadow-md outline-none border-secondary-light">
+                    </div>
+        
+                    <!-- Avatar -->
+                    <div id="avatarBtn">
+                        <img src="../assets/logo.png" class="w-10 h-10 rounded-full">
+                    </div>
+    
+                    <!-- Dropdown -->
+                    <div id="avatarMenu" class="absolute right-0 hidden w-40 mt-2 bg-white rounded-lg shadow-lg top-12">
+                        
+                        <a href="profile.html"
+                        class="block px-4 py-2 hover:bg-gray-100">
+                            Tài khoản
+                        </a>
+    
+                        <button
+                        class="w-full px-4 py-2 text-left hover:bg-gray-100">
+                            Đăng xuất
+                        </button>
+                    </div>
+                </div>
+    
+                <!-- Nút quay lại -->
+                <a href="home.html" class="flex items-center gap-2 mb-3 text-sm text-n-700 hover:text-n-800 hover:cursor-pointer">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    Trở lại
+                </a>
+
+                <!-- Content - Book detail -->
+                <div class="flex gap-10">
+                    <!-- Ảnh sách -->
+                    <div class="w-40 h-56 overflow-hidden rounded-lg shadow-lg">
+                        <img src="../assets/book.jpg" class="object-cover w-full h-full">
+                    </div>
+    
+                    <!-- Thông tin -->
+                    <div class="space-y-4">
+    
+                        <h1 id="book-title" class="text-3xl font-bold text-n-800">Title Sách</h1>
+    
+                        <p class="text-n-800">
+                            <i class="fa-regular fa-user"></i>
+                            Tác giả: <span id="book-author"></span>
+                        </p>
+    
+                        <p class="text-n-800">
+                            <i class="fa-regular fa-calendar-days"></i>
+                            Ngày đăng: <span id="book-post"></span>
+                        </p>
+    
+                        <p class="text-n-800">
+                            <i class="fa-solid fa-table-list"></i>
+                            Thể loại: <span id="book-category"></span>
+                        </p>
+    
+                        <p class="text-n-800">
+                            <i class="fa-regular fa-eye"></i>
+                            Lượt đọc: <span id="book-views"></span>
+                        </p>
+    
+                        <p class="text-n-800">
+                            <i class="fa-regular fa-heart"></i>
+                            Lượt thích: <span id="book-likes"></span>
+                        </p>
+    
+                        <!-- mô tả -->
+                        <div>
+                            <h2 class="mb-2 text-lg font-semibold">Mô tả</h2>
+                            <p id="book-desc" class="leading-relaxed text-gray-700"></p>
+                        </div>
+    
+                        <!-- nút -->
+                        <div class="flex gap-4 w-sm">
+    
+                            <button id="read-btn" class="book-btn">
+                                <i class="fa-solid fa-book-open"></i>
+                                Đọc ngay
+                            </button>
+    
+                            <button id="like-btn" class="book-btn">
+                                <i class="fa-solid fa-heart"></i>
+                                Yêu thích
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Bình luận -->
+                <div class="p-4 mt-10 bg-white">
+                    <h2 class="mb-4 text-xl font-semibold">Bình luận</h2>
+
+                    <!-- Nhập bình luận -->
+                    <div class="flex gap-3 mb-6">
+                        <img src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
+                        <div class="flex-1">
+                            <textarea name="" id="commentInput" class="w-full p-3 border rounded-lg resize-none focus:ring-2 focus:ring-p-300" rows="2" placeholder="Viết bình luận..."></textarea>
+                            <div class="flex justify-end gap-2">
+                                <button id="comment-btn" class="book-btn w-fit">Gửi</button>
+                                <button class="book-btn w-fit">Hủy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danh sách bình luận -->
+                    <div id="commentList" class="space-y-4">
+                        <!-- 1 comment mẫu -->
+                        <div class="flex gap-3 p-4 rounded-lg bg-background">
+                            <img src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <span class="font-semibold">User A</span>
+                                    <span class="text-sm text-gray-500">12:30</span>
+                                </div>
+                                <p class="text-n-800">Sách hay quá</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="mt-16 text-n-800 bg-p-200">
+                <div class="flex justify-around gap-8 px-10 py-10">
+    
+                    <!-- Cột 1: Logo + mô tả -->
+                    <div>
+                        <h2 class="mb-3 text-xl font-bold">Book Online</h2>
+                        <p class="text-sm text-n-700">
+                            Nền tảng đọc sách online miễn phí và VIP. 
+                            Đọc mọi lúc, mọi nơi.
+                        </p>
+                    </div>
+    
+                    <!-- Cột 2: Liên hệ -->
+                    <div>
+                        <h3 class="mb-3 font-semibold">Liên hệ</h3>
+                        <p class="text-sm text-n-700">Email: support@book.com</p>
+                        <p class="text-sm text-n-700">Hotline: 0123 456 789</p>
+    
+                        <!-- Social -->
+                        <div class="flex gap-4 mt-3 text-lg">
+                            <i class="cursor-pointer fa-brands fa-facebook hover:text-blue-500"></i>
+                            <i class="cursor-pointer fa-brands fa-youtube hover:text-red-500"></i>
+                            <i class="cursor-pointer fa-brands fa-github hover:text-white"></i>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Copyright -->
+                <div class="py-4 text-sm text-center text-gray-500 border-t border-gray-700">
+                    © 2026 Book Online. All rights reserved.
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- toast message -->
+    <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
+</body>
+</html>

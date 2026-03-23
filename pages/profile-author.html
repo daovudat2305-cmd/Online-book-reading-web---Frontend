@@ -52,9 +52,14 @@
                     Lịch sử thanh toán
                 </button>
 
-                <button data-tab="author" class="font-semibold menu-btn rounded-xl">
-                    <i class="fa-solid fa-pen-nib"></i>
-                    Đăng ký làm tác giả
+                <button data-tab="publish-book" class="font-semibold menu-btn rounded-xl">
+                    <i class="fa-solid fa-book"></i>
+                    Đăng sách
+                </button>
+
+                <button data-tab="publishing-history" class="font-semibold menu-btn rounded-xl">
+                    <i class="fa-solid fa-swatchbook"></i>
+                    Lịch sử đăng sách
                 </button>
 
             </div>
@@ -86,7 +91,7 @@
                                 <label class="block text-sm text-n-800">
                                     Tên đăng nhập
                                 </label>
-                                <input type="text" value="" disabled class="input-box" placeholder="username">
+                                <input type="text" disabled class="input-box" placeholder="username">
                             </div>
 
                             <!-- fullname -->
@@ -102,14 +107,14 @@
                                 <label class="block text-sm text-n-800">
                                     Email
                                 </label>
-                                <input type="email" value="" disabled class="input-box">
+                                <input type="email" disabled class="input-box">
                             </div>
 
                             <div>
                                 <label class="block text-sm text-n-800">
                                     Vai trò
                                 </label>
-                                <input type="text" value="Người dùng" disabled class="max-w-sm p-2 border rounded-lg w-fit bg-foreground">
+                                <input type="text" value="Tác giả" disabled class="max-w-sm p-2 border rounded-lg w-fit bg-foreground">
                             </div>
 
                             <!-- birthday , gender-->
@@ -242,65 +247,122 @@
 
             </div>
 
-            <!-- Author Request -->
-            <div id="author" class="hidden tab">
-                <h2 class="mb-4 text-xl font-bold">Đăng ký làm tác giả</h2>
+            <!-- Form Đăng sách -->
+            <div id="publish-book" class="hidden tab">
+                <h2 class="mb-6 text-2xl font-semibold">Đăng sách</h2>
 
-                <!-- FORM -->
-                <div class="flex-1 space-y-4">
-                    <h2 class="text-lg font-semibold">
-                        Thông tin cá nhân
-                    </h2>
-                    <!-- fullname -->
-                    <div>
-                        <label class="block text-sm text-n-800">
-                            Họ và tên
-                        </label>
-                        <input type="text" disabled class="input-box" placeholder="Nhập họ tên đầy đủ">
-                    </div>
+                <!-- form -->
+                <div>
+                    <div class="flex-1 space-y-4">
+                            <h2 class="text-lg font-semibold">
+                                Thông tin sách
+                            </h2>
+                            <!-- tiêu đề -->
+                            <div>
+                                <label class="block text-sm text-n-800">
+                                    Tiêu đề
+                                </label>
+                                <input type="text" class="input-box" placeholder="Tiêu đề sách">
+                            </div>
 
-                    <!-- email -->
-                    <div>
-                        <label class="block text-sm text-n-800">
-                            Email
-                        </label>
-                        <input type="email" disabled class="input-box">
-                    </div>
-                    
-                    <!-- stk -->
-                    <div>
-                        <label class="block text-sm text-n-800">
-                            Số tài khoản
-                        </label>
-                        <input type="text" placeholder="Nhập số tài khoản" class="input-box">
-                    </div>
-                    
-                    <!-- birthday , gender-->
-                    <div class="flex gap-12">
-                        <div>
-                            <label class="block text-sm text-n-800">
-                                Ngày sinh
-                            </label>
-                            <input type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                            <!-- Mô tả -->
+                            <div>
+                                <label class="block text-sm text-n-800">
+                                    Mô tả
+                                </label>
+                                <input type="text" placeholder="Mô tả sách" class="input-box">
+                            </div>
+
+                            <!-- file sách -->
+                            <div>
+                                <label class="block text-sm text-n-800">
+                                    Tải sách lên
+                                </label>
+                                <input type="file" class="input-box">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm text-n-800">
+                                    Bìa sách
+                                </label>
+                                <input type="file" class="input-box">
+                            </div>
+
+                            <!-- thể loại, loại sách-->
+                            <div class="flex gap-12">
+                                <div>
+                                    <label class="block text-sm text-n-800">
+                                        Thể loại
+                                    </label>
+                                    <select class="p-2 border rounded-lg w-fit bg-foreground">
+                                        <option>Thể loại 1</option>
+                                        <option>Thể loại 2</option>
+                                        <option>Thể loại 3</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm text-n-800">
+                                        Loại sách
+                                    </label>
+                                    <select class="p-2 border rounded-lg w-fit bg-foreground">
+                                        <option>Miễn phí</option>
+                                        <option>VIP</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- button -->
+                            <button class="btn">
+                                Đăng sách
+                            </button>
+
                         </div>
+                </div>
+            </div>
 
-                        <div>
-                            <label class="block text-sm text-n-800">
-                                Giới tính
-                            </label>
-                            <select class="p-2 border rounded-lg w-fit bg-foreground">
-                                <option>Nam</option>
-                                <option>Nữ</option>
-                                <option>Khác</option>
-                            </select>
-                        </div>
-                    </div>
+            <!-- Lịch sử đăng sách -->
+            <div id="publishing-history" class="hidden tab">
+                <h2 class="mb-6 text-2xl font-semibold">Lịch sử đăng sách</h2>
 
-                    <!-- button -->
-                    <button class="px-6 py-2 mt-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer">
-                        Nộp đơn đăng ký
-                    </button>
+                <div class="overflow-hidden border rounded-lg">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-background">
+                            <tr>
+                                <th class="p-3">Mã sách</th>
+                                <th class="p-3">Tiêu đề</th>
+                                <th class="p-3">Thời gian đăng</th>
+                                <th class="p-3">Trạng thái</th>
+                                <th class="p-3">Thông báo</th>
+                            </tr>
+                        </thead>
 
+                        <tbody class="divide-y">
+                            <tr class="hover:bg-p-200">
+                                <td class="p-3">Book1</td>
+                                <td class="p-3">Sách 1</td>
+                                <td class="p-3">01/03/2026</td>
+                                <td class="p-3 font-semibold text-warning">Đang chờ duyệt</td>
+                                <td class="p-3">Không có</td>
+                            </tr>
+
+                            <tr class="hover:bg-p-200">
+                                <td class="p-3">Book2</td>
+                                <td class="p-3">Sách 2</td>
+                                <td class="p-3">02/03/2026</td>
+                                <td class="p-3 font-semibold text-error">Bị từ chối</td>
+                                <td class="p-3">Không có</td>
+                            </tr>
+
+                            <tr class="hover:bg-p-200">
+                                <td class="p-3">Book3</td>
+                                <td class="p-3">Sách 3</td>
+                                <td class="p-3">03/03/2026</td>
+                                <td class="p-3 font-semibold text-success">Đã được duyệt</td>
+                                <td class="p-3">Không có</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
