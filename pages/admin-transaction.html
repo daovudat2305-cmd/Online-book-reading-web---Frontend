@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Giao dịch</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link href="../dist/output.css" rel="stylesheet">
+</head>
+<body class="bg-white min-h-screen font-sans text-gray-800 relative pb-20">
+
+    <div class="w-full bg-white relative pb-20">
+        
+        <div class="p-6 flex items-center space-x-4">
+            <h1 class="text-3xl font-bold text-black">Logo</h1>
+            <img src="../assets/logo.png" alt="Logo Icon" class="w-12 h-12 inline-block">
+        </div>
+
+        <nav class="bg-[#00c6d7] flex items-center text-black font-medium">
+            <a href="admin-home.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Quản lý sách
+            </a>
+            <a href="admin-author.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Tác giả
+            </a>
+            <a href="admin-author-register.html" class="px-6 py-4 hover:bg-[#40dbe5] transition duration-300 block">
+                Danh sách đăng ký tác giả
+            </a>
+            <a href="admin-transaction.html" class="bg-[#40dbe5] px-6 py-4 block">
+                Quản lý giao dịch
+            </a>
+        </nav>
+
+        <div class="p-6 mt-4 relative">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-[#fcf4f4] border border-gray-300 p-6 rounded shadow-sm">
+                    <p class="text-gray-600 font-medium mb-2">Tổng doanh thu (Tháng này)</p>
+                    <p class="text-2xl font-bold text-black">15,450,000 VNĐ</p>
+                </div>
+                <div class="bg-[#fcf4f4] border border-gray-300 p-6 rounded shadow-sm">
+                    <p class="text-gray-600 font-medium mb-2">Giao dịch Nạp gói VIP (Hôm nay)</p>
+                    <p class="text-2xl font-bold text-[#00c6d7]">124 lượt</p>
+                </div>
+                <div class="bg-[#fcf4f4] border border-gray-300 p-6 rounded shadow-sm">
+                    <p class="text-gray-600 font-medium mb-2">Yêu cầu Giả lương cho tác giả (Chờ xử lý)</p>
+                    <p class="text-2xl font-bold text-red-500">5 yêu cầu</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-end mb-6 space-y-4 md:space-y-0 pl-2">
+                <div class="flex items-center space-x-3">
+                    <button class="bg-[#d1d5db] px-6 py-2 rounded-full font-bold shadow-sm hover:bg-gray-400 transition">
+                        Tìm kiếm
+                    </button>
+                    <input type="text" placeholder="Nhập mã giao dịch hoặc tên..." class="bg-[#d1d5db] px-6 py-2 rounded-full w-[300px] outline-none focus:ring-2 focus:ring-[#00c6d7] placeholder-gray-600 font-medium shadow-sm">
+                </div>
+                
+                <div class="flex space-x-4">
+                    <select class="bg-white border border-gray-400 px-4 py-2 font-medium outline-none">
+                        <option value="">Tất cả loại giao dịch</option>
+                        <option value="nap">Độc giả nạp gói VIP</option>
+                        <option value="rut">Giả lương cho tác giả</option>
+                    </select>
+                    <select class="bg-white border border-gray-400 px-4 py-2 font-medium outline-none">
+                        <option value="">Trạng thái</option>
+                        <option value="success">Thành công</option>
+                        <option value="pending">Chờ xử lý</option>
+                        <option value="failed">Thất bại</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto border border-gray-300 shadow-sm relative">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[#d1d5db] text-black text-sm uppercase">
+                            <th class="px-6 py-4 font-bold border-b border-gray-400">Mã GD</th>
+                            <th class="px-6 py-4 font-bold border-b border-gray-400">Người dùng</th>
+                            <td class="px-6 py-4">Tên người dùng</th>
+                            <th class="px-6 py-4 font-bold border-b border-gray-400 text-center">Loại giao dịch</th>
+                            <th class="px-6 py-4 font-bold border-b border-gray-400">Số tiền / Xu</th>
+                            <th class="px-6 py-4 font-bold border-b border-gray-400">Thời gian</th>
+                            <th class="px-6 py-4 font-bold border-b border-gray-400">Trạng thái</th>
+                            <th class="px-6 py-4 font-bold border-b border-gray-400 text-center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        
+                        <tr class="hover:bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium">#TXN-9823</td>
+                            <td class="px-6 py-4">Độc giả</td>
+                            <td class="px-6 py-4">user_docgia1</td>
+                            <td class="px-6 py-4 text-center">Nạp gói VIP</td> <td class="px-6 py-4 font-bold text-green-600">+ 50,000 VNĐ</td>
+                            <td class="px-6 py-4 text-gray-500">14:30 - 20/10/2026</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Thành công</span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <a href="#" class="text-blue-600 hover:underline font-medium">Chi tiết</a>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium">#TXN-9824</td>
+                            <td class="px-6 py-4">Tác giả</td>
+                            <td class="px-6 py-4">tacgia_nguyenvana</td>
+                            <td class="px-6 py-4 text-center">Giả lương tác giả</td> <td class="px-6 py-4 font-bold text-red-500">- 2,000,000 VNĐ</td>
+                            <td class="px-6 py-4 text-gray-500">10:15 - 20/10/2026</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">Chờ xử lý</span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <a href="#" class="text-blue-600 hover:underline font-medium">Duyệt</a>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 border-b border-gray-200">
+                            <td class="px-6 py-4 font-medium">#TXN-9825</td>
+                            <td class="px-6 py-4">Tác giả</td>
+                            <td class="px-6 py-4">user_docgia2</td>
+                            <td class="px-6 py-4 text-center">Nạp gói VIP</td> <td class="px-6 py-4 font-bold text-gray-400">100,000 VNĐ</td>
+                            <td class="px-6 py-4 text-gray-500">09:00 - 20/10/2026</td>
+                            <td class="px-6 py-4">
+                                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">Thất bại</span>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <a href="#" class="text-blue-600 hover:underline font-medium">Chi tiết</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-8 flex justify-center space-x-2">
+                <button class="px-4 py-2 border border-gray-300 bg-gray-100 hover:bg-gray-200 font-medium">Trước</button>
+                <button class="px-4 py-2 bg-[#00c6d7] text-white font-bold">1</button>
+                <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100 font-medium">2</button>
+                <button class="px-4 py-2 border border-gray-300 hover:bg-gray-100 font-medium">3</button>
+                <button class="px-4 py-2 border border-gray-300 bg-gray-100 hover:bg-gray-200 font-medium">Sau</button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
