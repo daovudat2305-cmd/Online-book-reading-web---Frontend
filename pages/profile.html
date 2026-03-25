@@ -14,7 +14,7 @@
     <!-- Script -->
     <script defer src="../js/profile.js"></script>
     <script defer src="../js/pay.js"></script>
-
+    <script src=""></script>
 </head>
 <body>
     <div class="flex h-screen bg-gradient-to-t from-p-100 to-white">
@@ -70,8 +70,12 @@
 
                         <!-- AVATAR -->
                         <div class="text-center">
-                            <div class="mx-auto bg-gray-300 rounded-full w-28 h-28"></div>
-                            <p class="mt-3 text-sm text-n-800">
+                            <div class="mx-auto overflow-hidden rounded-full bg-background w-28 h-28">
+                                <img id="avatar" src="" alt="avatar">
+                            </div>
+                            <!-- Cập nhật avatar -->
+                            <input type="file" id="avatarInput" accept="image/*" class="hidden" />
+                            <p id="updateAvatarBtn" class="mt-3 text-sm cursor-pointer text-n-800">
                                 Cập nhật ảnh đại diện
                             </p>
                         </div>
@@ -86,7 +90,7 @@
                                 <label class="block text-sm text-n-800">
                                     Tên đăng nhập
                                 </label>
-                                <input type="text" value="" disabled class="input-box" placeholder="username">
+                                <input id="username" type="text" value="" disabled class="input-box" placeholder="username">
                             </div>
 
                             <!-- fullname -->
@@ -94,7 +98,7 @@
                                 <label class="block text-sm text-n-800">
                                     Họ và tên
                                 </label>
-                                <input type="text" placeholder="Nhập họ và tên" class="input-box">
+                                <input id="fullName" type="text" placeholder="Nhập họ và tên" class="input-box">
                             </div>
 
                             <!-- email -->
@@ -102,14 +106,14 @@
                                 <label class="block text-sm text-n-800">
                                     Email
                                 </label>
-                                <input type="email" value="" disabled class="input-box">
+                                <input id="email" type="email" value="" disabled class="input-box">
                             </div>
 
                             <div>
                                 <label class="block text-sm text-n-800">
                                     Vai trò
                                 </label>
-                                <input type="text" value="Người dùng" disabled class="max-w-sm p-2 border rounded-lg w-fit bg-foreground">
+                                <input id="role" type="text" value="" disabled class="max-w-sm p-2 border rounded-lg w-fit bg-foreground">
                             </div>
 
                             <!-- birthday , gender-->
@@ -118,14 +122,14 @@
                                     <label class="block text-sm text-n-800">
                                         Ngày sinh
                                     </label>
-                                    <input type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <input id="dob" type="date" class="p-2 border rounded-lg w-fit bg-foreground">
                                 </div>
 
                                 <div>
                                     <label class="block text-sm text-n-800">
                                         Giới tính
                                     </label>
-                                    <select class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <select id="gender" class="p-2 border rounded-lg w-fit bg-foreground">
                                         <option>Nam</option>
                                         <option>Nữ</option>
                                         <option>Khác</option>
@@ -134,7 +138,7 @@
                             </div>
 
                             <!-- button -->
-                            <button class="btn">
+                            <button id="saveInfo" class="btn">
                                 Lưu thay đổi
                             </button>
 
@@ -152,13 +156,13 @@
                     <div class="flex flex-col items-center justify-around pb-8 transition cursor-pointer bg-gradient-to-t from-p-300 to-green-200 w-60 h-80 rounded-3xl hover:shadow-2xl hover:scale-105">
                         <p class="text-xl font-semibold">Gói tháng <i class="fa-solid fa-crown"></i></p>
                         <div>
-                            <p class="text-lg font-semibold">10.000đ cho 1 tháng</p>
+                            <p class="text-lg font-semibold">25.000đ cho 1 tháng</p>
                             <ul class="list-disc">
                                 <li>Trở thành VIP trong 1 tháng</li>
                                 <li>Đọc toàn bộ sách VIP</li>
                             </ul>
                         </div>
-                        <button onclick="openQR(10000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
+                        <button onclick="openQR(25000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
                             Đăng ký ngay
                         </button>
                     </div>
@@ -167,13 +171,13 @@
                     <div class="flex flex-col items-center justify-around pb-8 transition cursor-pointer bg-gradient-to-t from-p-300 to-yellow-200 w-60 h-80 rounded-3xl hover:shadow-2xl hover:scale-105">
                         <p class="text-xl font-semibold">Gói quý <i class="fa-solid fa-crown"></i></p>
                         <div>
-                            <p class="text-lg font-semibold">30.000đ cho 1 quý</p>
+                            <p class="text-lg font-semibold">75.000đ cho 1 quý</p>
                             <ul class="list-disc">
                                 <li>Trở thành VIP trong 1 quý</li>
                                 <li>Đọc toàn bộ sách VIP</li>
                             </ul>
                         </div>
-                        <button onclick="openQR(30000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
+                        <button onclick="openQR(75000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
                             Đăng ký ngay
                         </button>
                     </div>
@@ -182,13 +186,13 @@
                     <div class="flex flex-col items-center justify-around pb-8 transition cursor-pointer bg-gradient-to-t from-p-300 to-secondary-light w-60 h-80 rounded-3xl hover:shadow-2xl hover:scale-105">
                         <p class="text-xl font-semibold">Gói năm <i class="fa-solid fa-crown"></i></p>
                         <div>
-                            <p class="text-lg font-semibold">100.000đ cho 1 năm</p>
+                            <p class="text-lg font-semibold">300.000đ cho 1 năm</p>
                             <ul class="list-disc">
                                 <li>Trở thành VIP trong 1 năm</li>
                                 <li>Đọc toàn bộ sách VIP</li>
                             </ul>
                         </div>
-                        <button onclick="openQR(100000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
+                        <button onclick="openQR(300000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
                             Đăng ký ngay
                         </button>
                     </div>
@@ -256,7 +260,7 @@
                         <label class="block text-sm text-n-800">
                             Họ và tên
                         </label>
-                        <input type="text" disabled class="input-box" placeholder="Nhập họ tên đầy đủ">
+                        <input type="text" class="input-box" placeholder="Nhập họ tên đầy đủ">
                     </div>
 
                     <!-- email -->
@@ -294,6 +298,13 @@
                                 <option>Khác</option>
                             </select>
                         </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-n-800">
+                            Lý do muốn làm tác giả
+                        </label>
+                        <textarea name="" id="commentInput" class="p-3 border rounded-lg resize-none w-xl bg-foreground focus:ring-2 focus:ring-p-300" rows="2" placeholder="Lý do muốn làm tác giả..."></textarea>
                     </div>
 
                     <!-- button -->
