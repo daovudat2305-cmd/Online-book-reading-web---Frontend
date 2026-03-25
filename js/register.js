@@ -1,19 +1,21 @@
 const API_URL = "http://localhost:8080/api/auth";
 
-// bấm đăng nhập
-document.getElementById('btnLogin').addEventListener('click', function(event) {
+// bấm đăng ký
+document.getElementById('btnRegister').addEventListener('click', function(event) {
     event.preventDefault() //ngăn load lại trang
 
+    const emailInput = document.getElementById('email').value;
     const usernameInput = document.getElementById('username').value;
     const passwordInput = document.getElementById('password').value;
 
     // gọi API
-    fetch(`${API_URL}/signin`, {
+    fetch(`${API_URL}/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            email: emailInput,
             username: usernameInput,
             password: passwordInput
         })
@@ -27,17 +29,9 @@ document.getElementById('btnLogin').addEventListener('click', function(event) {
         return response.json()
     })
     .then(data => {
-        localStorage.setItem('jwtToken', data.token)
-        localStorage.setItem('username', data.username)
-        localStorage.setItem('role', data.role)
+        alert(data.message)
 
-        alert('Đăng nhập thành công')
-        if(data.role === 'USER' || data.role === 'AUTHOR') {
-            window.location.href = 'home.html'
-        }
-        else {
-            window.location.href = 'admin-home.html'
-        }
+        window.location.href = 'login.html'
     })
     .catch(error => {
         alert(error.message)
