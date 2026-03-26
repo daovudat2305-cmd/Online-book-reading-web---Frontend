@@ -7,6 +7,7 @@ function checkLoginState() {
     // đọc token
     const token = localStorage.getItem('jwtToken')
     const username = localStorage.getItem('username')
+    const role = localStorage.getItem('role')
     
     const guestMenu = document.getElementById('guest-menu')
     const userMenu = document.getElementById('user-menu')
@@ -16,6 +17,7 @@ function checkLoginState() {
         guestMenu.style.display = 'none' 
         userMenu.style.display = 'flex'
         document.getElementById('display-username').innerText = username
+        document.getElementById('profileBtn').href = role == "USER" ? "profile.html" : "profile-author.html"
         loadAvatar()
     }
     else {
