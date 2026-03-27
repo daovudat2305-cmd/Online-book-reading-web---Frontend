@@ -12,6 +12,7 @@
 
     <!-- Script -->
     <script defer src="../js/admin.js"></script>
+    <script src="../js/admin-authors.js"></script>
 </head>
 <body class="relative min-h-screen font-sans bg-gradient-to-t from-p-200 to-white text-n-800">
 
@@ -40,59 +41,92 @@
             </button>
         </nav>
 
-        <div class="relative p-6">
-            
-            <div class="flex items-center pl-2 mb-10 space-x-3">
-                <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
-                    Tìm kiếm
-                </button>
-                <input type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
-            </div>
-
-            <div class="grid grid-cols-2 px-6 mt-16 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-10 gap-y-12">
+        <div id="list-view">
+            <div class="relative p-6">
                 
-                <a href="admin-author-detail.html" class="flex flex-col items-center block text-center cursor-pointer group">
-                    <div class="flex items-center justify-center w-full overflow-hidden transition duration-300 border border-dashed rounded-full aspect-square bg-n-50 group-hover:shadow-lg border-p-400"></div>
-                    <span class="mt-4 text-[15px] font-medium text-n-800 group-hover:text-p-400 transition">Tên tác giả</span>
-                </a>
-
-                <a href="admin-author-detail.html" class="flex flex-col items-center block text-center cursor-pointer group">
-                    <div class="flex items-center justify-center w-full overflow-hidden transition duration-300 border border-dashed rounded-full aspect-square bg-n-50 group-hover:shadow-lg border-p-400"></div>
-                    <span class="mt-4 text-[15px] font-medium text-n-800 group-hover:text-p-400 transition">Tên tác giả</span>
-                </a>
-                
-                <a href="admin-author-detail.html" class="flex flex-col items-center block text-center cursor-pointer group">
-                    <div class="flex items-center justify-center w-full overflow-hidden transition duration-300 border border-dashed rounded-full aspect-square bg-n-50 group-hover:shadow-lg border-p-400"></div>
-                    <span class="mt-4 text-[15px] font-medium text-n-800 group-hover:text-p-400 transition">Tên tác giả</span>
-                </a>
-
-                <a href="admin-author-detail.html" class="flex flex-col items-center block text-center cursor-pointer group">
-                    <div class="flex items-center justify-center w-full overflow-hidden transition duration-300 border border-dashed rounded-full aspect-square bg-n-50 group-hover:shadow-lg border-p-400"></div>
-                    <span class="mt-4 text-[15px] font-medium text-n-800 group-hover:text-p-400 transition">Tên tác giả</span>
-                </a>
-
-                <a href="admin-author-detail.html" class="flex flex-col items-center block text-center cursor-pointer group">
-                    <div class="flex items-center justify-center w-full overflow-hidden transition duration-300 border border-dashed rounded-full aspect-square bg-n-50 group-hover:shadow-lg border-p-400"></div>
-                    <span class="mt-4 text-[15px] font-medium text-n-800 group-hover:text-p-400 transition">Tên tác giả</span>
-                </a>
-
-                <a href="admin-author-detail.html" class="flex flex-col items-center block text-center cursor-pointer group">
-                    <div class="flex items-center justify-center w-full overflow-hidden transition duration-300 border border-dashed rounded-full aspect-square bg-n-50 group-hover:shadow-lg border-p-400"></div>
-                    <span class="mt-4 text-[15px] font-medium text-n-800 group-hover:text-p-400 transition">Tên tác giả</span>
-                </a>
-
-                
-
+                <div class="flex items-center pl-2 mb-10 space-x-3">
+                    <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
+                        Tìm kiếm
+                    </button>
+                    <input type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
+                </div>
+    
+                <div id="list-authors" class="grid grid-cols-2 px-6 mt-16 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-10 gap-y-12">
+    
+                </div>
+    
+                <div id="pagination-container" class="flex justify-center mt-8 space-x-2">
+                    
+                </div>
+    
             </div>
+        </div>
 
-            <div class="flex justify-center mt-8 space-x-2">
-                <button class="px-4 py-2 font-medium border border-gray-300 bg-n-100 hover:bg-n-200">Trước</button>
-                <button class="px-4 py-2 font-bold text-white bg-p-400">1</button>
-                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">2</button>
-                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">3</button>
-                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">Sau</button>
+        <div id="detail-view" class="hidden">
+            <div class="relative p-6">
+                
+                <div class="flex items-center pl-2 mb-10 space-x-3">
+                    <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
+                        Tìm kiếm
+                    </button>
+                    <input type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
+                </div>
+    
+                <div class="bg-[#fcf4f4] w-full max-w-5xl mx-4 mt-8 p-12 flex flex-col md:flex-row gap-16 rounded-sm">
+                    
+                    <div class="flex flex-col items-center shrink-0">
+                        <div class="w-28 h-28 rounded-full bg-[#d1d5db] border border-gray-300 mb-4 overflow-hidden">
+                            <img id="detail-avatar" src="" alt="Avatar"> 
+                        </div>
+                        <span class="text-[15px] font-medium text-gray-700">Ảnh đại diện</span>
+                    </div>
+    
+                    <div class="flex flex-col w-full">
+                        <p class="mb-8 text-lg font-medium text-black">Thông tin cá nhân tác giả</p>
+                        
+                        <div class="space-y-4 text-[16px] text-black">
+                            
+                            <div class="grid grid-cols-[200px_auto] items-center">
+                                <p>Tên đăng nhập:</p>
+                                <p id="detail-username" class="font-medium"></p> 
+                            </div>
+                            
+                            <div class="grid grid-cols-[200px_auto] items-center">
+                                <p>Họ và tên:</p>
+                                <p id="detail-fullName" class="font-medium"></p>
+                            </div>
+                            
+                            <div class="grid grid-cols-[200px_auto] items-center">
+                                <p>Email:</p>
+                                <p id="detail-email" class="font-medium"></p>
+                            </div>
+                            
+                            <div class="grid grid-cols-[200px_auto] items-center">
+                                <p>Ngày sinh:</p>
+                                <p id="detail-dob" class="font-medium"></p>
+                            </div>
+                            
+                            <div class="grid grid-cols-[200px_auto] items-center">
+                                <p>Giới tính:</p>
+                                <p id="detail-gender" class="font-medium"></p>
+                            </div>
+                            
+                            <div class="grid grid-cols-[200px_auto] items-center">
+                                <p>STK ngân hàng:</p>
+                                <p id="detail-stk" class="font-medium"></p>
+                            </div>
+    
+                            <div class="grid grid-cols-[200px_auto] items-center pt-2">
+                                <p>Danh sách sách đã đăng:</p>
+                                <a href="#" class="font-medium text-blue-600 hover:underline">Xem chi tiết</a>
+                            </div>
+    
+                        </div>
+                    </div>
+    
+                </div>
+    
             </div>
-
         </div>
     </div>
 
