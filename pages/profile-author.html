@@ -16,8 +16,8 @@
     <script defer src="../js/pay.js"></script>
 
 </head>
-<body>
-    <div class="flex h-screen bg-gradient-to-t from-p-100 to-white">
+<body class="bg-gradient-to-t from-p-100 to-white">
+    <div class="flex min-h-screen">
 
         <!-- SIDEBAR -->
         <div class="p-8 border-r w-80">
@@ -103,7 +103,7 @@
                                 <label class="block text-sm text-n-800">
                                     Họ và tên
                                 </label>
-                                <input id="fullName" type="text" placeholder="Nhập họ và tên" class="input-box">
+                                <input id="fullName" disabled type="text" class="input-box">
                             </div>
 
                             <!-- email -->
@@ -121,20 +121,27 @@
                                 <input id="role" type="text" value="" disabled class="max-w-sm p-2 border rounded-lg w-fit bg-foreground">
                             </div>
 
+                            <div>
+                                <label class="block text-sm text-n-800">
+                                    Số tài khoản
+                                </label>
+                                <input id="stk" type="text" disabled value="" class="input-box">
+                            </div>
+
                             <!-- birthday , gender-->
                             <div class="flex gap-12">
                                 <div>
                                     <label class="block text-sm text-n-800">
                                         Ngày sinh
                                     </label>
-                                    <input id="dob" type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <input id="dob" type="date" class="p-2 border rounded-lg cursor-pointer w-fit bg-foreground">
                                 </div>
 
                                 <div>
                                     <label class="block text-sm text-n-800">
                                         Giới tính
                                     </label>
-                                    <select id="gender" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <select id="gender" class="p-2 border rounded-lg cursor-pointer w-fit bg-foreground">
                                         <option>Nam</option>
                                         <option>Nữ</option>
                                         <option>Khác</option>

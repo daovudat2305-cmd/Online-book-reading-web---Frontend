@@ -75,7 +75,7 @@ function loadAvatar() {
     })
     .then(data => {
         const avatar = document.getElementById('avatarPreview')
-        avatar.src = data.avatar == null ? "../assets/avatar.jpg" : data.avatar
+        avatar.src = data.avatar
     })
     .catch(error => {
         alert(error.message)

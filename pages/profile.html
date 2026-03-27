@@ -14,10 +14,10 @@
     <!-- Script -->
     <script defer src="../js/profile.js"></script>
     <script defer src="../js/pay.js"></script>
-    <script src=""></script>
+    <script defer src="../js/register-author.js"></script>
 </head>
-<body>
-    <div class="flex h-screen bg-gradient-to-t from-p-100 to-white">
+<body class="bg-gradient-to-t from-p-100 to-white">
+    <div class="flex min-h-screen">
 
         <!-- SIDEBAR -->
         <div class="p-8 border-r w-80">
@@ -122,14 +122,14 @@
                                     <label class="block text-sm text-n-800">
                                         Ngày sinh
                                     </label>
-                                    <input id="dob" type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <input id="dob" type="date" class="p-2 border rounded-lg cursor-pointer w-fit bg-foreground">
                                 </div>
 
                                 <div>
                                     <label class="block text-sm text-n-800">
                                         Giới tính
                                     </label>
-                                    <select id="gender" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <select id="gender" class="p-2 border rounded-lg cursor-pointer w-fit bg-foreground">
                                         <option>Nam</option>
                                         <option>Nữ</option>
                                         <option>Khác</option>
@@ -260,7 +260,7 @@
                         <label class="block text-sm text-n-800">
                             Họ và tên
                         </label>
-                        <input type="text" class="input-box" placeholder="Nhập họ tên đầy đủ">
+                        <input id="fullNameAuthor" type="text" class="input-box" placeholder="Nhập họ tên đầy đủ">
                     </div>
 
                     <!-- email -->
@@ -268,7 +268,7 @@
                         <label class="block text-sm text-n-800">
                             Email
                         </label>
-                        <input type="email" disabled class="input-box">
+                        <input id="emailAuthor" type="email" disabled class="input-box">
                     </div>
                     
                     <!-- stk -->
@@ -276,7 +276,7 @@
                         <label class="block text-sm text-n-800">
                             Số tài khoản
                         </label>
-                        <input type="text" placeholder="Nhập số tài khoản" class="input-box">
+                        <input id="stk" type="text" placeholder="Nhập số tài khoản" class="input-box">
                     </div>
                     
                     <!-- birthday , gender-->
@@ -285,14 +285,14 @@
                             <label class="block text-sm text-n-800">
                                 Ngày sinh
                             </label>
-                            <input type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                            <input id="dobAuthor" type="date" class="p-2 border rounded-lg w-fit bg-foreground">
                         </div>
 
                         <div>
                             <label class="block text-sm text-n-800">
                                 Giới tính
                             </label>
-                            <select class="p-2 border rounded-lg w-fit bg-foreground">
+                            <select id="genderAuthor" class="p-2 border rounded-lg w-fit bg-foreground">
                                 <option>Nam</option>
                                 <option>Nữ</option>
                                 <option>Khác</option>
@@ -304,15 +304,55 @@
                         <label class="block text-sm text-n-800">
                             Lý do muốn làm tác giả
                         </label>
-                        <textarea name="" id="commentInput" class="p-3 border rounded-lg resize-none w-xl bg-foreground focus:ring-2 focus:ring-p-300" rows="2" placeholder="Lý do muốn làm tác giả..."></textarea>
+                        <textarea name="" id="description" class="p-3 border rounded-lg resize-none w-xl bg-foreground focus:ring-2 focus:ring-p-300" rows="2" placeholder="Lý do muốn làm tác giả..."></textarea>
                     </div>
 
                     <!-- button -->
-                    <button class="px-6 py-2 mt-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer">
+                    <button id="registerAuthorBtn" class="px-6 py-2 mt-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer">
                         Nộp đơn đăng ký
                     </button>
 
                 </div>
+
+                <!-- History -->
+                <div class="flex flex-col gap-2 mt-4">
+                    <h2 class="text-lg font-semibold">
+                        Lịch sử nộp đơn
+                    </h2>
+                    <div class="overflow-hidden border rounded-lg">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-background">
+                                <tr>
+                                    <th class="p-3">Mã đơn đăng ký</th>
+                                    <th class="p-3">Ngày nộp</th>
+                                    <th class="p-3">Ngày review</th>
+                                    <th class="p-3">Trạng thái</th>
+                                    <th class="p-3">Chi tiết</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="register-table" class="divide-y bg-foreground">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- chi tiết đơn đăng ký -->
+                <div id="register-detail" class="fixed inset-0 flex items-center justify-center hidden bg-n-200/60">
+
+                    <div class="bg-white p-6 rounded-lg w-[500px]">
+                        <h2 class="mb-4 text-xl font-bold">Chi tiết đơn đăng ký</h2>
+
+                        <div id="register-content"></div>
+
+                        <button onclick="closeDetail()"
+                            class="px-4 py-2 mt-4 text-white rounded bg-n-600 hover:bg-n-800 hover:cursor-pointer">
+                            Đóng
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
         </div>

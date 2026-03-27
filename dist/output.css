@@ -289,6 +289,9 @@
   .z-50 {
     z-index: 50;
   }
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -503,8 +506,8 @@
   .h-full {
     height: 100%;
   }
-  .h-screen {
-    height: 100vh;
+  .max-h-\[150px\] {
+    max-height: 150px;
   }
   .min-h-screen {
     min-height: 100vh;
@@ -569,6 +572,9 @@
   .w-\[480px\] {
     width: 480px;
   }
+  .w-\[500px\] {
+    width: 500px;
+  }
   .w-fit {
     width: fit-content;
   }
@@ -621,6 +627,9 @@
     --tw-translate-y: calc(calc(1 / 2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
   .cursor-pointer {
     cursor: pointer;
   }
@@ -641,6 +650,9 @@
   }
   .grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .grid-cols-\[140px_auto\] {
+    grid-template-columns: 140px auto;
   }
   .grid-cols-\[200px_auto\] {
     grid-template-columns: 200px auto;
@@ -789,6 +801,9 @@
   .overflow-x-auto {
     overflow-x: auto;
   }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
   .rounded {
     border-radius: 0.25rem;
   }
@@ -913,6 +928,12 @@
   .bg-n-200 {
     background-color: hsl(210, 22%, 85%);
   }
+  .bg-n-200\/60 {
+    background-color: color-mix(in oklab, hsl(210, 22%, 85%) 60%, transparent);
+  }
+  .bg-n-600 {
+    background-color: hsl(217, 18%, 54%);
+  }
   .bg-p-50 {
     background-color: #f0f8ff;
   }
@@ -933,6 +954,9 @@
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
+  }
+  .bg-secondary-light {
+    background-color: hsl(275, 71%, 68%);
   }
   .bg-success {
     background-color: hsl(120, 85%, 60%);
@@ -975,10 +999,6 @@
   }
   .to-p-50 {
     --tw-gradient-to: #f0f8ff;
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-  .to-p-200 {
-    --tw-gradient-to: #b9e2fe;
     --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .to-p-300 {
@@ -1069,6 +1089,9 @@
   .pt-8 {
     padding-top: calc(var(--spacing) * 8);
   }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
   .pb-8 {
     padding-bottom: calc(var(--spacing) * 8);
   }
@@ -1095,6 +1118,9 @@
   }
   .text-right {
     text-align: right;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
   }
   .font-sans {
     font-family: var(--font-sans);
@@ -1145,6 +1171,9 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .break-words {
+    overflow-wrap: break-word;
+  }
   .text-\[\#00c6d7\] {
     color: #00c6d7;
   }
@@ -1172,6 +1201,9 @@
   .text-green-700 {
     color: var(--color-green-700);
   }
+  .text-n-50 {
+    color: hsl(210, 14%, 98%);
+  }
   .text-n-500 {
     color: hsl(217, 20%, 58%);
   }
@@ -1183,6 +1215,9 @@
   }
   .text-n-800 {
     color: hsl(220, 14%, 12%);
+  }
+  .text-p-600 {
+    color: #007acb;
   }
   .text-p-700 {
     color: #0062a4;
@@ -1218,6 +1253,9 @@
   }
   .opacity-0 {
     opacity: 0%;
+  }
+  .opacity-50 {
+    opacity: 50%;
   }
   .shadow-inner {
     --tw-shadow: inset 0 2px 4px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.05));
@@ -1352,6 +1390,13 @@
       }
     }
   }
+  .hover\:bg-n-800 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(220, 14%, 12%);
+      }
+    }
+  }
   .hover\:bg-p-200 {
     &:hover {
       @media (hover: hover) {
@@ -1380,6 +1425,13 @@
       }
     }
   }
+  .hover\:bg-secondary-dark {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(275, 71%, 48%);
+      }
+    }
+  }
   .hover\:bg-success {
     &:hover {
       @media (hover: hover) {
@@ -1405,6 +1457,13 @@
     &:hover {
       @media (hover: hover) {
         color: hsl(220, 14%, 12%);
+      }
+    }
+  }
+  .hover\:text-p-800 {
+    &:hover {
+      @media (hover: hover) {
+        color: #055387;
       }
     }
   }
@@ -1466,6 +1525,11 @@
   .focus\:ring-red-400 {
     &:focus {
       --tw-ring-color: var(--color-red-400);
+    }
+  }
+  .md\:col-span-2 {
+    @media (width >= 48rem) {
+      grid-column: span 2 / span 2;
     }
   }
   .md\:grid-cols-3 {

@@ -61,10 +61,14 @@ function loadInfo() {
         gender.value = data.gender == null ? "Khác" : data.gender
 
         const avatar = document.getElementById('avatar')
-        avatar.src = data.avatar == null ? "../assets/avatar.jpg" : data.avatar
+        avatar.src = data.avatar
 
         if(data.dob != null) {
             document.getElementById('dob').value = data.dob
+        }
+
+        if(document.getElementById('stk')) {
+            document.getElementById('stk').value = data.bankAccount
         }
     })
     .catch(error => {
