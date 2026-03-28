@@ -835,6 +835,10 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-4 {
+    border-style: var(--tw-border-style);
+    border-width: 4px;
+  }
   .border-t {
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
@@ -868,6 +872,9 @@
   }
   .border-n-200 {
     border-color: hsl(210, 22%, 85%);
+  }
+  .border-n-500 {
+    border-color: hsl(217, 20%, 58%);
   }
   .border-n-600 {
     border-color: hsl(217, 18%, 54%);
@@ -1359,13 +1366,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: hsl(0, 85%, 60%);
-      }
-    }
-  }
-  .hover\:bg-gray-100 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-gray-100);
       }
     }
   }

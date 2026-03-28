@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Online</title>
     <link rel="icon" type="image/png" href="../assets/logo.png">
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- CSS -->
 
     <link href="../dist/output.css" rel="stylesheet">
@@ -46,10 +47,10 @@
             <div class="relative p-6">
                 
                 <div class="flex items-center pl-2 mb-10 space-x-3">
-                    <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
+                    <button onclick="searchAuthorRequests()" class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500 hover:cursor-pointer">
                         Tìm kiếm
                     </button>
-                    <input type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
+                    <input id="searchRequestInput" type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
                 </div>
     
                 <!-- danh sách đơn -->
@@ -68,10 +69,10 @@
             <div class="relative p-6 ">
                 
                 <!-- Nút quay lại -->
-                <a href="admin-author.html" class="flex items-center gap-2 text-md ml-3 text-n-700 hover:text-n-800 hover:cursor-pointer">
+                <button onclick="goBackToList()" class="flex items-center gap-2 ml-3 text-md text-n-700 hover:text-n-800 hover:cursor-pointer">
                     <i class="fa-solid fa-chevron-left"></i>
                     Trở lại
-                </a>
+                </button>
     
                 <div class="flex flex-col w-full max-w-5xl gap-16 p-12 mx-4 mt-8 rounded-sm bg-n-50 md:flex-row">
                     

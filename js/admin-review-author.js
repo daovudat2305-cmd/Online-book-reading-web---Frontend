@@ -30,6 +30,41 @@ async function fetchAuthorRequests(page=0, size=12) {
     }
 }
 
+//tìm kiếm đơn
+async function searchAuthorRequests(page=0, size=12) {
+    const searchInput = document.getElementById('searchRequestInput')
+    const keyword = searchInput.value
+
+    if(keyword == null || keyword.trim().length==0) {
+        fetchAuthorRequests(0)
+        return
+    }
+
+    try {
+        // gọi API
+        const response = await fetch(`${API_URL}/${keyword.trim()}?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            } 
+        })
+
+        if(response.ok) {
+            const data = await response.json()
+            // data lúc này là page từ spring
+            currentAuthorRequests = data.content
+            renderAuthorRequests(data.content)
+            renderPagination(data.number, data.totalPages)
+        }
+        else {
+            alert("Lỗi khi tải dữ liệu")
+        }
+    } catch (error) {
+        alert("Lỗi kết nối" + error)
+    }
+}
+
 function renderAuthorRequests(authorRequests) {
     const container = document.getElementById('author-request-list')
     container.innerHTML = ''

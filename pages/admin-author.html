@@ -46,10 +46,10 @@
             <div class="relative p-6">
                 
                 <div class="flex items-center pl-2 mb-10 space-x-3">
-                    <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
+                    <button onclick="searchAuthors()" class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500 hover:cursor-pointer">
                         Tìm kiếm
                     </button>
-                    <input type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
+                    <input id="searchAuthorInput" type="text" placeholder="Bạn muốn tìm tác giả của sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
                 </div>
     
                 <div id="list-authors" class="grid grid-cols-2 px-6 mt-16 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-10 gap-y-12">
@@ -67,10 +67,10 @@
             <div class="relative p-6">
 
                 <!-- Nút quay lại -->
-                <a href="admin-author.html" class="flex items-center gap-2 text-md ml-3 text-n-700 hover:text-n-800 hover:cursor-pointer">
+                <button onclick="goBackToList()" class="flex items-center gap-2 ml-3 text-md text-n-700 hover:text-n-800 hover:cursor-pointer">
                     <i class="fa-solid fa-chevron-left"></i>
                     Trở lại
-                </a>
+                </button>
     
                 <div class="bg-[#fcf4f4] w-full max-w-5xl mx-4 mt-8 p-12 flex flex-col md:flex-row gap-16 rounded-sm">
                     

@@ -29,6 +29,39 @@ async function fetchListAuthors(page=0, size=12) {
     }
 }
 
+async function searchAuthors(page=0, size=12) {
+    const searchInput = document.getElementById('searchAuthorInput')
+
+    const keyword = searchInput.value
+    if(keyword.length==null || keyword.trim().length==0) {
+        fetchListAuthors(0)
+        return
+    } 
+
+    try {
+        // gọi API
+        const response = await fetch(`${API_URL}/${keyword.trim()}?page=${page}&size=${size}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            } 
+        })
+
+        if(response.ok) {
+            const data = await response.json()
+            currentListAuthors = data.content
+            renderListAuthors(data.content)
+            renderPagination(data.number, data.totalPages)
+        }
+        else {
+            alert("Lỗi khi tải dữ liệu")
+        }
+    } catch (error) {
+        alert("Lỗi kết nối" + error)
+    }
+}
+
 function renderListAuthors(listAuthors) {
     const container = document.getElementById('list-authors')
     container.innerHTML = ''
