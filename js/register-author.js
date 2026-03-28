@@ -171,13 +171,13 @@ document.getElementById('registerAuthorBtn').addEventListener('click', function(
         return response.json().catch(() => ({}));
     })
     .then(data => {
-        alert(data.message)
+        showToast(data.message, 'info')
         loadForm()
         loadInfo()
         registerHistory()
     })
     .catch(error => {
-        alert(error.message)
+        showToast(error.message, 'warning')
         console.error('Error: ', error)
     })
 })

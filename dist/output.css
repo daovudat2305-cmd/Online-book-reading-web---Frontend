@@ -440,6 +440,9 @@
   .mb-16 {
     margin-bottom: calc(var(--spacing) * 16);
   }
+  .ml-3 {
+    margin-left: calc(var(--spacing) * 3);
+  }
   .ml-4 {
     margin-left: calc(var(--spacing) * 4);
   }
@@ -868,9 +871,6 @@
   }
   .border-n-600 {
     border-color: hsl(217, 18%, 54%);
-  }
-  .border-p-400 {
-    border-color: #47bbfc;
   }
   .border-secondary-light {
     border-color: hsl(275, 71%, 68%);

@@ -113,11 +113,11 @@ document.getElementById('saveInfo').addEventListener('click', function(event) {
         return response.json().catch(() => ({}));
     })
     .then(data => {
-        alert(data.message)
+        showToast(data.message, 'success')
         loadInfo()
     })
     .catch(error => {
-        alert(error.message)
+        showToast(error.message, 'warning')
         console.error('Error: ', error)
     })
 })
@@ -155,14 +155,14 @@ avatarInput.addEventListener('change', async (event) => {
         if (response.ok) {
             document.getElementById('avatar').src = data.avatarUrl
             
-            alert(data.message);
+            showToast(data.message, 'success');
         } else {
             throw new Error(data.message || 'Lỗi từ máy chủ')
         }
 
     } catch (error) {
         console.error('Lỗi upload:', error)
-        alert('Đã có lỗi xảy ra khi cập nhật ảnh đại diện!');
+        showToast('Đã có lỗi xảy ra khi cập nhật ảnh đại diện!', 'error');
     } finally {
         // xóa value của thẻ input để có thể chọn lại chính ảnh đó lần sau nếu cần
         avatarInput.value = ''; 

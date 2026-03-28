@@ -29,12 +29,12 @@ document.getElementById('btnRegister').addEventListener('click', function(event)
         return response.json()
     })
     .then(data => {
-        alert(data.message)
+        showToast(data.message, "success")
 
         window.location.href = 'login.html'
     })
     .catch(error => {
-        alert(error.message)
+        showToast(error.message, "error")
         console.error('Error: ', error)
     })
 })

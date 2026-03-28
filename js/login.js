@@ -31,7 +31,7 @@ document.getElementById('btnLogin').addEventListener('click', function(event) {
         localStorage.setItem('username', data.username)
         localStorage.setItem('role', data.role)
 
-        alert('Đăng nhập thành công')
+        showToast('Đăng nhập thành công', "success")
         if(data.role === 'USER' || data.role === 'AUTHOR') {
             window.location.href = 'home.html'
         }
@@ -40,7 +40,7 @@ document.getElementById('btnLogin').addEventListener('click', function(event) {
         }
     })
     .catch(error => {
-        alert(error.message)
+        showToast(error.message, "error")
         console.error('Error: ', error)
     })
 })
