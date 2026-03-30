@@ -88,6 +88,10 @@ document.getElementById('saveInfo').addEventListener('click', function(event) {
     const fullNameValue = document.getElementById('fullName').value
     const dobValue = document.getElementById('dob').value
     const genderValue = document.getElementById('gender').value
+    let stk = ""
+    if(document.getElementById('stk') && document.getElementById('stk').value!=null) {
+        stk = document.getElementById('stk').value.trim()
+    }
 
     //gọi API
     fetch(`${API_URL}/myInfo`, {
@@ -99,7 +103,8 @@ document.getElementById('saveInfo').addEventListener('click', function(event) {
         body: JSON.stringify({
             fullName: fullNameValue,
             dob: dobValue,
-            gender: genderValue
+            gender: genderValue,
+            bankAccount: stk,
         })
     })
     .then(async response => {
