@@ -1,5 +1,7 @@
 function showToast(message, type="success") {
     const container = document.getElementById('toast-container')
+    // Kiểm tra nếu trang hiện tại có container thì mới chạy tiếp
+    if(!container) return; 
 
     const toast = document.createElement('div')
 
@@ -26,7 +28,8 @@ function showToast(message, type="success") {
 }
 
 function requireLogin() {
-    const isLogin = false; // lấy từ backend
+    // Lấy trạng thái từ Token thật trong localStorage
+    const isLogin = localStorage.getItem('jwtToken') ? true : false; 
     if(!isLogin) {
         showToast("Vui lòng đăng nhập!", "warning")
         return false;
@@ -34,18 +37,33 @@ function requireLogin() {
     return true
 }
 
-document.getElementById("read-btn").addEventListener("click", () => {
-    if (!requireLogin()) return;
+// Xử lý chuyển trang cho Sidebar (Sửa lỗi goTo is not defined)
+function goTo(url) {
+    window.location.href = url;
+}
 
-    showToast("Chúc bạn đọc sách vui vẻ 📚", "success");
-});
+// KIỂM TRA NÚT TRƯỚC KHI GÁN SỰ KIỆN (Để tránh lỗi ở trang Home)
+// Tui bọc vào DOMContentLoaded để đảm bảo HTML đã load xong mới tìm nút
+document.addEventListener("DOMContentLoaded", function() {
+    const readBtn = document.getElementById("read-btn");
+    if (readBtn) {
+        readBtn.addEventListener("click", () => {
+            if (!requireLogin()) return;
+            showToast("Chúc bạn đọc sách vui vẻ 📚", "success");
+        });
+    }
 
-document.getElementById("like-btn").addEventListener("click", () => {
-    if (!requireLogin()) return;
+    const likeBtn = document.getElementById("like-btn");
+    if (likeBtn) {
+        likeBtn.addEventListener("click", () => {
+            if (!requireLogin()) return;
+        });
+    }
 
-});
-
-document.getElementById("comment-btn").addEventListener("click", () => {
-    if (!requireLogin()) return;
-
+    const commentBtn = document.getElementById("comment-btn");
+    if (commentBtn) {
+        commentBtn.addEventListener("click", () => {
+            if (!requireLogin()) return;
+        });
+    }
 });

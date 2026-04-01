@@ -12,8 +12,14 @@
     <link href="../dist/output.css" rel="stylesheet">
     
     <!-- Script -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+        // Cấu hình Worker cho PDF.js hoạt động mượt mà
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
     <script defer src="../js/profile.js"></script>
     <script defer src="../js/pay.js"></script>
+    <script defer src="../js/profile-author.js"></script>
 
 </head>
 <body>
@@ -255,73 +261,108 @@
             <div id="publish-book" class="hidden tab">
                 <h2 class="mb-6 text-2xl font-semibold">Đăng sách</h2>
 
-                <!-- form -->
                 <div>
                     <div class="flex-1 space-y-4">
-                            <h2 class="text-lg font-semibold">
-                                Thông tin sách
-                            </h2>
-                            <!-- tiêu đề -->
-                            <div>
-                                <label class="block text-sm text-n-800">
-                                    Tiêu đề
-                                </label>
-                                <input type="text" class="input-box" placeholder="Tiêu đề sách">
-                            </div>
-
-                            <!-- Mô tả -->
-                            <div>
-                                <label class="block text-sm text-n-800">
-                                    Mô tả
-                                </label>
-                                <input type="text" placeholder="Mô tả sách" class="input-box">
-                            </div>
-
-                            <!-- file sách -->
-                            <div>
-                                <label class="block text-sm text-n-800">
-                                    Tải sách lên
-                                </label>
-                                <input type="file" class="input-box">
-                            </div>
-
-                            <div>
-                                <label class="block text-sm text-n-800">
-                                    Bìa sách
-                                </label>
-                                <input type="file" class="input-box">
-                            </div>
-
-                            <!-- thể loại, loại sách-->
-                            <div class="flex gap-12">
-                                <div>
-                                    <label class="block text-sm text-n-800">
-                                        Thể loại
-                                    </label>
-                                    <select class="p-2 border rounded-lg w-fit bg-foreground">
-                                        <option>Thể loại 1</option>
-                                        <option>Thể loại 2</option>
-                                        <option>Thể loại 3</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label class="block text-sm text-n-800">
-                                        Loại sách
-                                    </label>
-                                    <select class="p-2 border rounded-lg w-fit bg-foreground">
-                                        <option>Miễn phí</option>
-                                        <option>VIP</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- button -->
-                            <button class="btn">
-                                Đăng sách
-                            </button>
-
+                        <h2 class="text-lg font-semibold">
+                            Thông tin sách
+                        </h2>
+                        <div>
+                            <label class="block text-sm text-n-800">Tiêu đề</label>
+                            <input id="title" type="text" class="input-box" placeholder="Tiêu đề sách">
                         </div>
+
+                        <div>
+                            <label class="block text-sm text-n-800">Mô tả</label>
+                            <input id="description" type="text" placeholder="Mô tả sách" class="input-box">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-n-800">Số trang</label>
+                            <input id="totalPages" type="number" placeholder="Nhập số trang" class="input-box">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-n-800">Tải sách lên (PDF)</label>
+                            <input id="pdfFile" type="file" accept=".pdf" class="input-box">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-n-800">Bìa sách (Ảnh)</label>
+                            <input id="coverImage" type="file" accept="image/*" class="input-box">
+                        </div>
+
+                        <div class="flex flex-col gap-6 md:flex-row md:gap-12">
+                            
+                            <div class="flex-1">
+                                <label class="block mb-2 text-sm text-n-800">Thể loại (Có thể chọn nhiều)</label>
+                                <div class="p-3 border rounded-lg bg-foreground max-h-40 overflow-y-auto custom-scrollbar">
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="1" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Tiên hiệp</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="2" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Kiếm hiệp</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="3" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Hành động</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="4" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Ngôn tình</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="5" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Trinh thám</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="6" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Kinh dị</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="7" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Linh dị</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="8" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Viễn tưởng</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="9" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Học đường</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="10" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Hài hước</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="11" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Lịch sử</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
+                                            <input type="checkbox" name="categories" value="12" class="w-4 h-4 rounded">
+                                            <span class="text-sm">Thể thao</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="w-48">
+                                <label class="block mb-2 text-sm text-n-800">Loại sách</label>
+                                <select id="type" class="w-full p-2 border rounded-lg bg-foreground outline-none cursor-pointer">
+                                    <option value="FREE">Miễn phí</option>
+                                    <option value="VIP">VIP</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button id="btnSubmitBook" class="btn">
+                            Đăng sách
+                        </button>
+
+                    </div>
                 </div>
             </div>
 
@@ -335,37 +376,27 @@
                             <tr>
                                 <th class="p-3">Mã sách</th>
                                 <th class="p-3">Tiêu đề</th>
-                                <th class="p-3">Thời gian đăng</th>
-                                <th class="p-3">Trạng thái</th>
-                                <th class="p-3">Thông báo</th>
+                                <th class="p-3"> <div class="flex items-center gap-2">
+                                        <span>Thời gian đăng</span>
+                                        <input type="date" id="filter-date-input" class="p-1 text-xs font-normal text-gray-600 border border-gray-300 rounded cursor-pointer outline-none focus:border-blue-500 bg-white">
+                                    </div>
+                                </th>
+                                <th class="p-3">
+                                    <div class="flex flex-col gap-1">
+                                        <span>Trạng thái</span>
+                                        <select id="filter-status-select" class="p-1 text-xs font-normal text-gray-600 border border-gray-300 rounded cursor-pointer outline-none focus:border-blue-500 bg-white">
+                                            <option value="all">Tất cả</option>
+                                            <option value="0">Đang chờ duyệt</option>
+                                            <option value="1">Đã duyệt</option>
+                                            <option value="2">Bị từ chối duyệt</option>
+                                            <option value="3">Đã xóa</option> </select>
+                                        </select>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
-
-                        <tbody class="divide-y">
-                            <tr class="hover:bg-p-200">
-                                <td class="p-3">Book1</td>
-                                <td class="p-3">Sách 1</td>
-                                <td class="p-3">01/03/2026</td>
-                                <td class="p-3 font-semibold text-warning">Đang chờ duyệt</td>
-                                <td class="p-3">Không có</td>
-                            </tr>
-
-                            <tr class="hover:bg-p-200">
-                                <td class="p-3">Book2</td>
-                                <td class="p-3">Sách 2</td>
-                                <td class="p-3">02/03/2026</td>
-                                <td class="p-3 font-semibold text-error">Bị từ chối</td>
-                                <td class="p-3">Không có</td>
-                            </tr>
-
-                            <tr class="hover:bg-p-200">
-                                <td class="p-3">Book3</td>
-                                <td class="p-3">Sách 3</td>
-                                <td class="p-3">03/03/2026</td>
-                                <td class="p-3 font-semibold text-success">Đã được duyệt</td>
-                                <td class="p-3">Không có</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="history-table-body" class="divide-y">   
+                            </tbody>
                     </table>
                 </div>
             </div>
