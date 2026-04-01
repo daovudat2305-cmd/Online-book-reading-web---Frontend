@@ -3,24 +3,24 @@ const API = "http://localhost:8080/api"
 // token đã có ở project.js
 
 // hiện thị form
-function loadForm() {
-    // gọi API
-    fetch(`${API}/users/myInfo`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
+async function loadForm() {
+    try {
+        // gọi API
+        const response = await fetch(`${API}/users/myInfo`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
         if(!response.ok) {
             const errData = await response.json();
             const errMessage = errData.error || JSON.stringify(errData)
             throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
         }
-        return response.json()
-    })
-    .then(data => {
+        
+        const data = await response.json()
         const email = document.getElementById('emailAuthor')
         email.value = data.email
 
@@ -33,26 +33,26 @@ function loadForm() {
         if(data.dob != null) {
             document.getElementById('dobAuthor').value = data.dob
         }
-    })
-    .catch(error => {
+    } catch (error) {
         alert(error.message)
         console.error('Error: ', error)
-    })
+    }
 }
 
 
 // lấy lịch sử nộp đơn
 let registerDetail = null
-function registerHistory() {
-    //gọi API
-    fetch(`${API}/authors/register`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
+async function registerHistory() {
+    try {
+         //gọi API
+        const response = await fetch(`${API}/authors/register`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
         if (!response.ok) {
             // Cố gắng đọc nội dung lỗi từ server trả về
             const errData = await response.json().catch(() => ({}))
@@ -60,9 +60,7 @@ function registerHistory() {
             throw new Error(errMessage)
         }
         
-        return response.json().catch(() => ({}));
-    })
-    .then(data => {
+        const data = await response.json().catch(() => ({}))
         registerDetail = data
         //render ra bảng
         const tableBody = document.getElementById('register-table');
@@ -94,11 +92,10 @@ function registerHistory() {
             </td>
         `;
         tableBody.appendChild(row)
-    })
-    .catch(error => {
+    } catch (error) {
         alert(error.message)
         console.error('Error: ', error)
-    })
+    }
 }
 
 loadForm()
@@ -135,7 +132,7 @@ function closeDetail() {
 }
 
 // nộp đơn đăng ký
-document.getElementById('registerAuthorBtn').addEventListener('click', function(event) {
+document.getElementById('registerAuthorBtn').addEventListener('click',async function(event) {
     event.preventDefault() //ngăn load lại trang
 
     // lấy giá trị từ các ô input
@@ -145,22 +142,23 @@ document.getElementById('registerAuthorBtn').addEventListener('click', function(
     const stkValue = document.getElementById('stk').value
     const descriptionValue = document.getElementById('description').value
 
-    //gọi API
-    fetch(`${API}/authors/register`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            fullName: fullNameValue,
-            dob: dobValue,
-            gender: genderValue,
-            bankAccount: stkValue,
-            description: descriptionValue
+    try {
+        //gọi API
+        const response = await fetch(`${API}/authors/register`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fullName: fullNameValue,
+                dob: dobValue,
+                gender: genderValue,
+                bankAccount: stkValue,
+                description: descriptionValue
+            })
         })
-    })
-    .then(async response => {
+
         if (!response.ok) {
             // Cố gắng đọc nội dung lỗi từ server trả về
             const errData = await response.json().catch(() => ({}))
@@ -168,16 +166,13 @@ document.getElementById('registerAuthorBtn').addEventListener('click', function(
             throw new Error(errMessage)
         }
         
-        return response.json().catch(() => ({}));
-    })
-    .then(data => {
+        const data = await response.json().catch(() => ({}))
         showToast(data.message, 'info')
         loadForm()
         loadInfo()
         registerHistory()
-    })
-    .catch(error => {
+    } catch (error) {
         showToast(error.message, 'warning')
         console.error('Error: ', error)
-    })
+    }
 })

@@ -28,7 +28,7 @@ async function fetchListAuthors(page=0, size=12) {
         alert("Lỗi kết nối" + error)
     }
 }
-
+//tìm kiếm
 async function searchAuthors(page=0, size=12) {
     const searchInput = document.getElementById('searchAuthorInput')
 
@@ -79,7 +79,7 @@ function renderListAuthors(listAuthors) {
                 <span class="mt-4 text-[15px] font-medium text-gray-800 group-hover:text-p-400 transition">${author.fullName}</span>
             </div>
         `
-        container.insertAdjacentHTML('beforeend', authorCard);
+        container.insertAdjacentHTML('beforeend', authorCard)
     })
 }
 
