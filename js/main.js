@@ -56,29 +56,36 @@ document.addEventListener("click", (e) => {
 //hiển thị avatar
 const API_URL = "http://localhost:8080/api/users"
 const token = localStorage.getItem('jwtToken')
-function loadAvatar() {
-    // gọi API
-    fetch(`${API_URL}/myInfo`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
+async function loadAvatar() {
+    try {
+        // gọi API
+        const response = await fetch(`${API_URL}/myInfo`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
         if(!response.ok) {
             const errData = await response.json();
             const errMessage = errData.error || JSON.stringify(errData)
             throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
         }
-        return response.json()
-    })
-    .then(data => {
+        //hien thi du lieu
+        const data = await response.json()
+        const avatarBtn = document.getElementById("avatarBtn")
         const avatar = document.getElementById('avatarPreview')
         avatar.src = data.avatar
-    })
-    .catch(error => {
+        if(data.isVip) {
+            avatar.classList.add("border-3", "border-yellow-400")
+            avatarBtn.insertAdjacentHTML("beforeend", `<i class="fa-solid fa-crown text-yellow-400"></i>`)
+        }
+        else {
+            avatar.classList.add("border-3", "border-n-500")
+        }
+    } catch (error) {
         alert(error.message)
         console.error('Error: ', error)
-    })
+    }
 }
