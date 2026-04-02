@@ -1,3 +1,4 @@
+//xử lý phần user nộp đơn đăng ký làm tác giả
 // đăng ký làm tác giả
 const API = "http://localhost:8080/api"
 // token đã có ở project.js

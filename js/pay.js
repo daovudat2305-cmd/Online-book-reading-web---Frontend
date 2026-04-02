@@ -1,4 +1,4 @@
-
+//xử lý các phần liên quan đến thanh toán và vip
 //đăng ký VIP
 async function buyVip(vipId) {
     try {

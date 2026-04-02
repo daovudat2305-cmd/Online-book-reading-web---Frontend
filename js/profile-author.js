@@ -1,3 +1,4 @@
+//xử lý tác giả đăng sách
 document.addEventListener("DOMContentLoaded", function() {
     // PHẦN 1: TẢI LỊCH SỬ ĐĂNG SÁCH
     loadBookHistory();
@@ -23,28 +24,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Lấy Token từ két sắt
             const token = localStorage.getItem('jwtToken'); 
-            console.log("🎟️ VÉ ĐANG GỬI ĐI LÀ:", token); 
 
             // Kiểm tra nếu PDF đang trong quá trình đếm trang
             if (totalPages === "Đang đếm số trang...") {
-                alert("Hệ thống đang xử lý file PDF, vui lòng chờ trong giây lát!");
+                showToast("Hệ thống đang xử lý file PDF, vui lòng chờ trong giây lát!", "info");
                 return;
             }
 
             // 2. Chặn lỗi rỗng (Validation)
             if (!title || !description || !totalPages) {
-                alert("Vui lòng điền đầy đủ Tiêu đề, Mô tả và Số trang!");
+                showToast("Vui lòng điền đầy đủ Tiêu đề, Mô tả và Số trang!", "warning");
                 return;
             }
 
             if (!coverImageFile || !pdfFile) {
-                alert("Vui lòng đính kèm đầy đủ Bìa sách và File sách (PDF)!");
+                showToast("Vui lòng đính kèm đầy đủ Bìa sách và File sách (PDF)!", "warning");
                 return;
             }
 
             // Kiểm tra xem tác giả có quên chọn Thể loại không
             if (categoryIds.length === 0) {
-                alert("Vui lòng chọn ít nhất 1 thể loại cho cuốn sách của bạn!");
+                showToast("Vui lòng chọn ít nhất 1 thể loại cho cuốn sách của bạn!", "warning");
                 return;
             }
 
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return response.json();
             })
             .then(data => {
-                alert("🎉 Đăng sách thành công!");
+                showToast("🎉 Đăng sách thành công!", "success");
                 
                 // Xóa trắng form sau khi đăng xong
                 document.getElementById('title').value = '';
@@ -212,7 +212,7 @@ function renderBookTable(booksToRender) {
         let dateStr = new Date(book.createdAt || book.createdDate).toLocaleDateString('vi-VN');
 
         const tr = document.createElement('tr');
-        tr.className = "border-b hover:bg-gray-50 transition text-sm";
+        tr.className = "text-sm transition border-b hover:bg-gray-50";
         tr.innerHTML = `
             <td class="p-3 text-gray-500 text-xs">#${book.bookId.substring(0,8)}...</td>
             <td class="p-3 font-semibold text-n-800">${book.title}</td>

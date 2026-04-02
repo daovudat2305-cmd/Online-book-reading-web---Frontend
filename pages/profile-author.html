@@ -240,14 +240,14 @@
                             </tr>
                         </thead>
 
-                        <tbody id="paymentHistoryBody" class="divide-y text-sm">
+                        <tbody id="paymentHistoryBody" class="text-sm divide-y">
                             
                         </tbody>
                     </table>
                 </div>
 
                 <div class="flex items-center justify-center gap-4 mt-6">
-                    <button id="btnPrevPayment" class="px-4 py-2 text-white bg-n-500 rounded-lg hover:bg-n-600 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="btnPrevPayment" class="px-4 py-2 text-white rounded-lg bg-n-500 hover:bg-n-600 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
                         Trước
                     </button>
                     <span class="font-semibold text-n-800">Trang <span id="paymentCurrentPage">1</span> / <span id="paymentTotalPages">1</span></span>
@@ -296,7 +296,7 @@
                             
                             <div class="flex-1">
                                 <label class="block mb-2 text-sm text-n-800">Thể loại (Có thể chọn nhiều)</label>
-                                <div class="p-3 border rounded-lg bg-foreground max-h-40 overflow-y-auto custom-scrollbar">
+                                <div class="p-3 overflow-y-auto border rounded-lg bg-foreground max-h-40 custom-scrollbar">
                                     <div class="grid grid-cols-2 gap-3">
                                         <label class="flex items-center space-x-2 cursor-pointer hover:opacity-80">
                                             <input type="checkbox" name="categories" value="1" class="w-4 h-4 rounded">
@@ -352,7 +352,7 @@
 
                             <div class="w-48">
                                 <label class="block mb-2 text-sm text-n-800">Loại sách</label>
-                                <select id="type" class="w-full p-2 border rounded-lg bg-foreground outline-none cursor-pointer">
+                                <select id="type" class="w-full p-2 border rounded-lg outline-none cursor-pointer bg-foreground">
                                     <option value="FREE">Miễn phí</option>
                                     <option value="VIP">VIP</option>
                                 </select>
@@ -379,13 +379,13 @@
                                 <th class="p-3">Tiêu đề</th>
                                 <th class="p-3"> <div class="flex items-center gap-2">
                                         <span>Thời gian đăng</span>
-                                        <input type="date" id="filter-date-input" class="p-1 text-xs font-normal text-gray-600 border border-gray-300 rounded cursor-pointer outline-none focus:border-blue-500 bg-white">
+                                        <input type="date" id="filter-date-input" class="p-1 text-xs font-normal text-gray-600 bg-white border border-gray-300 rounded outline-none cursor-pointer focus:border-blue-500">
                                     </div>
                                 </th>
                                 <th class="p-3">
                                     <div class="flex flex-col gap-1">
                                         <span>Trạng thái</span>
-                                        <select id="filter-status-select" class="p-1 text-xs font-normal text-gray-600 border border-gray-300 rounded cursor-pointer outline-none focus:border-blue-500 bg-white">
+                                        <select id="filter-status-select" class="p-1 text-xs font-normal text-gray-600 bg-white border border-gray-300 rounded outline-none cursor-pointer focus:border-blue-500">
                                             <option value="all">Tất cả</option>
                                             <option value="0">Đang chờ duyệt</option>
                                             <option value="1">Đã duyệt</option>

@@ -1,3 +1,4 @@
+//xử lý phần hiện toast-message
 function showToast(message, type="warning") {
     const container = document.getElementById('toast-container')
 

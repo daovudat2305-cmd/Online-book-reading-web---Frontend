@@ -1,3 +1,5 @@
+//hiện thị thông tin sách
+let currentBook = null
 document.addEventListener("DOMContentLoaded", function() {
     // 1. Lấy mã sách (ID) từ thanh địa chỉ URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(book => {
         // Đổ dữ liệu vào giao diện người dùng
-
+        currentBook = book
         if(document.getElementById('detail-title')) 
             document.getElementById('detail-title').innerText = book.title;
         
@@ -45,40 +47,46 @@ document.addEventListener("DOMContentLoaded", function() {
         const categoryNames = book.categories.map(c => c.categoryName).join(", ");
         if(document.getElementById('detail-categories'))
             document.getElementById('detail-categories').innerText = categoryNames;
-
-        // PHẦN XỬ LÝ ĐỌC PDF
-        const btnRead = document.getElementById('btn-read-now'); // Nút "Đọc ngay"
-        const readModal = document.getElementById('read-modal'); // Cái Modal hiện lên
-        const pdfFrame = document.getElementById('pdf-frame');     // Cái thẻ iframe chứa PDF
-        const btnCloseRead = document.getElementById('btn-close-read'); // Nút X đóng modal
-
-        if (btnRead) {
-            btnRead.onclick = () => {
-                if (book.fileUrl) {
-                    // Ép sang https để tránh lỗi trình duyệt
-                    let secureUrl = book.fileUrl.replace("http://", "https://");
-                    
-                    // Hiện Modal
-                    readModal.classList.remove('hidden');
-                    
-                    // Dùng Google Docs Viewer để đọc PDF mượt hơn
-                    pdfFrame.src = `https://docs.google.com/gview?url=${encodeURIComponent(secureUrl)}&embedded=true`;
-                } else {
-                    alert("File sách hiện chưa khả dụng!");
-                }
-            };
-        }
-
-        // Đóng modal đọc sách
-        if (btnCloseRead) {
-            btnCloseRead.onclick = () => {
-                readModal.classList.add('hidden');
-                pdfFrame.src = ""; // Dừng tải PDF khi đóng
-            };
-        }
     })
     .catch(err => {
         console.error("❌ Lỗi load chi tiết sách:", err);
         alert("Lỗi: " + err.message);
     });
 });
+
+// PHẦN XỬ LÝ ĐỌC SÁCH PDF
+const btnRead = document.getElementById('btn-read-now'); // Nút "Đọc ngay"
+const readModal = document.getElementById('read-modal'); // Cái Modal hiện lên
+const pdfFrame = document.getElementById('pdf-frame');     // Cái thẻ iframe chứa PDF
+const btnCloseRead = document.getElementById('btn-close-read'); // Nút X đóng modal
+
+if (btnRead) {
+    btnRead.onclick = () => {
+        if(isLogin){
+            if (currentBook.fileUrl) {
+                // Ép sang https để tránh lỗi trình duyệt
+                let secureUrl = currentBook.fileUrl.replace("http://", "https://");
+                
+                // Hiện Modal
+                readModal.classList.remove('hidden');
+                
+                // Dùng Google Docs Viewer để đọc PDF mượt hơn
+                pdfFrame.src = `https://docs.google.com/gview?url=${encodeURIComponent(secureUrl)}&embedded=true`;
+            } else {
+                alert("File sách hiện chưa khả dụng!");
+            }
+        }
+        else {
+            showToast("Vui lòng đăng nhập để đọc!", "warning")
+            return
+        }
+    };
+}
+
+// Đóng modal đọc sách
+if (btnCloseRead) {
+    btnCloseRead.onclick = () => {
+        readModal.classList.add('hidden');
+        pdfFrame.src = ""; // Dừng tải PDF khi đóng
+    };
+}

@@ -1,3 +1,4 @@
+//xử lý đăng ký
 const API_URL = "http://localhost:8080/api/auth";
 
 // bấm đăng ký

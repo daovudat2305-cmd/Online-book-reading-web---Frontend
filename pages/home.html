@@ -13,7 +13,7 @@
 
     <!-- Script -->
     <script defer src="../js/main.js"></script>
-
+    <script defer src="../js/book.js"></script>
 </head>
 <body class="bg-gradient-to-t from-p-100 to-p-50">
     <div class="flex min-h-screen">
@@ -49,31 +49,44 @@
 
         <div class="flex flex-col w-full">
             <!-- Main -->
-            <main class="flex-1 p-6 ml-64"> <div class="sticky z-50 flex items-center justify-around mb-8 top-4">
+            <main class="flex-1 p-6 ml-64"> 
+                <!-- Header -->
+                <div class="sticky z-50 flex items-center justify-around mb-8 top-4">
                     <div class="w-1/2">
                         <input id="search-input" placeholder="Tìm kiếm sách" class="w-full px-4 py-2 bg-white border rounded-full shadow-md outline-none border-secondary-light">
                     </div>
 
+                    <!-- Đăng nhập / Đăng ký -->
                     <div id="guest-menu">
                         <button onclick="window.location.href='login.html'" class="p-2 btn">Đăng nhập</button>
                         <button onclick="window.location.href='register.html'" class="p-2 btn">Đăng ký</button>
                     </div>
 
-                    <div id="user-menu" class="relative">
+                    <div id="user-menu">
+                        <!-- Avatar -->
                         <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer">
-                            <img id="avatarPreview" src="" class="w-10 h-10 rounded-full border-2">
+                            <img id="avatarPreview" src="" class="w-10 h-10 rounded-full">
                             <span id="display-username" class="text-sm font-semibold"></span>
                         </div>
-
-                        <div id="avatarMenu" class="absolute right-0 hidden w-40 mt-2 rounded-lg shadow-lg bg-white top-12 border">
-                            <a id="profileBtn" href="profile.html" class="block px-4 py-2 hover:bg-gray-100">Tài khoản</a>
-                            <button onclick="logout()" class="w-full px-4 py-2 text-left hover:bg-gray-100">Đăng xuất</button>
+        
+                        <!-- Dropdown -->
+                        <div id="avatarMenu" class="absolute hidden w-40 mt-2 rounded-lg shadow-lg right-10 bg-n-50 top-12">
+                            <a id="profileBtn" href="profile.html"
+                            class="block px-4 py-2 hover:bg-n-200">
+                                Tài khoản
+                            </a>
+        
+                            <button onclick="logout()"
+                            class="w-full px-4 py-2 text-left hover:bg-n-200 hover:cursor-pointer">
+                                Đăng xuất
+                            </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Content -->
                 <div id="book-grid" class="grid grid-cols-4 gap-8">
-                    </div>
+                </div>
 
             </main>
             
@@ -116,6 +129,5 @@
 
     <!-- toast message -->
     <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
-    <script src="../js/home.js"></script>
 </body>
 </html>

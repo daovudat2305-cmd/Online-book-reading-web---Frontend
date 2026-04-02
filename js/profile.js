@@ -1,3 +1,5 @@
+//xử lý phần thông tin cá nhân người dùng
+
 const menuBtn = document.querySelectorAll(".menu-btn")
 const tabs = document.querySelectorAll(".tab")
 

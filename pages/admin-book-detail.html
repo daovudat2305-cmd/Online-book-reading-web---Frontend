@@ -11,6 +11,8 @@
 
     <!-- Script -->
     <script defer src="../js/admin.js"></script>
+    <script src="../js/admin-book-detail.js"></script>
+    <script src="../js/layout.js"></script>
 </head>
 <body class="relative min-h-screen font-sans bg-gradient-to-t from-p-200 to-white text-n-800">
 
@@ -42,8 +44,8 @@
             </div>
 
             <div class="flex flex-col gap-10 pl-4 mt-12 md:flex-row">
-                <div class="w-56 shrink-0 self-start" id="book-cover-container">
-                    <img src="..." class="w-full object-contain shadow-md rounded border border-gray-200" id="book-cover-img">
+                <div class="self-start w-56 shrink-0" id="book-cover-container">
+                    <img src="..." class="object-contain w-full border border-gray-200 rounded shadow-md" id="book-cover-img">
                 </div>
 
                 <div class="flex flex-col">
@@ -57,7 +59,7 @@
                     <p id="book-reads">Lượt đọc: 0</p>
                     <p id="book-comments">Số bình luận: 0</p>
                     <p id="book-type">Loại sách: ...</p>
-                    <p>Thể loại: <span id="book-categories" class="font-normal italic text-gray-600">Đang tải...</span></p>
+                    <p>Thể loại: <span id="book-categories" class="italic font-normal text-gray-600">Đang tải...</span></p>
                 </div>
 
 
@@ -73,9 +75,9 @@
                 </div>
             </div>
 
-            <div class="pb-20 mt-16 pl-4">
+            <div class="pb-20 pl-4 mt-16">
                 <h3 class="mb-6 text-xl font-bold text-n-800">Giới thiệu nội dung</h3>
-                <div id="book-description" class="max-w-4xl leading-relaxed text-n-700 italic">
+                <div id="book-description" class="max-w-4xl italic leading-relaxed text-n-700">
                     Đang tải nội dung giới thiệu...
                 </div>
             </div>
@@ -96,12 +98,12 @@
         </div>
     </div>
 
-    <div id="read-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black/80 p-4">
+    <div id="read-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4 bg-black/80">
         <div class="relative w-11/12 max-w-7xl h-[95vh] bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden">
             
-            <div class="flex justify-between items-center px-6 py-4 border-b bg-blue-50">
+            <div class="flex items-center justify-between px-6 py-4 border-b bg-blue-50">
                 <h3 class="text-xl font-bold text-blue-900" id="read-modal-title">Đọc sách</h3>
-                <button id="btn-close-read" class="text-red-500 hover:text-red-700 font-bold text-3xl leading-none focus:outline-none">&times;</button>
+                <button id="btn-close-read" class="text-3xl font-bold leading-none text-red-500 hover:text-red-700 focus:outline-none">&times;</button>
             </div>
             
             <div class="flex-1 w-full bg-gray-200">
@@ -110,9 +112,6 @@
             
         </div>
     </div>
-
-    <script src="../js/admin-book-detail.js"></script>
-    <script src="../js/layout.js"></script>
 
 </body>
 </html>
