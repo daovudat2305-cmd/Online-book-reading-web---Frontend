@@ -14,13 +14,14 @@
     <!-- Script -->
     <script defer src="../js/profile.js"></script>
     <script defer src="../js/pay.js"></script>
-    <script src=""></script>
+    <script defer src="../js/register-author.js"></script>
+    <script defer src="../js/toast-message.js"></script>
 </head>
-<body>
-    <div class="flex h-screen bg-gradient-to-t from-p-100 to-white">
+<body class="bg-gradient-to-t from-p-100 to-white">
+    <div class="flex min-h-screen">
 
         <!-- SIDEBAR -->
-        <div class="p-8 border-r w-80">
+        <div class="sticky top-0 h-screen p-8 border-r w-80">
 
             <div class="flex items-center gap-3 mb-8">
                 <img src="../assets/logo.png" class="w-10 h-10 rounded-lg">
@@ -70,9 +71,12 @@
 
                         <!-- AVATAR -->
                         <div class="text-center">
-                            <div class="mx-auto overflow-hidden rounded-full bg-background w-28 h-28">
+                            <div id="avatarContainer" class="mx-auto overflow-hidden border-4 rounded-full bg-background w-28 h-28 border-n-500">
                                 <img id="avatar" src="" alt="avatar">
                             </div>
+                            
+                            <span id="isVip" class="font-semibold text-yellow-400"></span>
+
                             <!-- Cập nhật avatar -->
                             <input type="file" id="avatarInput" accept="image/*" class="hidden" />
                             <p id="updateAvatarBtn" class="mt-3 text-sm cursor-pointer text-n-800">
@@ -122,14 +126,14 @@
                                     <label class="block text-sm text-n-800">
                                         Ngày sinh
                                     </label>
-                                    <input id="dob" type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <input id="dob" type="date" class="p-2 border rounded-lg cursor-pointer w-fit bg-foreground">
                                 </div>
 
                                 <div>
                                     <label class="block text-sm text-n-800">
                                         Giới tính
                                     </label>
-                                    <select id="gender" class="p-2 border rounded-lg w-fit bg-foreground">
+                                    <select id="gender" class="p-2 border rounded-lg cursor-pointer w-fit bg-foreground">
                                         <option>Nam</option>
                                         <option>Nữ</option>
                                         <option>Khác</option>
@@ -150,7 +154,9 @@
             <!-- VIP -->
             <div id="vip" class="hidden tab">
                 <h2 class="mb-6 text-2xl font-semibold">Đăng ký VIP</h2>
-
+                <div id="vipStatus" class="mb-6">
+                    
+                </div>
                 <div class="flex justify-center max-w-4xl gap-8 mx-auto">
                     <!-- Gói tháng -->
                     <div class="flex flex-col items-center justify-around pb-8 transition cursor-pointer bg-gradient-to-t from-p-300 to-green-200 w-60 h-80 rounded-3xl hover:shadow-2xl hover:scale-105">
@@ -162,7 +168,7 @@
                                 <li>Đọc toàn bộ sách VIP</li>
                             </ul>
                         </div>
-                        <button onclick="openQR(25000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
+                        <button onclick="buyVip('VIP_THANG')" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
                             Đăng ký ngay
                         </button>
                     </div>
@@ -171,13 +177,13 @@
                     <div class="flex flex-col items-center justify-around pb-8 transition cursor-pointer bg-gradient-to-t from-p-300 to-yellow-200 w-60 h-80 rounded-3xl hover:shadow-2xl hover:scale-105">
                         <p class="text-xl font-semibold">Gói quý <i class="fa-solid fa-crown"></i></p>
                         <div>
-                            <p class="text-lg font-semibold">75.000đ cho 1 quý</p>
+                            <p class="text-lg font-semibold">70.000đ cho 1 quý</p>
                             <ul class="list-disc">
                                 <li>Trở thành VIP trong 1 quý</li>
                                 <li>Đọc toàn bộ sách VIP</li>
                             </ul>
                         </div>
-                        <button onclick="openQR(75000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
+                        <button onclick="buyVip('VIP_QUY')" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
                             Đăng ký ngay
                         </button>
                     </div>
@@ -186,13 +192,13 @@
                     <div class="flex flex-col items-center justify-around pb-8 transition cursor-pointer bg-gradient-to-t from-p-300 to-secondary-light w-60 h-80 rounded-3xl hover:shadow-2xl hover:scale-105">
                         <p class="text-xl font-semibold">Gói năm <i class="fa-solid fa-crown"></i></p>
                         <div>
-                            <p class="text-lg font-semibold">300.000đ cho 1 năm</p>
+                            <p class="text-lg font-semibold">270.000đ cho 1 năm</p>
                             <ul class="list-disc">
                                 <li>Trở thành VIP trong 1 năm</li>
                                 <li>Đọc toàn bộ sách VIP</li>
                             </ul>
                         </div>
-                        <button onclick="openQR(300000)" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
+                        <button onclick="buyVip('VIP_NAM')" class="px-4 py-2 font-bold transition duration-200 rounded-3xl w-fit bg-background hover:cursor-pointer hover:scale-105 hover:shadow-lg">
                             Đăng ký ngay
                         </button>
                     </div>
@@ -208,40 +214,28 @@
                     <table class="w-full text-left border-collapse">
                         <thead class="bg-background">
                             <tr>
-                                <th class="p-3">Mã giao dịch</th>
                                 <th class="p-3">Gói VIP</th>
+                                <th class="p-3">Nội dung</th>
                                 <th class="p-3">Giá tiền</th>
                                 <th class="p-3">Thời gian</th>
                                 <th class="p-3">Trạng thái</th>
                             </tr>
                         </thead>
 
-                        <tbody class="divide-y">
-                            <tr class="hover:bg-p-200">
-                                <td class="p-3">PAY001</td>
-                                <td class="p-3">Gói năm</td>
-                                <td class="p-3">500000 đ</td>
-                                <td class="p-3">01/03/2026</td>
-                                <td class="p-3 font-semibold text-warning">Đang xử lý</td>
-                            </tr>
-
-                            <tr class="hover:bg-p-200">
-                                <td class="p-3">PAY002</td>
-                                <td class="p-3">Gói năm</td>
-                                <td class="p-3">500000 đ</td>
-                                <td class="p-3">01/03/2026</td>
-                                <td class="p-3 font-semibold text-success">Thành công</td>
-                            </tr>
-
-                            <tr class="hover:bg-p-200">
-                                <td class="p-3">PAY003</td>
-                                <td class="p-3">Gói năm</td>
-                                <td class="p-3">500000 đ</td>
-                                <td class="p-3">01/03/2026</td>
-                                <td class="p-3 font-semibold text-error">Lỗi</td>
-                            </tr>
+                        <tbody id="paymentHistoryBody" class="divide-y text-sm">
+                            
                         </tbody>
                     </table>
+                </div>
+
+                <div class="flex items-center justify-center gap-4 mt-6">
+                    <button id="btnPrevPayment" class="px-4 py-2 text-white bg-n-500 rounded-lg hover:bg-n-600 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Trước
+                    </button>
+                    <span class="font-semibold text-n-800">Trang <span id="paymentCurrentPage">1</span> / <span id="paymentTotalPages">1</span></span>
+                    <button id="btnNextPayment" class="px-4 py-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Sau
+                    </button>
                 </div>
 
             </div>
@@ -260,7 +254,7 @@
                         <label class="block text-sm text-n-800">
                             Họ và tên
                         </label>
-                        <input type="text" class="input-box" placeholder="Nhập họ tên đầy đủ">
+                        <input id="fullNameAuthor" type="text" class="input-box" placeholder="Nhập họ tên đầy đủ">
                     </div>
 
                     <!-- email -->
@@ -268,7 +262,7 @@
                         <label class="block text-sm text-n-800">
                             Email
                         </label>
-                        <input type="email" disabled class="input-box">
+                        <input id="emailAuthor" type="email" disabled class="input-box">
                     </div>
                     
                     <!-- stk -->
@@ -276,7 +270,7 @@
                         <label class="block text-sm text-n-800">
                             Số tài khoản
                         </label>
-                        <input type="text" placeholder="Nhập số tài khoản" class="input-box">
+                        <input id="stk" type="text" placeholder="Nhập số tài khoản" class="input-box">
                     </div>
                     
                     <!-- birthday , gender-->
@@ -285,14 +279,14 @@
                             <label class="block text-sm text-n-800">
                                 Ngày sinh
                             </label>
-                            <input type="date" class="p-2 border rounded-lg w-fit bg-foreground">
+                            <input id="dobAuthor" type="date" class="p-2 border rounded-lg w-fit bg-foreground">
                         </div>
 
                         <div>
                             <label class="block text-sm text-n-800">
                                 Giới tính
                             </label>
-                            <select class="p-2 border rounded-lg w-fit bg-foreground">
+                            <select id="genderAuthor" class="p-2 border rounded-lg w-fit bg-foreground">
                                 <option>Nam</option>
                                 <option>Nữ</option>
                                 <option>Khác</option>
@@ -304,19 +298,62 @@
                         <label class="block text-sm text-n-800">
                             Lý do muốn làm tác giả
                         </label>
-                        <textarea name="" id="commentInput" class="p-3 border rounded-lg resize-none w-xl bg-foreground focus:ring-2 focus:ring-p-300" rows="2" placeholder="Lý do muốn làm tác giả..."></textarea>
+                        <textarea name="" id="description" class="p-3 border rounded-lg resize-none w-xl bg-foreground focus:ring-2 focus:ring-p-300" rows="2" placeholder="Lý do muốn làm tác giả..."></textarea>
                     </div>
 
                     <!-- button -->
-                    <button class="px-6 py-2 mt-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer">
+                    <button id="registerAuthorBtn" class="px-6 py-2 mt-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer">
                         Nộp đơn đăng ký
                     </button>
 
                 </div>
+
+                <!-- History -->
+                <div class="flex flex-col gap-2 mt-4">
+                    <h2 class="text-lg font-semibold">
+                        Lịch sử nộp đơn
+                    </h2>
+                    <div class="overflow-hidden border rounded-lg">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-background">
+                                <tr>
+                                    <th class="p-3">Mã đơn đăng ký</th>
+                                    <th class="p-3">Ngày nộp</th>
+                                    <th class="p-3">Ngày review</th>
+                                    <th class="p-3">Trạng thái</th>
+                                    <th class="p-3">Chi tiết</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="register-table" class="divide-y bg-foreground">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- chi tiết đơn đăng ký -->
+                <div id="register-detail" class="fixed inset-0 flex items-center justify-center hidden bg-n-200/60">
+
+                    <div class="bg-white p-6 rounded-lg w-[500px]">
+                        <h2 class="mb-4 text-xl font-bold">Chi tiết đơn đăng ký</h2>
+
+                        <div id="register-content"></div>
+
+                        <button onclick="closeDetail()"
+                            class="px-4 py-2 mt-4 text-white rounded bg-n-600 hover:bg-n-800 hover:cursor-pointer">
+                            Đóng
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
     </div>
+
+    <!-- toast message -->
+    <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
 </body>
 </html>

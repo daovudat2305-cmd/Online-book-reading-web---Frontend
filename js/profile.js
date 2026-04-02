@@ -27,24 +27,25 @@ menuBtn.forEach(btn => {
 const API_URL = "http://localhost:8080/api/users"
 const token = localStorage.getItem('jwtToken')
 // hiện thị thông tin
-function loadInfo() {
-    // gọi API
-    fetch(`${API_URL}/myInfo`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(async response => {
+async function loadInfo() {
+    try {
+        // gọi API
+        const response = await fetch(`${API_URL}/myInfo`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
         if(!response.ok) {
             const errData = await response.json();
             const errMessage = errData.error || JSON.stringify(errData)
             throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
         }
-        return response.json()
-    })
-    .then(data => {
+
+        //hien thi du lieu
+        const data = await response.json()
         const username = document.getElementById('username')
         username.value = data.username
 
@@ -61,44 +62,61 @@ function loadInfo() {
         gender.value = data.gender == null ? "Khác" : data.gender
 
         const avatar = document.getElementById('avatar')
-        avatar.src = data.avatar == null ? "../assets/avatar.jpg" : data.avatar
+        avatar.src = data.avatar
 
         if(data.dob != null) {
             document.getElementById('dob').value = data.dob
         }
-    })
-    .catch(error => {
+
+        if(document.getElementById('stk')) {
+            document.getElementById('stk').value = data.bankAccount
+        }
+
+        if(data.isVip) {
+            const avatarContainer = document.getElementById('avatarContainer')
+            avatarContainer.classList.add("border-yellow-400")
+
+            document.getElementById('isVip').innerHTML = `VIP <i class="fa-solid fa-crown"></i>`
+            loadVipInterface(data.vipDetail.daysRemaining)
+        }
+    } catch (error) {
         alert(error.message)
         console.error('Error: ', error)
-    })
+    }
 }
 
 loadInfo()
 
 
 // cập nhật thông tin
-document.getElementById('saveInfo').addEventListener('click', function(event) {
+document.getElementById('saveInfo').addEventListener('click',async function(event) {
     event.preventDefault() //ngăn load lại trang
 
     // lấy giá trị từ các ô input
     const fullNameValue = document.getElementById('fullName').value
     const dobValue = document.getElementById('dob').value
     const genderValue = document.getElementById('gender').value
+    let stk = ""
+    if(document.getElementById('stk') && document.getElementById('stk').value!=null) {
+        stk = document.getElementById('stk').value.trim()
+    }
 
-    //gọi API
-    fetch(`${API_URL}/myInfo`, {
-        method: 'PATCH',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            fullName: fullNameValue,
-            dob: dobValue,
-            gender: genderValue
+    try {
+        //gọi API
+        const response = await fetch(`${API_URL}/myInfo`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                fullName: fullNameValue,
+                dob: dobValue,
+                gender: genderValue,
+                bankAccount: stk,
+            })
         })
-    })
-    .then(async response => {
+        
         if (!response.ok) {
             // Cố gắng đọc nội dung lỗi từ server trả về
             const errData = await response.json().catch(() => ({}))
@@ -106,16 +124,13 @@ document.getElementById('saveInfo').addEventListener('click', function(event) {
             throw new Error(errMessage)
         }
         
-        return response.json().catch(() => ({}));
-    })
-    .then(data => {
-        alert(data.message)
+        const data = await response.json().catch(() => ({}))
+        showToast(data.message, 'success')
         loadInfo()
-    })
-    .catch(error => {
-        alert(error.message)
+    } catch (error) {
+        showToast(error.message, 'warning')
         console.error('Error: ', error)
-    })
+    }
 })
 
 
@@ -151,14 +166,14 @@ avatarInput.addEventListener('change', async (event) => {
         if (response.ok) {
             document.getElementById('avatar').src = data.avatarUrl
             
-            alert(data.message);
+            showToast(data.message, 'success');
         } else {
             throw new Error(data.message || 'Lỗi từ máy chủ')
         }
 
     } catch (error) {
         console.error('Lỗi upload:', error)
-        alert('Đã có lỗi xảy ra khi cập nhật ảnh đại diện!');
+        showToast('Đã có lỗi xảy ra khi cập nhật ảnh đại diện!', 'error');
     } finally {
         // xóa value của thẻ input để có thể chọn lại chính ảnh đó lần sau nếu cần
         avatarInput.value = ''; 

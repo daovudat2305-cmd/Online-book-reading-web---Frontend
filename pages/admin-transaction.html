@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý Giao dịch</title>
     <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <!-- CSS -->
     <link href="../dist/output.css" rel="stylesheet">
+
+    <!-- Script -->
+    <script defer src="../js/admin.js"></script>
 </head>
 <body class="relative min-h-screen pb-20 font-sans bg-gradient-to-t from-p-200 to-white text-n-800">
 
@@ -29,6 +34,9 @@
             <a href="admin-transaction.html" class="block px-6 py-4 bg-p-200">
                 Quản lý giao dịch
             </a>
+            <button onclick="logout()" class="p-2 cursor-pointer text-n-50 bg-secondary-light rounded-3xl hover:bg-secondary-dark">
+                Đăng xuất
+            </button>
         </nav>
 
         <div class="relative p-6 mt-4">

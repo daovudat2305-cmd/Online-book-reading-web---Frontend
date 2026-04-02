@@ -50,21 +50,32 @@
                         <input type="text" placeholder="Tìm kiếm sách" class="w-full px-4 py-2 bg-white border rounded-full shadow-md outline-none border-secondary-light">
                     </div>
         
-                    <div id="avatarBtn">
-                        <img src="../assets/logo.png" class="w-10 h-10 rounded-full">
+                    <!-- Đăng nhập / Đăng ký -->
+                    <div id="guest-menu">
+                        <button onclick="window.location.href='login.html'" class="p-2 btn">Đăng nhập</button>
+                        <button onclick="window.location.href='register.html'" class="p-2 btn">Đăng ký</button>
                     </div>
-    
-                    <div id="avatarMenu" class="absolute right-0 hidden w-40 mt-2 bg-white rounded-lg shadow-lg top-12">
-                        
-                        <a href="profile.html"
-                        class="block px-4 py-2 hover:bg-gray-100">
-                            Tài khoản
-                        </a>
-    
-                        <button
-                        class="w-full px-4 py-2 text-left hover:bg-gray-100">
-                            Đăng xuất
-                        </button>
+
+                    <div id="user-menu" class="relative">
+                        <!-- Avatar -->
+                        <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer">
+                            <img id="avatarPreview" src="" class="w-10 h-10 rounded-full">
+                            <span id="display-username" class="text-sm font-semibold"></span>
+                        </div>
+        
+                        <!-- Dropdown -->
+                        <div id="avatarMenu" class="absolute right-0 hidden w-40 mt-2 rounded-lg shadow-lg bg-n-50 top-12">
+                            
+                            <a id="profileBtn" href="profile.html"
+                            class="block px-4 py-2 hover:bg-n-200">
+                                Tài khoản
+                            </a>
+        
+                            <button onclick="logout()"
+                            class="w-full px-4 py-2 text-left hover:bg-n-200 hover:cursor-pointer">
+                                Đăng xuất
+                            </button>
+                        </div>
                     </div>
                 </div>
     

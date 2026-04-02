@@ -12,7 +12,6 @@
     <link href="../dist/output.css" rel="stylesheet">
 
     <!-- Script -->
-    <script defer src="../js/home.js"></script>
     <script defer src="../js/main.js"></script>
 
 </head>
@@ -60,8 +59,9 @@
                         <button onclick="window.location.href='register.html'" class="p-2 btn">Đăng ký</button>
                     </div>
 
-                    <div id="user-menu" class="relative"> <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer">
-                            <img id="avatarPreview" src="../assets/logo.png" class="w-10 h-10 rounded-full">
+                    <div id="user-menu" class="relative">
+                        <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer">
+                            <img id="avatarPreview" src="" class="w-10 h-10 rounded-full border-2">
                             <span id="display-username" class="text-sm font-semibold"></span>
                         </div>
 
@@ -116,5 +116,6 @@
 
     <!-- toast message -->
     <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
+    <script src="../js/home.js"></script>
 </body>
 </html>

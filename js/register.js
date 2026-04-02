@@ -4,51 +4,54 @@ const API_URL = "http://localhost:8080/api/auth";
 document.getElementById('btnRegister').addEventListener('click', function(event) {
     event.preventDefault() //ngăn load lại trang
 
-    const emailInput = document.getElementById('email').value;
-    const usernameInput = document.getElementById('username').value;
-    const passwordInput = document.getElementById('password').value;
+    register()
+})
 
-    // gọi API
-    fetch(`${API_URL}/signup`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: emailInput,
-            username: usernameInput,
-            password: passwordInput
+async function register() {
+    const emailInput = document.getElementById('email').value
+    const usernameInput = document.getElementById('username').value
+    const passwordInput = document.getElementById('password').value
+
+    try {
+        const response = await fetch(`${API_URL}/signup`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: emailInput,
+                username: usernameInput,
+                password: passwordInput
+            })
         })
-    })
-    .then(async response => {
+
         if(!response.ok) {
             const errData = await response.json();
             const errMessage = errData.error || JSON.stringify(errData)
             throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
         }
-        return response.json()
-    })
-    .then(data => {
-        alert(data.message)
+
+        const data = await response.json()
+
+        showToast(data.message, "success")
 
         window.location.href = 'login.html'
-    })
-    .catch(error => {
-        alert(error.message)
+    } catch (error) {
+        showToast(error.message, "error")
         console.error('Error: ', error)
-    })
-})
+    }
+}
 
 // ẩn hiện password
-const password = document.getElementById("password");
-const toggle = document.getElementById("togglePassword");
+const password = document.getElementById("password")
+const toggle = document.getElementById("togglePassword")
 
 toggle.addEventListener("click", () => {
     if (password.type === "password") {
-        password.type = "text";
-        toggle.innerHTML = `<i class="fa-regular fa-eye-slash"></i>`;
+        password.type = "text"
+        toggle.innerHTML = `<i class="fa-regular fa-eye-slash"></i>`
     } else {
-        password.type = "password";
-        toggle.innerHTML = `<i class="fa-regular fa-eye"></i>`;
+        password.type = "password"
+        toggle.innerHTML = `<i class="fa-regular fa-eye"></i>`
     }
 });

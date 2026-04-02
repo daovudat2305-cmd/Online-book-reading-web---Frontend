@@ -1,50 +1,144 @@
+// ==========================================
+// 1. CÁC HÀM TIỆN ÍCH DÙNG CHUNG (Do ông viết)
+// ==========================================
 function showToast(message, type="success") {
-    const container = document.getElementById('toast-container')
-    // Kiểm tra nếu trang hiện tại có container thì mới chạy tiếp
-    if(!container) return; 
+    const container = document.getElementById('toast-container');
+    if(!container) return;
 
-    const toast = document.createElement('div')
+    let bgColor = "";
+    if(type === 'success') bgColor = "bg-success";
+    else if(type === 'error') bgColor = "bg-error";
+    else if(type === 'warning') bgColor = "bg-warning";
 
-    let bgColor = ""
-    if(type === 'success') bgColor = "bg-success"
-    else if(type === 'error') bgColor = "bg-error"
-    else if(type === 'warning') bgColor = "bg-warning"
+    // Fix lỗi: Tui đã thêm dòng tạo element toast vào đây cho ông
+    const toast = document.createElement('div');
+    toast.className = `${bgColor} text-n-800 px-4 py-2 rounded-lg shadow-lg transition duration-300 opacity-0 translate-x-10`;
+    toast.innerText = message;
 
-    toast.className = `${bgColor} text-n-800 px-4 py-2 rounded-lg shadow-lg transition duration-300 opacity-0 translate-x-10`
-    toast.innerText = message
+    container.appendChild(toast);
 
-    container.appendChild(toast)
-
-    // hiệu ứng hiện
     setTimeout(() => {
-        toast.classList.remove('opacity-0', 'translate-x-10')
-    }, 100)
+        toast.classList.remove('opacity-0', 'translate-x-10');
+    }, 100);
 
-    // tự ẩn sau 3s
     setTimeout(() => {
         toast.classList.add("opacity-0", "translate-x-10");
         setTimeout(() => toast.remove(), 300);
-    }, 3000)
+    }, 3000);
 }
 
 function requireLogin() {
-    // Lấy trạng thái từ Token thật trong localStorage
     const isLogin = localStorage.getItem('jwtToken') ? true : false; 
     if(!isLogin) {
-        showToast("Vui lòng đăng nhập!", "warning")
+        showToast("Vui lòng đăng nhập!", "warning");
         return false;
     }
-    return true
+    return true;
 }
 
-// Xử lý chuyển trang cho Sidebar (Sửa lỗi goTo is not defined)
 function goTo(url) {
     window.location.href = url;
 }
 
-// KIỂM TRA NÚT TRƯỚC KHI GÁN SỰ KIỆN (Để tránh lỗi ở trang Home)
-// Tui bọc vào DOMContentLoaded để đảm bảo HTML đã load xong mới tìm nút
+
+// ==========================================
+// 2. LOGIC TÀI KHOẢN & AVATAR (Do bạn ông viết)
+// ==========================================
+function checkLoginState() {
+    const token = localStorage.getItem('jwtToken');
+    const username = localStorage.getItem('username');
+    const role = localStorage.getItem('role');
+    
+    const guestMenu = document.getElementById('guest-menu');
+    const userMenu = document.getElementById('user-menu');
+
+    if(token) {
+        if(guestMenu) guestMenu.style.display = 'none';
+        if(userMenu) userMenu.style.display = 'flex';
+        
+        const displayUsername = document.getElementById('display-username');
+        if(displayUsername) displayUsername.innerText = username;
+        
+        const profileBtn = document.getElementById('profileBtn');
+        if(profileBtn) profileBtn.href = role == "USER" ? "profile.html" : "profile-author.html";
+        
+        loadAvatar();
+    } else {
+        if(guestMenu) guestMenu.style.display = 'block';
+        if(userMenu) userMenu.style.display = 'none';
+    }
+}
+
+function logout() {
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    window.location.reload();
+}
+
+const API_URL = "http://localhost:8080/api/users";
+
+async function loadAvatar() {
+    const token = localStorage.getItem('jwtToken');
+    if(!token) return;
+
+    try {
+        const response = await fetch(`${API_URL}/myInfo`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if(!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.error || "Có lỗi xảy ra ở máy chủ");
+        }
+        
+        const data = await response.json();
+        const avatarBtn = document.getElementById("avatarBtn");
+        const avatar = document.getElementById('avatarPreview');
+        
+        if(avatar) avatar.src = data.avatar;
+        
+        if(data.isVip && avatar) {
+            avatar.classList.add("border-3", "border-yellow-400");
+            if(avatarBtn) avatarBtn.insertAdjacentHTML("beforeend", `<i class="fa-solid fa-crown text-yellow-400"></i>`);
+        } else if (avatar) {
+            avatar.classList.add("border-3", "border-n-500");
+        }
+    } catch (error) {
+        console.error('Lỗi tải Avatar: ', error);
+    }
+}
+
+
+// ==========================================
+// 3. KHỞI CHẠY SỰ KIỆN KHI TRANG LOAD XONG (Gộp của cả 2)
+// ==========================================
 document.addEventListener("DOMContentLoaded", function() {
+    
+    // Chạy kiểm tra đăng nhập ngay khi vào web
+    checkLoginState();
+
+    // Sự kiện mở menu Avatar (Của nhóm)
+    const avatarBtn = document.getElementById("avatarBtn");
+    const avatarMenu = document.getElementById("avatarMenu");
+
+    if (avatarBtn && avatarMenu) {
+        avatarBtn.addEventListener("click", () => {
+            avatarMenu.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!avatarBtn.contains(e.target) && !avatarMenu.contains(e.target)) {
+                avatarMenu.classList.add("hidden");
+            }
+        });
+    }
+
+    // Sự kiện Nút tương tác sách (Của ông)
     const readBtn = document.getElementById("read-btn");
     if (readBtn) {
         readBtn.addEventListener("click", () => {
