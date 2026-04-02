@@ -7,16 +7,12 @@
     <link rel="icon" type="image/png" href="../assets/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- CSS -->
-
     <link href="../dist/output.css" rel="stylesheet">
 
-    <!-- Script -->
     <script defer src="../js/main.js"></script>
 </head>
 <body class="bg-gradient-to-t from-p-100 to-p-50">
     <div class="flex min-h-screen">
-        <!-- Sidebar -->
         <aside class="fixed flex flex-col items-center p-2 m-auto ml-4 -translate-y-1/2 shadow-md w-fit h-fit bg-p-300 rounded-2xl top-1/2 left-4">
             <div class="mt-6 mb-6">
                 <img src="../assets/logo.png" class="w-10 h-10 rounded-full">
@@ -47,12 +43,9 @@
         </aside>
 
         <div class="flex flex-col w-full">
-            <!-- Main -->
             <main class="flex-col flex-1 p-4 ml-50">
                 
-                <!-- Header -->
                 <div class="sticky z-50 flex items-center justify-around mb-8 top-2">
-                    <!-- Search -->
                     <div class="w-1/2">
                         <input type="text" placeholder="Tìm kiếm sách" class="w-full px-4 py-2 bg-white border rounded-full shadow-md outline-none border-secondary-light">
                     </div>
@@ -63,7 +56,7 @@
                         <button onclick="window.location.href='register.html'" class="p-2 btn">Đăng ký</button>
                     </div>
 
-                    <div id="user-menu">
+                    <div id="user-menu" class="relative">
                         <!-- Avatar -->
                         <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer">
                             <img id="avatarPreview" src="" class="w-10 h-10 rounded-full">
@@ -86,59 +79,49 @@
                     </div>
                 </div>
     
-                <!-- Nút quay lại -->
                 <a href="home.html" class="flex items-center gap-2 mb-3 text-sm text-n-700 hover:text-n-800 hover:cursor-pointer">
                     <i class="fa-solid fa-chevron-left"></i>
                     Trở lại
                 </a>
 
-                <!-- Content - Book detail -->
                 <div class="flex gap-10">
-                    <!-- Ảnh sách -->
-                    <div class="w-40 h-56 overflow-hidden rounded-lg shadow-lg">
-                        <img src="../assets/book.jpg" class="object-cover w-full h-full">
+                    <div class="w-56 h-80 shrink-0 overflow-hidden rounded-lg shadow-lg">
+                        <img id="detail-cover" class="object-cover w-full h-full">
                     </div>
     
-                    <!-- Thông tin -->
-                    <div class="space-y-4">
+                    <div class="space-y-4 flex-1">
     
-                        <h1 id="book-title" class="text-3xl font-bold text-n-800">Title Sách</h1>
+                        <h1 id="detail-title" class="text-3xl font-bold text-n-800">Đang tải...</h1>
     
                         <p class="text-n-800">
                             <i class="fa-regular fa-user"></i>
-                            Tác giả: <span id="book-author"></span>
-                        </p>
+                            Tác giả: <span id="detail-author">...</span> </p>
     
                         <p class="text-n-800">
                             <i class="fa-regular fa-calendar-days"></i>
-                            Ngày đăng: <span id="book-post"></span>
-                        </p>
+                            Ngày đăng: <span id="detail-date">...</span> </p>
     
                         <p class="text-n-800">
                             <i class="fa-solid fa-table-list"></i>
-                            Thể loại: <span id="book-category"></span>
-                        </p>
+                            Thể loại: <span id="detail-categories">...</span> </p>
     
                         <p class="text-n-800">
                             <i class="fa-regular fa-eye"></i>
-                            Lượt đọc: <span id="book-views"></span>
+                            Lượt đọc: <span id="book-views">0</span>
                         </p>
     
                         <p class="text-n-800">
                             <i class="fa-regular fa-heart"></i>
-                            Lượt thích: <span id="book-likes"></span>
+                            Lượt thích: <span id="book-likes">0</span>
                         </p>
     
-                        <!-- mô tả -->
                         <div>
                             <h2 class="mb-2 text-lg font-semibold">Mô tả</h2>
-                            <p id="book-desc" class="leading-relaxed text-gray-700"></p>
+                            <p id="detail-description" class="leading-relaxed text-gray-700">Đang tải mô tả...</p> 
                         </div>
     
-                        <!-- nút -->
                         <div class="flex gap-4 w-sm">
-    
-                            <button id="read-btn" class="book-btn">
+                            <button id="btn-read-now" class="book-btn">
                                 <i class="fa-solid fa-book-open"></i>
                                 Đọc ngay
                             </button>
@@ -151,11 +134,9 @@
                     </div>
                 </div>
     
-                <!-- Bình luận -->
                 <div class="p-4 mt-10 bg-white">
                     <h2 class="mb-4 text-xl font-semibold">Bình luận</h2>
 
-                    <!-- Nhập bình luận -->
                     <div class="flex gap-3 mb-6">
                         <img src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
                         <div class="flex-1">
@@ -167,9 +148,7 @@
                         </div>
                     </div>
 
-                    <!-- Danh sách bình luận -->
                     <div id="commentList" class="space-y-4">
-                        <!-- 1 comment mẫu -->
                         <div class="flex gap-3 p-4 rounded-lg bg-background">
                             <img src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
                             <div class="flex-1">
@@ -184,11 +163,9 @@
                 </div>
             </main>
 
-            <!-- Footer -->
             <footer class="mt-16 text-n-800 bg-p-200">
                 <div class="flex justify-around gap-8 px-10 py-10">
     
-                    <!-- Cột 1: Logo + mô tả -->
                     <div>
                         <h2 class="mb-3 text-xl font-bold">Book Online</h2>
                         <p class="text-sm text-n-700">
@@ -197,13 +174,11 @@
                         </p>
                     </div>
     
-                    <!-- Cột 2: Liên hệ -->
                     <div>
                         <h3 class="mb-3 font-semibold">Liên hệ</h3>
                         <p class="text-sm text-n-700">Email: support@book.com</p>
                         <p class="text-sm text-n-700">Hotline: 0123 456 789</p>
     
-                        <!-- Social -->
                         <div class="flex gap-4 mt-3 text-lg">
                             <i class="cursor-pointer fa-brands fa-facebook hover:text-blue-500"></i>
                             <i class="cursor-pointer fa-brands fa-youtube hover:text-red-500"></i>
@@ -212,7 +187,6 @@
                     </div>
                 </div>
     
-                <!-- Copyright -->
                 <div class="py-4 text-sm text-center text-gray-500 border-t border-gray-700">
                     © 2026 Book Online. All rights reserved.
                 </div>
@@ -220,8 +194,21 @@
         </div>
 
     </div>
+ 
+    <div id="read-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden bg-black/80 backdrop-blur-sm">
+        <div class="relative flex flex-col w-11/12 bg-white rounded-lg h-[95vh] shadow-2xl">
+            <div class="flex items-center justify-between p-4 text-white rounded-t-lg bg-p-600">
+                <h2 id="read-modal-title" class="text-xl font-bold truncate">Đang đọc sách...</h2>
+                <button id="btn-close-read" class="text-3xl font-bold transition hover:text-red-300">&times;</button>
+            </div>
+            
+            <div class="flex-1 w-full bg-gray-200 rounded-b-lg">
+                <iframe id="pdf-frame" class="w-full h-full rounded-b-lg" src=""></iframe>
+            </div>
+        </div>
+    </div>
 
-    <!-- toast message -->
     <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
+    <script src="../js/book-detail.js"></script>
 </body>
 </html>

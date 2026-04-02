@@ -17,10 +17,7 @@
 
     <div class="w-full">
         
-        <div class="flex items-center p-6 space-x-4">
-            <img src="../assets/logo.png" alt="Logo Icon" class="inline-block w-12 h-12">
-            <h1 class="text-3xl font-bold text-n-800">Book Online - Quản lý</h1>
-        </div>
+        <div id="header-placeholder"></div>
 
         <nav class="flex items-center font-medium bg-p-400 text-n-800">
             <a href="admin-home.html" class="block px-6 py-4 bg-p-200">
@@ -43,7 +40,7 @@
         <div class="p-6">
             
             <div class="flex items-center mb-10 space-x-3">
-                <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
+                <button id="btn-search" class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
                     Tìm kiếm
                 </button>
                 <input type="text" placeholder="Bạn muốn tìm sách nào" class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
@@ -128,7 +125,7 @@
             </div>
 
             <div id="search-results" class="hidden pb-12 mt-10">
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-10">
+                <div id="book-grid-container" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-10">
                     
                     <a href="admin-book-detail.html" class="flex flex-col items-center block cursor-pointer book-approved group">
                         <div class="w-full aspect-[2/3] bg-[#d9d9d9] group-hover:shadow-lg transition duration-300"></div>
@@ -166,34 +163,8 @@
         </div>
     </div>
 
-    <script src="../js/mainn.js"></script>
-    <script>
-    // --- Code cũ của bạn cho nút tìm kiếm ---
-    const btnSearch = document.getElementById("btn-search");
-    const emptyState = document.getElementById("empty-state");
-    const searchResults = document.getElementById("search-results");
-
-    btnSearch.addEventListener("click", function() {
-        emptyState.classList.add("hidden");
-        searchResults.classList.remove("hidden");
-    });
-
-    // --- CODE MỚI CHO CHECKBOX LỌC SÁCH ---
-    const filterPending = document.getElementById('filter-pending');
-    const approvedBooks = document.querySelectorAll('.book-approved');
-    const pendingBooks = document.querySelectorAll('.book-pending');
-
-    filterPending.addEventListener('change', function() {
-        if (this.checked) {
-            // Nếu tích chọn -> Giấu sách đã duyệt, hiện sách chờ duyệt
-            approvedBooks.forEach(book => book.classList.add('hidden'));
-            pendingBooks.forEach(book => book.classList.remove('hidden'));
-        } else {
-            // Nếu bỏ tích -> Hiện lại sách đã duyệt, giấu sách chờ duyệt
-            approvedBooks.forEach(book => book.classList.remove('hidden'));
-            pendingBooks.forEach(book => book.classList.add('hidden'));
-        }
-    });
-</script>
+    <script src="../js/admin-home.js"></script>
+    <script src="../js/layout.js"></script>
+    
 </body>
 </html>
