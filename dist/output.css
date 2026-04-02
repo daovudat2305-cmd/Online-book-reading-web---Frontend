@@ -288,6 +288,9 @@
   .top-12 {
     top: calc(var(--spacing) * 12);
   }
+  .top-16 {
+    top: calc(var(--spacing) * 16);
+  }
   .top-\[40px\] {
     top: 40px;
   }

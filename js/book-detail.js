@@ -63,6 +63,10 @@ const btnCloseRead = document.getElementById('btn-close-read'); // Nút X đóng
 if (btnRead) {
     btnRead.onclick = () => {
         if(isLogin){
+            if(currentBook.type=="VIP" && !isVip) {
+                showToast("Vui lòng đăng ký VIP để đọc sách!", "warning")
+                return
+            }
             if (currentBook.fileUrl) {
                 // Ép sang https để tránh lỗi trình duyệt
                 let secureUrl = currentBook.fileUrl.replace("http://", "https://");
@@ -77,7 +81,7 @@ if (btnRead) {
             }
         }
         else {
-            showToast("Vui lòng đăng nhập để đọc!", "warning")
+            showToast("Vui lòng đăng nhập để đọc sách!", "warning")
             return
         }
     };

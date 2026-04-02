@@ -1,6 +1,7 @@
 //kiểm tra đăng nhập và hiện thị avatar cùng username ở trang chủ hoặc thay bằng nút đăng nhập/đăng ký
 //nếu chưa đăng nhập thì hiển thị nút đăng nhập / đăng ký
 let isLogin = false
+let isVip = false
 document.addEventListener('DOMContentLoaded', function(){
     checkLoginState()
 })
@@ -24,8 +25,8 @@ function checkLoginState() {
         loadAvatar()
     }
     else {
-    guestMenu.style.display = 'block'
-    userMenu.style.display = 'none'
+        guestMenu.style.display = 'block'
+        userMenu.style.display = 'none'
     }
 }
 
@@ -35,6 +36,7 @@ function logout() {
     localStorage.removeItem('jwtToken')
     localStorage.removeItem('username')
     localStorage.removeItem('role')
+    isLogin = false
 
     // Tải lại trang chủ để giao diện cập nhật lại thành nút Đăng nhập
     window.location.reload()
@@ -81,6 +83,7 @@ async function loadAvatar() {
         const avatar = document.getElementById('avatarPreview')
         avatar.src = data.avatar
         if(data.isVip) {
+            isVip = true
             avatar.classList.add("border-3", "border-yellow-400")
             avatarBtn.insertAdjacentHTML("beforeend", `<i class="fa-solid fa-crown text-yellow-400"></i>`)
         }
