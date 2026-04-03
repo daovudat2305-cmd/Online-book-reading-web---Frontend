@@ -70,7 +70,7 @@
                         </div>
         
                         <!-- Dropdown -->
-                        <div id="avatarMenu" class="absolute right-0 hidden w-40 mt-2 rounded-lg shadow-lg bg-n-50 top-12">
+                        <div id="avatarMenu" class="absolute hidden w-40 mt-2 rounded-lg shadow-lg -right-12 bg-n-50 top-12">
                             
                             <a id="profileBtn" href="profile.html"
                             class="block px-4 py-2 hover:bg-n-200">
@@ -90,6 +90,7 @@
                     Trở lại
                 </a>
 
+                <!-- Thông tin sách -->
                 <div class="flex gap-10">
                     <div class="w-56 overflow-hidden rounded-lg shadow-lg h-80 shrink-0">
                         <img id="detail-cover" class="object-cover w-full h-full">
@@ -118,7 +119,7 @@
     
                         <p class="text-n-800">
                             <i class="fa-regular fa-heart"></i>
-                            Lượt thích: <span id="book-likes">0</span>
+                            Lượt yêu thích: <span id="book-favorites">0</span>
                         </p>
     
                         <div>
@@ -126,15 +127,14 @@
                             <p id="detail-description" class="leading-relaxed text-gray-700">Đang tải mô tả...</p> 
                         </div>
     
-                        <div class="flex gap-4 w-sm">
-                            <button id="btn-read-now" class="book-btn">
+                        <div class="flex items-center gap-4 w-50">
+                            <button id="btn-read-now" class="mb-0 book-btn">
                                 <i class="fa-solid fa-book-open"></i>
                                 Đọc ngay
                             </button>
     
-                            <button id="like-btn" class="book-btn">
+                            <button id="favorite-btn" class="text-2xl text-n-600 hover:cursor-pointer">
                                 <i class="fa-solid fa-heart"></i>
-                                Yêu thích
                             </button>
                         </div>
                     </div>
@@ -142,30 +142,31 @@
     
                 <!-- bình luận -->
                 <div class="p-4 mt-10 bg-white">
-                    <h2 class="mb-4 text-xl font-semibold">Bình luận</h2>
+                    <h2 class="mb-4 text-xl font-semibold">Bình luận (<span id="numberOfComments">0</span>)</h2>
 
                     <div class="flex gap-3 mb-6">
-                        <img src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
+                        <img id="comment-avatar" src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
                         <div class="flex-1">
                             <textarea name="" id="commentInput" class="w-full p-3 border rounded-lg resize-none focus:ring-2 focus:ring-p-300" rows="2" placeholder="Viết bình luận..."></textarea>
                             <div class="flex justify-end gap-2">
                                 <button id="comment-btn" class="book-btn w-fit">Gửi</button>
-                                <button class="book-btn w-fit">Hủy</button>
+                                <button id="comment-cancel-btn" class="book-btn w-fit">Hủy</button>
                             </div>
                         </div>
                     </div>
-
+                    <!-- comment list -->
                     <div id="commentList" class="space-y-4">
-                        <div class="flex gap-3 p-4 rounded-lg bg-background">
-                            <img src="../assets/logo.png" alt="" class="w-10 h-10 rounded-full">
-                            <div class="flex-1">
-                                <div class="flex justify-between">
-                                    <span class="font-semibold">User A</span>
-                                    <span class="text-sm text-gray-500">12:30</span>
-                                </div>
-                                <p class="text-n-800">Sách hay quá</p>
-                            </div>
-                        </div>
+                        
+                    </div>
+                    <!-- button -->
+                    <div class="flex items-center justify-center gap-4 mt-6">
+                        <button id="btnPrevComment" class="px-4 py-2 text-white rounded-lg bg-n-500 hover:bg-n-600 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                            Trước
+                        </button>
+                        <span class="font-semibold text-n-800">Trang <span id="commentCurrentPage">1</span> / <span id="commentTotalPages">1</span></span>
+                        <button id="btnNextComment" class="px-4 py-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                            Sau
+                        </button>
                     </div>
                 </div>
             </main>
