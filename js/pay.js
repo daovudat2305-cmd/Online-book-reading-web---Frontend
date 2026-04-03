@@ -229,6 +229,13 @@ function renderPaymentTable(listPayments) {
 }
 
 function renderPagination(currentPage, totalPages) {
+    if(totalPages==0) {
+        document.getElementById('paymentCurrentPage').innerText = 0
+        document.getElementById('paymentTotalPages').innerText = 0
+        document.getElementById('btnPrevPayment').disabled = true
+        document.getElementById('btnNextPayment').disabled = true
+        return
+    }
     document.getElementById('paymentCurrentPage').innerText = currentPage + 1
     document.getElementById('paymentTotalPages').innerText = totalPages
 
