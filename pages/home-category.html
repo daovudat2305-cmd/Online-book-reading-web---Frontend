@@ -7,16 +7,14 @@
     <link rel="icon" type="image/png" href="../assets/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <!-- CSS -->
-
     <link href="../dist/output.css" rel="stylesheet">
 
-    <!-- Script -->
     <script defer src="../js/main.js"></script>
+    <script defer src="../js/book.js"></script>
+    <script defer src="../js/home-category.js"></script>
 </head>
 <body class="bg-gradient-to-t from-p-100 to-p-50">
     <div class="flex min-h-screen">
-        <!-- Sidebar -->
         <aside class="fixed flex flex-col items-center p-2 m-auto ml-4 -translate-y-1/2 shadow-md w-fit h-fit bg-p-300 rounded-2xl top-1/2 left-4">
             <div class="mt-6 mb-6">
                 <img src="../assets/logo.png" class="w-10 h-10 rounded-full">
@@ -29,7 +27,7 @@
                     <span class="font-medium home-label">Trang chủ</span>
                 </a>
                 
-                <a href="home-category.html" onclick="event.preventDefault(); goTo('home-category.html')" class="home-btn home-btn-active">
+                <a href="home-category.html" class="home-btn home-btn-active">
                     <i class="fa-solid fa-layer-group"></i>
                     <span class="font-medium home-label">Thể loại</span>
                 </a>
@@ -47,30 +45,24 @@
         </aside>
 
         <div class="flex flex-col w-full">
-            <!-- Main -->
             <main class="flex-1 p-6 ml-50">
     
-                <!-- Header -->
                 <div class="sticky z-50 flex items-center justify-around mb-8 top-4">
-                    <!-- Search -->
                     <div class="w-1/2">
-                        <input type="text" placeholder="Tìm kiếm sách" class="w-full px-4 py-2 bg-white border rounded-full shadow-md outline-none border-secondary-light">
+                        <input id="search-input" type="text" placeholder="Tìm kiếm sách" class="w-full px-4 py-2 bg-white border rounded-full shadow-md outline-none border-secondary-light">
                     </div>
         
-                    <!-- Đăng nhập / Đăng ký -->
                     <div id="guest-menu">
                         <button onclick="window.location.href='login.html'" class="p-2 btn">Đăng nhập</button>
                         <button onclick="window.location.href='register.html'" class="p-2 btn">Đăng ký</button>
                     </div>
 
                     <div id="user-menu">
-                        <!-- Avatar -->
-                        <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer">
+                        <div id="avatarBtn" class="flex items-center gap-2 hover:cursor-pointer relative">
                             <img id="avatarPreview" src="" class="w-10 h-10 rounded-full">
                             <span id="display-username" class="text-sm font-semibold"></span>
                         </div>
         
-                        <!-- Dropdown -->
                         <div id="avatarMenu" class="absolute hidden w-40 mt-2 rounded-lg shadow-lg right-10 bg-n-50 top-12">
                             
                             <a id="profileBtn" href="profile.html"
@@ -86,34 +78,70 @@
                     </div>
                 </div>
                 
-                <!-- Category -->
-                <div class="p-2 mb-6 shadow-md bg-p-200 rounded-2xl w-xl">
-                    <table class="text-left border-separate border-spacing-x-6 border-spacing-y-3">
+                <div class="p-6 mb-6 shadow-md bg-p-200 rounded-2xl w-full max-w-4xl">
+                    <table class="text-left border-separate border-spacing-x-6 border-spacing-y-4 w-full">
                         <tbody>
                             <tr>
-                                <th>Thể loại</th>
+                                <th class="align-top pt-1 w-32">Thể loại</th>
                                 <td>
-                                    <select class="p-1 border rounded-lg w-fit bg-p-50">
-                                        <option>Thể loại 1</option>
-                                        <option>Thể loại 2</option>
-                                        <option>Thể loại 3</option>
-                                        <option>Thể loại 4</option>
-                                    </select>
+                                    <div id="category-filter-group" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Tiên hiệp" class="category-checkbox rounded"> <span>Tiên hiệp</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Kiếm hiệp" class="category-checkbox rounded"> <span>Kiếm hiệp</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Hành động" class="category-checkbox rounded"> <span>Hành động</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Ngôn tình" class="category-checkbox rounded"> <span>Ngôn tình</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Trinh thám" class="category-checkbox rounded"> <span>Trinh thám</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Kinh dị" class="category-checkbox rounded"> <span>Kinh dị</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Linh dị" class="category-checkbox rounded"> <span>Linh dị</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Viễn tưởng" class="category-checkbox rounded"> <span>Viễn tưởng</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Học đường" class="category-checkbox rounded"> <span>Học đường</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Hài hước" class="category-checkbox rounded"> <span>Hài hước</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="lịch sử" class="category-checkbox rounded"> <span>lịch sử</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 text-sm cursor-pointer hover:text-p-400">
+                                            <input type="checkbox" value="Thể thao" class="category-checkbox rounded"> <span>Thể thao</span>
+                                        </label>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Loại truyện</th>
-                                <td>
-                                    <button class="type-btn">Miễn phí</button>
-                                    <button class="type-btn">VIP</button>
+                                <td class="flex gap-3">
+                                    <button class="type-filter-btn px-6 py-1 border border-p-300 rounded-full bg-p-400 font-bold shadow-inner transition-all duration-200" data-value="ALL">Tất cả</button>
+                                    
+                                    <button class="type-filter-btn px-6 py-1 border border-p-300 rounded-full bg-white hover:bg-p-100 transition-all duration-200" data-value="FREE">Miễn phí</button>
+                                    
+                                    <button class="type-filter-btn px-6 py-1 border border-p-300 rounded-full bg-white hover:bg-p-100 transition-all duration-200" data-value="VIP">VIP</button>
+                                    
+                                    <input type="hidden" id="current-type-filter" value="ALL">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Sắp xếp</th>
                                 <td>
-                                    <select class="p-1 border rounded-lg w-fit bg-p-50">
-                                        <option>Ngày đăng giảm dần</option>
-                                        <option>Ngày đăng tăng dần</option>
+                                    <select id="sort-select" class="p-1 border rounded-lg w-fit bg-p-50 outline-none">
+                                        <option value="latest">Ngày đăng giảm dần</option>
+                                        <option value="oldest">Ngày đăng tăng dần</option>
                                     </select>
                                 </td>
                             </tr>
@@ -121,88 +149,14 @@
                     </table>
                 </div>
 
-                <!-- Content -->
-                <div class="grid grid-cols-4 gap-4">
-                    <!-- card sách -->
-                    <a href="book-detail.html">
-                        <div class="w-40 cursor-pointer group">
-                            <div class="overflow-hidden transition duration-300 rounded-lg shadow-lg group-hover:scale-105">
-                                <img src="../assets/book.jpg" class="object-cover w-full h-56">
-                            </div>
-        
-                            <h3 class="mt-2 text-sm font-semibold line-clamp-2">
-                                Tên sách
-                            </h3>
-        
-                            <p class="text-xs text-gray-500">
-                                Tác giả
-                            </p>
-                        </div>
-                    </a>
-    
-                    <div class="w-40 cursor-pointer group">
-                        <div class="overflow-hidden transition duration-300 rounded-lg shadow-md group-hover:scale-105">
-                            <img src="../assets/book.jpg" class="object-cover w-full h-56">
-                        </div>
-    
-                        <h3 class="mt-2 text-sm font-semibold line-clamp-2">
-                            Tên sách
-                        </h3>
-    
-                        <p class="text-xs text-gray-500">
-                            Tác giả
-                        </p>
+                <div id="book-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     </div>
-    
-                    <div class="w-40 cursor-pointer group">
-                        <div class="overflow-hidden transition duration-300 rounded-lg shadow-md group-hover:scale-105">
-                            <img src="../assets/book.jpg" class="object-cover w-full h-56">
-                        </div>
-    
-                        <h3 class="mt-2 text-sm font-semibold line-clamp-2">
-                            Tên sách
-                        </h3>
-    
-                        <p class="text-xs text-gray-500">
-                            Tác giả
-                        </p>
-                    </div>
-    
-                    <div class="w-40 cursor-pointer group">
-                        <div class="overflow-hidden transition duration-300 rounded-lg shadow-md group-hover:scale-105">
-                            <img src="../assets/book.jpg" class="object-cover w-full h-56">
-                        </div>
-    
-                        <h3 class="mt-2 text-sm font-semibold line-clamp-2">
-                            Tên sách
-                        </h3>
-    
-                        <p class="text-xs text-gray-500">
-                            Tác giả
-                        </p>
-                    </div>
-                    <div class="w-40 cursor-pointer group">
-                        <div class="overflow-hidden transition duration-300 rounded-lg shadow-md group-hover:scale-105">
-                            <img src="../assets/book.jpg" class="object-cover w-full h-56">
-                        </div>
-    
-                        <h3 class="mt-2 text-sm font-semibold line-clamp-2">
-                            Tên sách
-                        </h3>
-    
-                        <p class="text-xs text-gray-500">
-                            Tác giả
-                        </p>
-                    </div>
-                </div>
     
             </main>
 
-            <!-- Footer -->
             <footer class="mt-16 text-n-800 bg-p-200">
                 <div class="flex justify-around gap-8 px-10 py-10">
     
-                    <!-- Cột 1: Logo + mô tả -->
                     <div>
                         <h2 class="mb-3 text-xl font-bold">Book Online</h2>
                         <p class="text-sm text-n-700">
@@ -211,13 +165,11 @@
                         </p>
                     </div>
     
-                    <!-- Cột 2: Liên hệ -->
                     <div>
                         <h3 class="mb-3 font-semibold">Liên hệ</h3>
                         <p class="text-sm text-n-700">Email: support@book.com</p>
                         <p class="text-sm text-n-700">Hotline: 0123 456 789</p>
     
-                        <!-- Social -->
                         <div class="flex gap-4 mt-3 text-lg">
                             <i class="cursor-pointer fa-brands fa-facebook hover:text-blue-500"></i>
                             <i class="cursor-pointer fa-brands fa-youtube hover:text-red-500"></i>
@@ -226,7 +178,6 @@
                     </div>
                 </div>
     
-                <!-- Copyright -->
                 <div class="py-4 text-sm text-center text-gray-500 border-t border-gray-700">
                     © 2026 Book Online. All rights reserved.
                 </div>
