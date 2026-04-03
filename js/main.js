@@ -2,6 +2,7 @@
 //nếu chưa đăng nhập thì hiển thị nút đăng nhập / đăng ký
 let isLogin = false
 let isVip = false
+let user = null
 document.addEventListener('DOMContentLoaded', function(){
     checkLoginState()
 })
@@ -22,7 +23,7 @@ function checkLoginState() {
         userMenu.style.display = 'flex'
         document.getElementById('display-username').innerText = username
         document.getElementById('profileBtn').href = role == "USER" ? "profile.html" : "profile-author.html"
-        loadAvatar()
+        window.userLoadPromise = loadAvatar()
     }
     else {
         guestMenu.style.display = 'block'
@@ -79,9 +80,11 @@ async function loadAvatar() {
         }
         //hien thi du lieu
         const data = await response.json()
+        user = data
         const avatarBtn = document.getElementById("avatarBtn")
         const avatar = document.getElementById('avatarPreview')
         avatar.src = data.avatar
+        if(document.getElementById('comment-avatar')) document.getElementById('comment-avatar').src = data.avatar
         if(data.isVip) {
             isVip = true
             avatar.classList.add("border-3", "border-yellow-400")
