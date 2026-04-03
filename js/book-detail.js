@@ -1,3 +1,40 @@
+//hiện active nút với trang tương ứng
+document.addEventListener("DOMContentLoaded", () => {
+    // Gọi hàm cập nhật trạng thái Sidebar khi tải trang
+    updateSidebarActiveState()
+});
+
+function updateSidebarActiveState() {
+    // lấy URL của trang trước đó
+    const previousUrl = document.referrer
+    
+    // lấy các nút
+    const navLinks = document.querySelectorAll('aside nav .home-btn')
+    
+    // xóa class 'home-btn-active' ở tất cả các nút để làm mới
+    navLinks.forEach(link => {
+        link.classList.remove('home-btn-active');
+    });
+
+    let isMatched = false
+
+    // kiểm tra xem URL trang trước đó có chứa href của nút không
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        
+        // Nếu URL trang trước đó có chứa tên file href (ví dụ: 'home-category.html')
+        if (previousUrl.includes(href)) {
+            link.classList.add('home-btn-active');
+            isMatched = true;
+        }
+    });
+
+    // mặc định chọn trang chủ
+    if (!isMatched && navLinks.length > 0) {
+        navLinks[0].classList.add('home-btn-active');
+    }
+}
+
 //hiện thị thông tin sách
 let currentBook = null
 document.addEventListener("DOMContentLoaded", function() {
@@ -256,6 +293,10 @@ commentBtn.addEventListener('click', async function() {
     console.log(user)
     if(!isLogin) {
         showToast("Vui lòng đăng nhập!", "warning")
+        return
+    }
+    if(!isVip && currentBook.type=="VIP") {
+        showToast("Đăng ký VIP để bình luận!", "warning")
         return
     }
     const contentComment = commentInput.value
