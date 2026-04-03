@@ -200,7 +200,12 @@ function renderBookTable(booksToRender) {
         } else if (book.status == 1) {
             statusText = 'Đã duyệt'; statusColor = 'text-green-500';
         } else if (book.status == 2) {
-            statusText = 'Bị từ chối duyệt'; statusColor = 'text-orange-600';
+            statusText = 'Bị từ chối (Bấm để xem lý do)';
+            statusColor = 'text-orange-500 underline decoration-dotted'; 
+            cursorClass = 'cursor-pointer';
+            const reason = book.message || "Admin không để lại lý do cụ thể.";
+            clickEvent = `onclick="alert('Lý do từ chối: ${reason}')"`;
+
         } else if (book.status == 3) {
             statusText = 'Đã xóa (Bấm để xem lý do)'; 
             statusColor = 'text-red-700 underline decoration-dotted';

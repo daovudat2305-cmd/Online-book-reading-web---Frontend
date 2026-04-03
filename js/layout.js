@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.text())
             .then(data => {
                 headerPlaceholder.innerHTML = data;
-                // ✨ Tui đã xóa dòng setupAdminHeaderEvents() ở đây để nó không gọi nhầm nữa
             });
     }
 });

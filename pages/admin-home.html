@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Online</title>
     <link rel="icon" type="image/png" href="../assets/logo.png">
-   
-    <!-- CSS -->
-
+    
     <link href="../dist/output.css" rel="stylesheet">
 
-    <!-- Script -->
     <script defer src="../js/admin.js"></script>
+    <script  defer src="../js/admin-home.js"></script>
+    <script src="../js/layout.js"></script>
 </head>
 <body class="min-h-screen font-sans text-n-800 bg-gradient-to-t from-p-200 to-white">
 
@@ -50,51 +49,51 @@
                 <span class="absolute px-3 py-1 text-xl font-bold border border-n-50 bg-n-50 -top-4 left-4">Thể loại</span>
                 <div class="grid grid-cols-2 mt-4 md:grid-cols-4 lg:grid-cols-7 gap-y-6 gap-x-4">
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Tiên hiệp" class="custom-checkbox">
                         <span class="text-sm font-bold">Tiên hiệp</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Kiếm hiệp" class="custom-checkbox">
                         <span class="text-sm font-bold">Kiếm hiệp</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Hành động" class="custom-checkbox">
                         <span class="text-sm font-bold">Hành động</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Ngôn tình" class="custom-checkbox">
                         <span class="text-sm font-bold">Ngôn tình</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Trinh thám" class="custom-checkbox">
                         <span class="text-sm font-bold">Trinh thám</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Kinh dị" class="custom-checkbox">
                         <span class="text-sm font-bold">Kinh dị</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Linh dị" class="custom-checkbox">
                         <span class="text-sm font-bold">Linh dị</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Viễn tưởng" class="custom-checkbox">
                         <span class="text-sm font-bold">Viễn tưởng</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Học đường" class="custom-checkbox">
                         <span class="text-sm font-bold">Học đường</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Hài hước" class="custom-checkbox">
                         <span class="text-sm font-bold">Hài hước</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="lịch sử" class="custom-checkbox">
                         <span class="text-sm font-bold">lịch sử</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" name="categories" value="Thể thao" class="custom-checkbox">
                         <span class="text-sm font-bold">Thể thao</span>
                     </label>
                 </div>
@@ -108,7 +107,7 @@
                         <span class="text-sm font-bold">Lượt xem</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
-                        <input type="checkbox" class="custom-checkbox">
+                        <input type="checkbox" id="sort-date" class="custom-checkbox">
                         <span class="text-sm font-bold">Ngày cập nhật</span>
                     </label>
                     <label class="flex flex-col items-center space-y-2 cursor-pointer hover:opacity-80">
@@ -163,8 +162,7 @@
         </div>
     </div>
 
-    <script src="../js/admin-home.js"></script>
-    <script src="../js/layout.js"></script>
+
     
 </body>
 </html>
