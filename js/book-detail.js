@@ -85,6 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if(document.getElementById('detail-categories'))
             document.getElementById('detail-categories').innerText = categoryNames;
 
+        //lượt đọc
+        if(document.getElementById('book-view'))
+            document.getElementById('book-view').innerText = book.viewCount==null ? 0 : book.viewCount;
+
         //hiện thị danh sách bình luận, lượt yêu thích
         fetchCommentList(0)
         renderFavoritesByBook()

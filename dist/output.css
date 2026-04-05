@@ -525,8 +525,14 @@
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
+  .h-9 {
+    height: calc(var(--spacing) * 9);
+  }
   .h-10 {
     height: calc(var(--spacing) * 10);
+  }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
   }
   .h-12 {
     height: calc(var(--spacing) * 12);
@@ -536,6 +542,9 @@
   }
   .h-32 {
     height: calc(var(--spacing) * 32);
+  }
+  .h-35 {
+    height: calc(var(--spacing) * 35);
   }
   .h-42 {
     height: calc(var(--spacing) * 42);
@@ -594,8 +603,14 @@
   .w-8 {
     width: calc(var(--spacing) * 8);
   }
+  .w-9 {
+    width: calc(var(--spacing) * 9);
+  }
   .w-10 {
     width: calc(var(--spacing) * 10);
+  }
+  .w-11 {
+    width: calc(var(--spacing) * 11);
   }
   .w-11\/12 {
     width: calc(11 / 12 * 100%);
@@ -605,6 +620,9 @@
   }
   .w-20 {
     width: calc(var(--spacing) * 20);
+  }
+  .w-25 {
+    width: calc(var(--spacing) * 25);
   }
   .w-28 {
     width: calc(var(--spacing) * 28);
@@ -933,6 +951,10 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
   .border-3 {
     border-style: var(--tw-border-style);
     border-width: 3px;
@@ -960,6 +982,15 @@
   .border-none {
     --tw-border-style: none;
     border-style: none;
+  }
+  .border-\[\#9CA3AF\] {
+    border-color: #9CA3AF;
+  }
+  .border-\[\#CD7F32\] {
+    border-color: #CD7F32;
+  }
+  .border-\[\#FFD700\] {
+    border-color: #FFD700;
   }
   .border-gray-100 {
     border-color: var(--color-gray-100);
@@ -1335,6 +1366,9 @@
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
   }
+  .text-\[8px\] {
+    font-size: 8px;
+  }
   .text-\[10px\] {
     font-size: 10px;
   }
@@ -1373,6 +1407,15 @@
   }
   .text-\[\#00c6d7\] {
     color: #00c6d7;
+  }
+  .text-\[\#9CA3AF\] {
+    color: #9CA3AF;
+  }
+  .text-\[\#CD7F32\] {
+    color: #CD7F32;
+  }
+  .text-\[\#FFD700\] {
+    color: #FFD700;
   }
   .text-black {
     color: var(--color-black);
@@ -1631,6 +1674,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: hsl(0, 85%, 60%);
+      }
+    }
+  }
+  .hover\:bg-foreground {
+    &:hover {
+      @media (hover: hover) {
+        background-color: hsl(240, 14%, 99%);
       }
     }
   }
