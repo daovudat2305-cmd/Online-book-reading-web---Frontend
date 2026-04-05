@@ -143,6 +143,10 @@ function openAuthorDetail(authorId) {
     document.getElementById('detail-gender').innerText = author.gender
     document.getElementById('detail-stk').innerText = author.bankAccount
 
+    document.getElementById('detail-books').onclick = () =>{
+        getBooksByAuthor(author.username)
+    }
+
     // Ẩn danh sách, hiện chi tiết
     document.getElementById('list-view').classList.add('hidden')
     document.getElementById('detail-view').classList.remove('hidden')
@@ -181,3 +185,68 @@ function changePage(pageIndex) {
 document.addEventListener("DOMContentLoaded", () => {
     fetchListAuthors(0);
 });
+
+
+//lấy sách theo tác giả
+async function getBooksByAuthor(authorName) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/admin/authors/${authorName}/books`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        if(!response.ok) {
+            const errData = await response.json();
+            const errMessage = errData.error || JSON.stringify(errData)
+            throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
+        }
+        const data = await response.json()
+        showBooksModal(data)
+    } catch (error) {
+        alert(error.message)
+        console.error('Error: ', error)
+    }
+}
+
+// Hàm đóng Modal
+function closeBooksModal() {
+    const modal = document.getElementById('books-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// Hàm render dữ liệu sách lên Modal
+function showBooksModal(booksData) {
+    const modal = document.getElementById('books-modal')
+    const content = document.getElementById('books-modal-content')
+    
+    content.innerHTML = '';
+
+    const bookList = booksData
+
+    if (bookList.length === 0) {
+        content.innerHTML = `<p class="mt-10 text-center text-gray-500">Tác giả này chưa đăng cuốn sách nào.</p>`;
+    } else {
+        const listHtml = bookList.map(book => `
+            <div class="flex items-center gap-4 p-4 transition border rounded-md shadow-sm bg-n-50 border-gray-200 hover:shadow-md">
+                <div class="flex-shrink-0 w-16 h-24 overflow-hidden bg-n-100 rounded">
+                    <img src="${book.coverImage}" alt="Bìa sách" class="object-cover w-full h-full">
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-gray-800">${book.title}</h3>
+                    <p class="text-sm font-medium text-p-400">Loại: ${book.type}</p>
+                    <p class="text-sm font-medium text-p-400">Ngày đăng: ${book.createdAt}</p>
+                </div>
+            </div>
+        `).join('');
+        
+        content.innerHTML = listHtml;
+    }
+
+    // Hiển thị Modal lên
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}

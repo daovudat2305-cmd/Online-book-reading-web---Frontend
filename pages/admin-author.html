@@ -116,9 +116,9 @@
                                 <p id="detail-stk" class="font-medium"></p>
                             </div>
     
-                            <div class="grid grid-cols-[200px_auto] items-center pt-2">
+                            <div class="flex items-center gap-2 pt-2">
                                 <p>Danh sách sách đã đăng:</p>
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Xem chi tiết</a>
+                                <button id="detail-books" class="font-medium text-blue-600 hover:underline hover:cursor-pointer">Xem chi tiết</button>
                             </div>
     
                         </div>
@@ -130,5 +130,21 @@
         </div>
     </div>
 
+    <!-- chi tiết sách tác giả đă đăng -->
+    <div id="books-modal" class="fixed inset-0 z-50 items-center justify-center hidden bg-n-200/60">
+        <div class="w-full max-w-3xl p-6 bg-white rounded-lg shadow-xl h-[80vh] flex flex-col relative">
+            
+            <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-n-800">Danh sách sách đã đăng</h2>
+                <button onclick="closeBooksModal()" class="text-gray-500 transition hover:text-red-500 hover:cursor-pointer">
+                    <i class="text-2xl fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="books-modal-content" class="flex-1 p-4 mt-4 space-y-4 overflow-y-auto">
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
