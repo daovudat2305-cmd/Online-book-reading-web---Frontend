@@ -396,12 +396,24 @@ async function statusFavorite() {
     }
 }
 
+// tránh việc click liên tục
+let isProcessingFavorite = false;
 favoriteBtn.addEventListener('click', async function() {
+    if (isProcessingFavorite) {
+        return; 
+    }
+
     const bookId = currentBook.bookId
     if(!isLogin) {
         showToast('Vui lòng đăng nhập!', "warning")
         return
     }
+
+    // khóa nút
+    isProcessingFavorite = true;
+    favoriteBtn.style.pointerEvents = 'none'// Ngăn click chuột
+    favoriteBtn.style.opacity = '0.6'     // Làm mờ nút để tạo phản hồi thị giác
+
     try {
         const response = await fetch(`http://localhost:8080/api/favorites/${bookId}?username=${localStorage.getItem('username')}`, {
             method: "POST",
@@ -427,5 +439,10 @@ favoriteBtn.addEventListener('click', async function() {
     } catch (error) {
         alert(error.message)
         console.error('Error: ', error)
+    } finally {
+        // cho phép bấm lại nút
+        isProcessingFavorite = false
+        favoriteBtn.style.pointerEvents = 'auto'
+        favoriteBtn.style.opacity = '1'      
     }
 })
