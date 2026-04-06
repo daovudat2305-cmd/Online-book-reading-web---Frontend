@@ -11,6 +11,8 @@
 
     <!-- Script -->
     <script defer src="../js/admin.js"></script>
+    <script defer src="../js/admin-transaction.js"></script>
+    <script defer src="../js/toast-message.js"></script>
 </head>
 <body class="relative min-h-screen pb-20 font-sans bg-gradient-to-t from-p-200 to-white text-n-800">
 
@@ -44,113 +46,130 @@
             <div class="grid grid-cols-1 gap-6 mb-12 md:grid-cols-3">
                 <div class="p-6 border rounded shadow-sm bg-n-50 border-n-200">
                     <p class="mb-2 font-medium text-n-600">Tổng doanh thu (Tháng này)</p>
-                    <p class="text-2xl font-bold text-n-800">15,450,000 VNĐ</p>
+                    <p class="text-2xl font-bold text-n-800"><span id="totalRevenue"></span> VNĐ</p>
                 </div>
                 <div class="p-6 border rounded shadow-sm bg-n-50 border-n-200">
-                    <p class="mb-2 font-medium text-n-600">Giao dịch Nạp gói VIP (Hôm nay)</p>
-                    <p class="text-2xl font-bold text-[#00c6d7]">124 lượt</p>
+                    <p class="mb-2 font-medium text-n-600">Giao dịch Nạp gói VIP (Tháng này)</p>
+                    <p class="text-2xl font-bold text-[#00c6d7]"><span id="numberOfVip"></span> lượt</p>
                 </div>
                 <div class="p-6 border rounded shadow-sm bg-n-50 border-n-200">
                     <p class="mb-2 font-medium text-n-600">Yêu cầu Giả lương cho tác giả (Chờ xử lý)</p>
-                    <p class="text-2xl font-bold text-red-500">5 yêu cầu</p>
+                    <p class="text-2xl font-bold text-red-500"><span id="numberOfRequestIsPending"></span> yêu cầu</p>
                 </div>
             </div> 
 
             <div class="flex flex-col items-end justify-between pl-2 mb-6 space-y-4 md:flex-row md:space-y-0">
                 <div class="flex items-center space-x-3">
-                    <button class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
+                    <button onclick="searchPayment()" class="px-6 py-2 font-bold transition rounded-full shadow-sm bg-n-200 hover:bg-n-500">
                         Tìm kiếm
                     </button>
-                    <input type="text" placeholder="Nhập giao dịch hoặc tên..." class="bg-n-50 px-6 py-2 rounded-full w-[350px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
+                    <input id="searchPaymentInput" type="text" placeholder="Nhập giao dịch hoặc tên người dùng (nạp VIP)" class="bg-n-50 px-6 py-2 rounded-full w-[400px] outline-none focus:ring-2 focus:ring-p-300 placeholder-n-600 font-medium shadow-sm">
                 </div>
                 
                 <div class="flex space-x-4">
-                    <select class="px-4 py-2 font-medium bg-white border outline-none border-n-200">
-                        <option value="">Tất cả loại giao dịch</option>
+                    <select id="transactionType" onchange="switchTableView()" class="px-4 py-2 font-medium bg-white border outline-none border-n-200">
                         <option value="nap">Độc giả nạp gói VIP</option>
                         <option value="rut">Giả lương cho tác giả</option>
-                    </select>
-                    <select class="px-4 py-2 font-medium bg-white border outline-none border-n-200">
-                        <option value="">Trạng thái</option>
-                        <option value="success">Thành công</option>
-                        <option value="pending">Chờ xử lý</option>
-                        <option value="failed">Thất bại</option>
                     </select>
                 </div>
             </div>
 
-            <div class="relative overflow-x-auto border shadow-sm border-n-300">
-                <table class="w-full text-left border-collapse bg-n-50">
-                    <thead>
-                        <tr class="text-sm uppercase bg-background text-n-800">
-                            <th class="px-6 py-4 font-bold border-b border-gray-400">Mã GD</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-400">Người dùng</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-400">Tên người dùng</th>
-                            <th class="px-6 py-4 font-bold text-center border-b border-gray-400">Loại giao dịch</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-400">Số tiền / Xu</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-400">Thời gian</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-400">Trạng thái</th>
-                            <th class="px-6 py-4 font-bold text-center border-b border-gray-400">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        
-                        <tr class="border-b border-n-200 hover:bg-p-300">
-                            <td class="px-6 py-4 font-medium">#TXN-9823</td>
-                            <td class="px-6 py-4">Độc giả</td>
-                            <td class="px-6 py-4">user_docgia1</td>
-                            <td class="px-6 py-4 text-center">Nạp gói VIP</td> <td class="px-6 py-4 font-bold text-green-600">+ 50,000 VNĐ</td>
-                            <td class="px-6 py-4 text-n-600">14:30 - 20/10/2026</td>
-                            <td class="px-6 py-4">
-                                <span class="px-3 py-1 text-xs font-bold text-green-700 bg-green-100 rounded-full">Thành công</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Chi tiết</a>
-                            </td>
-                        </tr>
-
-                        <tr class="border-b border-n-200 hover:bg-p-300">
-                            <td class="px-6 py-4 font-medium">#TXN-9824</td>
-                            <td class="px-6 py-4">Tác giả</td>
-                            <td class="px-6 py-4">tacgia_nguyenvana</td>
-                            <td class="px-6 py-4 text-center">Giả lương tác giả</td> <td class="px-6 py-4 font-bold text-red-500">- 2,000,000 VNĐ</td>
-                            <td class="px-6 py-4 text-n-600">10:15 - 20/10/2026</td>
-                            <td class="px-6 py-4">
-                                <span class="px-3 py-1 text-xs font-bold text-yellow-700 bg-yellow-100 rounded-full">Chờ xử lý</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Duyệt</a>
-                            </td>
-                        </tr>
-
-                        <tr class="border-b border-n-200 hover:bg-p-300">
-                            <td class="px-6 py-4 font-medium">#TXN-9825</td>
-                            <td class="px-6 py-4">Tác giả</td>
-                            <td class="px-6 py-4">user_docgia2</td>
-                            <td class="px-6 py-4 text-center">Nạp gói VIP</td> <td class="px-6 py-4 font-bold text-n-500">100,000 VNĐ</td>
-                            <td class="px-6 py-4 text-n-600">09:00 - 20/10/2026</td>
-                            <td class="px-6 py-4">
-                                <span class="px-3 py-1 text-xs font-bold text-red-700 bg-red-100 rounded-full">Thất bại</span>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Chi tiết</a>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
+            <!-- bảng nạp vip -->
+            <div id="tableVip">
+                <div class="relative overflow-x-auto border shadow-sm border-n-300">
+                    <table class="w-full text-left border-collapse bg-n-50">
+                        <thead>
+                            <tr class="text-sm uppercase bg-background text-n-800">
+                                <th class="px-2 py-2 font-bold border-b border-gray-400">Người dùng</th>
+                                <th class="px-2 py-2 font-bold border-b border-gray-400">Tên người dùng</th>
+                                <th class="px-2 py-2 font-bold text-center border-b border-gray-400">Loại giao dịch</th>
+                                <th class="px-2 py-2 font-bold text-center border-b border-gray-400">Số tiền</th>
+                                <th class="px-2 py-2 font-bold border-b border-gray-400">
+                                    <div class="flex items-center gap-2">
+                                        <span>Thời gian</span>
+                                        <input type="date" id="filter-date-input" class="p-1 text-xs font-normal text-gray-600 bg-white border border-gray-300 rounded outline-none cursor-pointer focus:border-blue-500">
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 font-bold border-b border-gray-400">
+                                    <div class="flex flex-col gap-1">
+                                        <span>Trạng thái</span>
+                                        <select id="filter-status-select" class="p-1 text-xs font-normal text-gray-600 bg-white border border-gray-300 rounded outline-none cursor-pointer focus:border-blue-500">
+                                            <option value="all">Tất cả</option>
+                                            <option value="PAID">Thành công</option>
+                                            <option value="FAIL">Thất bại</option>
+                                            <option value="CANCELLED">Đã hủy</option>
+                                            <option value="PENDING">Đang xử lý</option>
+                                        </select>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="listPaymentBody" class="text-sm">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <!-- nút -->
+                <div class="flex items-center justify-center gap-4 mt-6">
+                    <button id="btnPrevPayment" class="px-4 py-2 text-white rounded-lg bg-n-500 hover:bg-n-600 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Trước
+                    </button>
+                    <span class="font-semibold text-n-800">Trang <span id="paymentCurrentPage">1</span> / <span id="paymentTotalPages">1</span></span>
+                    <button id="btnNextPayment" class="px-4 py-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Sau
+                    </button>
+                </div>
             </div>
 
-            <div class="flex justify-center mt-8 space-x-2">
-                <button class="px-4 py-2 font-medium border border-gray-300 bg-n-100 hover:bg-n-200">Trước</button>
-                <button class="px-4 py-2 font-bold text-white bg-p-400">1</button>
-                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">2</button>
-                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">3</button>
-                <button class="px-4 py-2 font-medium border border-gray-200 bg-n-100 hover:bg-n-200">Sau</button>
+            <!-- bảng trả lương -->
+            <div id="tableSalary" class="hidden">
+                <div class="relative overflow-x-auto border shadow-sm border-n-300">
+                    <table class="w-full text-left border-collapse bg-n-50">
+                        <thead>
+                            <tr class="text-sm uppercase bg-background text-n-800">
+                                <th class="px-4 py-3 font-bold border-b border-gray-400">Tên Tác giả</th>
+                                <th class="px-4 py-3 font-bold border-b border-gray-400">Nội dung</th>
+                                <th class="px-4 py-3 font-bold text-center border-b border-gray-400">Số tiền yêu cầu</th>
+                                <th class="px-4 py-3 font-bold border-b border-gray-400">
+                                    <div class="flex items-center gap-2">
+                                        <span>Thời gian duyệt</span>
+                                        <input type="date" id="filter-date-request" class="p-1 text-xs font-normal text-gray-600 bg-white border border-gray-300 rounded outline-none cursor-pointer focus:border-blue-500">
+                                    </div>
+                                </th>
+                                <th class="px-4 py-3 font-bold border-b border-gray-400">
+                                    <div class="flex flex-col gap-1">
+                                        <span>Trạng thái</span>
+                                        <select id="filter-status-request" class="p-1 text-xs font-normal text-gray-600 bg-white border border-gray-300 rounded outline-none cursor-pointer focus:border-blue-500">
+                                            <option value="all">Tất cả</option>
+                                            <option value="PAID">Đồng ý</option>
+                                            <option value="REJECTED">Từ chối</option>
+                                            <option value="PENDING">Đang xử lý</option>
+                                        </select>
+                                    </div>
+                                </th>
+                                <th class="px-4 py-3 font-bold text-center border-b border-gray-400">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listRequestsBody" class="text-md">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <!-- nút -->
+                <div class="flex items-center justify-center gap-4 mt-6">
+                    <button id="btnPrevRequest" class="px-4 py-2 text-white rounded-lg bg-n-500 hover:bg-n-600 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Trước
+                    </button>
+                    <span class="font-semibold text-n-800">Trang <span id="requestCurrentPage">1</span> / <span id="requestTotalPages">1</span></span>
+                    <button id="btnNextRequest" class="px-4 py-2 text-white rounded-lg bg-p-500 hover:bg-p-700 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        Sau
+                    </button>
+                </div>
             </div>
-
         </div>
     </div>
 
+    <!-- toast message -->
+    <div id="toast-container" class="fixed z-50 space-y-3 top-5 right-5"></div>
 </body>
 </html>

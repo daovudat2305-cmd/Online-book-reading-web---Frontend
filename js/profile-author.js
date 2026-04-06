@@ -1,7 +1,8 @@
 //xử lý tác giả đăng sách
 document.addEventListener("DOMContentLoaded", function() {
-    // PHẦN 1: TẢI LỊCH SỬ ĐĂNG SÁCH
+    // PHẦN 1: TẢI LỊCH SỬ ĐĂNG SÁCH, số tiền được trả
     loadBookHistory();
+    loadBalance()
 
     // PHẦN 2: XỬ LÝ ĐĂNG SÁCH MỚI
     const btnSubmit = document.getElementById('btnSubmitBook');
@@ -142,7 +143,7 @@ async function loadBookHistory() {
         
         allMyBooks = await response.json();
 
-        // ✨ SẮP XẾP THỜI GIAN (Mới nhất lên đầu)
+        // SẮP XẾP THỜI GIAN (Mới nhất lên đầu)
         allMyBooks.sort((a, b) => {
             let dateA = new Date(a.createdAt || a.createdDate || 0);
             let dateB = new Date(b.createdAt || b.createdDate || 0);
@@ -261,4 +262,64 @@ if (pdfInput) {
             reader.readAsArrayBuffer(file);
         }
     });
+}
+
+
+
+// tính tiền và gửi yêu cầu
+async function loadBalance() {
+    try {
+        const response = await fetch(`http://localhost:8080/api/authors/balance`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        if(!response.ok) {
+            const errData = await response.json();
+            const errMessage = errData.error || JSON.stringify(errData)
+            throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
+        }
+        const data = await response.json()
+        document.getElementById('displayBalance').value = data.totalAmount + " VNĐ"
+        if(data.totalAmount==null || data.totalAmount==0) {
+            document.getElementById('requestBtn').disabled = true
+        }
+        else {
+            document.getElementById('requestBtn').disabled = false
+        }
+    } catch (error) {
+        alert(error.message)
+        console.error('Error: ', error)
+    }
+}
+
+async function sendRequest() {
+    const btn = document.getElementById("requestBtn");
+    if (btn.disabled === true) {
+        showToast("Bạn không thể yêu cầu trả tiền!", "warning")
+        return;
+    }
+    try {
+        const response = await fetch(`http://localhost:8080/api/authors/paymentRequest`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        })
+
+        if(!response.ok) {
+            const errData = await response.json();
+            const errMessage = errData.error || JSON.stringify(errData)
+            throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
+        }
+        showToast("Đã gửi yêu cầu!", "info")
+        loadBalance()
+    } catch (error) {
+        showToast(error.message, "warning")
+        console.error('Error: ', error)
+    }
 }

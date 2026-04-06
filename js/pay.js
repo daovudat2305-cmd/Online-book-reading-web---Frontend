@@ -210,7 +210,7 @@ function renderPaymentTable(listPayments) {
             status = "Đã hủy"
             statusColor = "text-error"
         }
-        else if(payment.status == "FAILED") {
+        else if(payment.status == "FAIL") {
             status = "Thất bại"
             statusColor = "text-error"
         }
