@@ -114,7 +114,7 @@
     
                         <p class="text-n-800">
                             <i class="fa-regular fa-eye"></i>
-                            Lượt đọc: <span id="book-views">0</span>
+                            Lượt đọc: <span id="book-view">0</span>
                         </p>
     
                         <p class="text-n-800">
@@ -207,13 +207,28 @@
     <!-- đọc sách -->
     <div id="read-modal" class="fixed inset-0 z-[100] flex items-center justify-center hidden bg-black/80 backdrop-blur-sm">
         <div class="relative flex flex-col w-11/12 bg-white rounded-lg h-[95vh] shadow-2xl">
+            
             <div class="flex items-center justify-between p-4 text-white rounded-t-lg bg-p-600">
-                <h2 id="read-modal-title" class="text-xl font-bold truncate">Đang đọc sách...</h2>
-                <button id="btn-close-read" class="text-3xl font-bold transition hover:text-red-300">&times;</button>
+                
+                <h2 id="read-modal-title" class="text-xl font-bold truncate max-w-[40%]">Đang đọc sách...</h2>
+                
+                <div class="flex items-center gap-3 bg-white/20 px-4 py-1.5 rounded-full border border-white/30 shadow-inner">
+                    <label class="hidden md:block text-xs font-bold uppercase tracking-widest text-white/90">Trang hiện tại:</label>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="manual-page-input" value="1" min="1" 
+                               class="w-14 h-8 px-1 rounded-md text-black text-center font-bold focus:outline-none focus:ring-2 focus:ring-yellow-400 border-none">
+                        <button onclick="handleManualSave()" 
+                                class="bg-yellow-400 hover:bg-yellow-500 text-p-600 px-4 h-8 rounded-md text-xs font-black uppercase transition-all active:scale-90 shadow-md">
+                            Lưu trang
+                        </button>
+                    </div>
+                </div>
+
+                <button id="btn-close-read" class="text-3xl font-bold transition hover:text-red-300 leading-none">&times;</button>
             </div>
             
-            <div class="flex-1 w-full bg-gray-200 rounded-b-lg">
-                <iframe id="pdf-frame" class="w-full h-full rounded-b-lg" src=""></iframe>
+            <div class="flex-1 w-full bg-gray-200 rounded-b-lg overflow-hidden">
+                <iframe id="pdf-frame" class="w-full h-full border-none" src=""></iframe>
             </div>
         </div>
     </div>
