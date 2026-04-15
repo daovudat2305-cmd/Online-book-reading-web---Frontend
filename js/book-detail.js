@@ -37,6 +37,9 @@ function updateSidebarActiveState() {
 
 //hiện thị thông tin sách
 let currentBook = null
+let viewTimer = null; //Biến để giữ bộ đếm giờ lượt đọc
+let sessionStartTime = null; // Biến giữ bộ đếm thời gian đọc
+
 document.addEventListener("DOMContentLoaded", function() {
     // 1. Lấy mã sách (ID) từ thanh địa chỉ URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -107,6 +110,7 @@ const btnRead = document.getElementById('btn-read-now'); // Nút "Đọc ngay"
 const readModal = document.getElementById('read-modal'); // Cái Modal hiện lên
 const pdfFrame = document.getElementById('pdf-frame');     // Cái thẻ iframe chứa PDF
 const btnCloseRead = document.getElementById('btn-close-read'); // Nút X đóng modal
+
 //đọc sách
 if (btnRead) {
     btnRead.onclick = () => {
@@ -121,9 +125,20 @@ if (btnRead) {
                 
                 // Hiện Modal
                 readModal.classList.remove('hidden');
+                sessionStartTime = Date.now();
                 
                 // Dùng Google Docs Viewer để đọc PDF mượt hơn
                 pdfFrame.src = `https://docs.google.com/gview?url=${encodeURIComponent(secureUrl)}&embedded=true`;
+                
+                // Lưu lịch sử đọc (gọi ngay để hiện trong lịch sử)
+                saveReadingHistory(currentBook.bookId);
+
+                // 🟢 THÊM MỚI: Hẹn giờ 10 giây để tăng lượt đọc
+                console.log("⏱️ Bắt đầu tính giờ 10s để cộng lượt đọc...");
+                viewTimer = setTimeout(() => {
+                    increaseViewCount(currentBook.bookId);
+                }, 10000); // 10000ms = 10 giây
+
             } else {
                 alert("File sách hiện chưa khả dụng!");
             }
@@ -136,11 +151,63 @@ if (btnRead) {
 }
 
 // Đóng modal đọc sách
-if (btnCloseRead) {
-    btnCloseRead.onclick = () => {
-        readModal.classList.add('hidden');
-        pdfFrame.src = ""; // Dừng tải PDF khi đóng
-    };
+btnCloseRead.onclick = () => {
+    // ... (code cũ giữ nguyên) ...
+    readModal.classList.add('hidden');
+    pdfFrame.src = ""; 
+    
+    // 🟢 TÍNH TOÁN VÀ GỬI THỜI GIAN ĐỌC LÊN SERVER
+    if (sessionStartTime) {
+        let sessionEndTime = Date.now();
+        // Lấy (Sau - Trước) chia 1000 để ra số giây
+        let elapsedSeconds = Math.floor((sessionEndTime - sessionStartTime) / 1000);
+        
+        if (elapsedSeconds > 0) {
+            saveReadingTime(currentBook.bookId, elapsedSeconds);
+        }
+        sessionStartTime = null; // Reset lại cho lần đọc sau
+    }
+};
+
+// ĐỂ GỌI API tăng thời gian đã đọc
+function saveReadingTime(bookId, seconds) {
+    const token = localStorage.getItem('jwtToken') || localStorage.getItem('token');
+    let cleanToken = token.replace(/['"]+/g, '').trim();
+    let finalHeader = cleanToken.startsWith('Bearer ') ? cleanToken : `Bearer ${cleanToken}`;
+
+    fetch(`http://localhost:8080/api/user/history/${bookId}/add-time?seconds=${seconds}`, {
+        method: 'POST',
+        headers: { 'Authorization': finalHeader }
+    })
+    .then(res => {
+        if(res.ok) console.log(`⏱️ Đã lưu thêm ${seconds} giây vào tổng thời gian đọc.`);
+    })
+    .catch(err => console.error("Lỗi lưu thời gian:", err));
+}
+
+// Gọi API tăng lượt đọc
+async function increaseViewCount(bookId) {
+    const token = localStorage.getItem('jwtToken') || localStorage.getItem('token');
+    if (!token) return;
+    let cleanToken = token.replace(/['"]+/g, '').trim();
+    let finalHeader = cleanToken.startsWith('Bearer ') ? cleanToken : `Bearer ${cleanToken}`;
+
+    fetch(`http://localhost:8080/api/user/history/${bookId}/increment-view`, {
+        method: 'POST',
+        headers: { 'Authorization': finalHeader }
+    })
+    .then(res => {
+        if(res.ok) {
+            console.log("🚀 Đã đủ 10 giây! Cộng lượt đọc thành công.");
+            // Cập nhật số lượt đọc trên màn hình cho đẹp
+            const viewTxt = document.getElementById('book-view');
+            if(viewTxt) {
+                let currentNumber = parseInt(viewTxt.innerText) || 0;
+                viewTxt.innerText = currentNumber + 1;
+            }
+        }
+    })
+    .catch(error => console.error("Lỗi tăng view:", error));
 }
 
 //hiển thị danh sách bình luận
@@ -446,3 +513,53 @@ favoriteBtn.addEventListener('click', async function() {
         favoriteBtn.style.opacity = '1'      
     }
 })
+
+// Lưu số trang
+function handleManualSave() {
+    const pageInput = document.getElementById('manual-page-input');
+    const pageValue = parseInt(pageInput.value);
+
+    if (isNaN(pageValue) || pageValue < 1) {
+        alert("Vui lòng nhập số trang hợp lệ!");
+        return;
+    }
+
+    // Truyền thêm chữ 'true' ở cuối để báo đây là lưu thủ công -> cần hiện Alert
+    saveReadingHistory(currentBook.bookId, pageValue, true);
+}
+
+// Hàm lưu lịch sử
+function saveReadingHistory(bookId, page = null, isManual = false) {
+    const token = localStorage.getItem('jwtToken') || localStorage.getItem('token');
+    if (!token) return;
+
+    let cleanToken = token.replace(/['"]+/g, '').trim();
+    let finalHeader = cleanToken.startsWith('Bearer ') ? cleanToken : `Bearer ${cleanToken}`;
+
+    // 1. Xây dựng URL động: Chỉ thêm currentPage nếu page khác null
+    let url = `http://localhost:8080/api/user/history/update?bookId=${bookId}`;
+    if (page !== null) {
+        url += `&currentPage=${page}`;
+    }
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Authorization': finalHeader }
+    })
+    .then(response => {
+        if(response.ok) {
+            // Log ra để kiểm tra cho dễ
+            if (page !== null) {
+                console.log("✅ Đã cập nhật lịch sử: Đang ở trang", page);
+            } else {
+                console.log("✅ Đã cập nhật giờ đọc (Giữ nguyên số trang cũ)");
+            }
+            
+            // CHỈ HIỆN THÔNG BÁO NẾU ĐÂY LÀ LƯU THỦ CÔNG
+            if (isManual) {
+                alert(`✅ Đã đánh dấu bạn đang đọc ở Trang ${page}`);
+            }
+        }
+    })
+    .catch(error => console.error("Lỗi cập nhật lịch sử:", error));
+}

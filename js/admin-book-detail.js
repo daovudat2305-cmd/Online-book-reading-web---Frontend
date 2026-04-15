@@ -65,6 +65,38 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('book-cover-container').innerHTML = 
             `<img src="${book.coverImage}" class="w-full object-contain shadow-md rounded border border-gray-200">`;
         
+        
+        // 1. Lượt đọc
+        if (document.getElementById('book-view')) {
+            document.getElementById('book-view').innerText = "Lượt đọc: " + (book.viewCount == null ? 0 : book.viewCount);
+        }
+
+        // 2. Lượt yêu thích
+        fetch(`http://localhost:8080/api/favorites/${bookId}/count`, {
+            method: "GET",
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (document.getElementById('book-favorites')) {
+                document.getElementById('book-favorites').innerText = "Lượt yêu thích: " + (data.favorites || 0);
+            }
+        })
+        .catch(err => console.error("Lỗi lấy lượt thích:", err));
+
+        // 3. Số bình luận
+        fetch(`http://localhost:8080/api/comments/${bookId}?page=0&size=1`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (document.getElementById('numberOfComments')) {
+                document.getElementById('numberOfComments').innerText = "Số bình luận: " + (data.totalElements || 0);
+            }
+        })
+        .catch(err => console.error("Lỗi lấy bình luận:", err));
+
         // Nút đọc sách
         // 1. Khai báo các biến cho Modal Đọc Sách
         const readModal = document.getElementById('read-modal');
