@@ -133,7 +133,7 @@ if (btnRead) {
                 // Lưu lịch sử đọc (gọi ngay để hiện trong lịch sử)
                 saveReadingHistory(currentBook.bookId);
 
-                // 🟢 THÊM MỚI: Hẹn giờ 10 giây để tăng lượt đọc
+                // Hẹn giờ 10 giây để tăng lượt đọc
                 console.log("⏱️ Bắt đầu tính giờ 10s để cộng lượt đọc...");
                 viewTimer = setTimeout(() => {
                     increaseViewCount(currentBook.bookId);
@@ -152,11 +152,16 @@ if (btnRead) {
 
 // Đóng modal đọc sách
 btnCloseRead.onclick = () => {
-    // ... (code cũ giữ nguyên) ...
     readModal.classList.add('hidden');
     pdfFrame.src = ""; 
+
+    if (typeof viewTimer !== 'undefined' && viewTimer) {
+        clearTimeout(viewTimer); // Hủy lệnh cộng view
+        viewTimer = null;        // Xóa dấu vết
+        console.log("❌ Đã đóng sách sớm, hủy đếm giờ cộng view!");
+    }
     
-    // 🟢 TÍNH TOÁN VÀ GỬI THỜI GIAN ĐỌC LÊN SERVER
+    // TÍNH TOÁN VÀ GỬI THỜI GIAN ĐỌC LÊN SERVER
     if (sessionStartTime) {
         let sessionEndTime = Date.now();
         // Lấy (Sau - Trước) chia 1000 để ra số giây
