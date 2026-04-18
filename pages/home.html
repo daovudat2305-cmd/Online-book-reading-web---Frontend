@@ -7,6 +7,9 @@
     <link rel="icon" type="image/png" href="../assets/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- CSS -->
 
     <link href="../dist/output.css" rel="stylesheet">
@@ -84,12 +87,30 @@
                     </div>
                 </div>
 
-                <!-- Content -->
-                <div id="book-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Đề xuất sách -->
+                <div class="w-full mb-12">
+                    <h2 class="mb-4 text-2xl font-semibold text-n-800">
+                        <i class="mr-2 text-yellow-300 fa-solid fa-star"></i> Đề xuất
+                    </h2>
+                    
+                    <div class="p-2 overflow-hidden swiper mySwiper rounded-xl">
+                        <div class="swiper-wrapper" id="slider-wrapper"></div>
+                        <div class="swiper-button-next font-bold !text-n-800 bg-white/60 p-7 rounded-full shadow hover:bg-white transition"></div>
+                        <div class="swiper-button-prev font-bold !text-n-800 bg-white/60 p-7 rounded-full shadow hover:bg-white transition"></div>
                     </div>
+                </div>
 
-                <div id="pagination-container" class="flex justify-center items-center mt-10 mb-8 gap-2">
+                <!-- Content -->
+                <div>
+                    <h2 class="mb-4 text-2xl font-semibold text-n-800">
+                        <i class="mr-2 fa-solid fa-book"></i> Sách hay
+                    </h2>
+                    <div id="book-grid" class="grid grid-cols-2 gap-6 md:grid-cols-4">
                     </div>
+    
+                    <div id="pagination-container" class="flex items-center justify-center gap-2 mt-10 mb-8">
+                    </div>
+                </div>
 
             </main>
             
