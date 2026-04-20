@@ -113,7 +113,6 @@ function applyHomeFilters() {
 }
 
 // --- CÁC HÀM XỬ LÝ PHÂN TRANG (Cần có để chuyển trang) ---
-
 function renderPaginationUI(totalPages, currentPage) {
   const paginationContainer = document.getElementById("pagination-container");
   if (!paginationContainer) return;
@@ -121,26 +120,70 @@ function renderPaginationUI(totalPages, currentPage) {
   paginationContainer.innerHTML = "";
   if (totalPages <= 1) return;
 
-  // Nút Trước
-  const prevBtn = `<button class="px-3 py-1 border rounded ${currentPage === 0 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "hover:bg-blue-100"}" ${currentPage === 0 ? "disabled" : ""} onclick="changePage(${currentPage - 1})">< Trước</button>`;
-  paginationContainer.innerHTML += prevBtn;
+  let html = ""; // Gom chuỗi HTML lại rồi gán 1 lần để tối ưu hiệu suất
 
-  // Các nút số (1, 2, 3...)
-  for (let i = 0; i < totalPages; i++) {
-    const activeClass =
-      i === currentPage
-        ? "bg-blue-500 text-white font-bold"
-        : "hover:bg-blue-100";
-    const pageBtn = `<button class="px-3 py-1 border rounded ${activeClass}" onclick="changePage(${i})">${i + 1}</button>`;
-    paginationContainer.innerHTML += pageBtn;
+  // 1. Nút Trang Đầu
+  html += `<button class="px-3 py-1 border rounded ${currentPage === 0 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "hover:bg-blue-100"}" ${currentPage === 0 ? "disabled" : ""} onclick="changePage(0)">Trang đầu</button>`;
+
+  // 2. Nút Trước
+  html += `<button class="px-3 py-1 border rounded ${currentPage === 0 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "hover:bg-blue-100"}" ${currentPage === 0 ? "disabled" : ""} onclick="changePage(${currentPage - 1})">< Trước</button>`;
+
+  // 3. Tính toán khoảng hiển thị (Sliding Window - Tối đa 7 nút)
+  const maxVisiblePages = 7;
+  let startPage = 0;
+  let endPage = totalPages - 1;
+
+  if (totalPages > maxVisiblePages) {
+    // Luôn giữ currentPage ở giữa (ví dụ: 3 nút trước, currentPage, 3 nút sau)
+    startPage = currentPage - 3;
+    endPage = currentPage + 3;
+
+    // Xử lý khi bị lẹm viền trái (vd: currentPage = 0, 1, 2)
+    if (startPage < 0) {
+      startPage = 0;
+      endPage = maxVisiblePages - 1;
+    }
+    // Xử lý khi bị lẹm viền phải (vd: currentPage sát trang cuối)
+    else if (endPage >= totalPages) {
+      endPage = totalPages - 1;
+      startPage = totalPages - maxVisiblePages;
+    }
   }
 
-  // Nút Sau
-  const nextBtn = `<button class="px-3 py-1 border rounded ${currentPage === totalPages - 1 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "hover:bg-blue-100"}" ${currentPage === totalPages - 1 ? "disabled" : ""} onclick="changePage(${currentPage + 1})">Sau ></button>`;
-  paginationContainer.innerHTML += nextBtn;
+  // 4. Render dấu ... ở đầu (nếu mảng bị che khuất phần đầu)
+  if (startPage > 0) {
+    html += `<span class="px-2 py-1 text-gray-500">...</span>`;
+  }
+
+  // 5. Render các nút số
+  for (let i = startPage; i <= endPage; i++) {
+    const activeClass =
+      i === currentPage
+        ? "bg-blue-500 text-white font-bold border-blue-500"
+        : "hover:bg-blue-100 text-gray-700";
+    html += `<button class="px-3 py-1 border rounded ${activeClass}" onclick="changePage(${i})">${i + 1}</button>`;
+  }
+
+  // 6. Render dấu ... ở cuối (nếu mảng bị che khuất phần cuối)
+  if (endPage < totalPages - 1) {
+    html += `<span class="px-2 py-1 text-gray-500">...</span>`;
+  }
+
+  // 7. Nút Sau
+  html += `<button class="px-3 py-1 border rounded ${currentPage === totalPages - 1 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "hover:bg-blue-100"}" ${currentPage === totalPages - 1 ? "disabled" : ""} onclick="changePage(${currentPage + 1})">Sau ></button>`;
+
+  // 8. Nút Trang Cuối
+  html += `<button class="px-3 py-1 border rounded ${currentPage === totalPages - 1 ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "hover:bg-blue-100"}" ${currentPage === totalPages - 1 ? "disabled" : ""} onclick="changePage(${totalPages - 1})">Trang cuối</button>`;
+
+  // Đổ toàn bộ HTML vào container
+  paginationContainer.innerHTML = html;
 }
 
 function changePage(pageNumber) {
   currentPage = pageNumber;
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   applyHomeFilters(); // Gọi lại API để lấy sách của trang mới
 }

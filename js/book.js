@@ -119,6 +119,7 @@ function renderPagination(totalPages, currentPage) {
   };
   paginationContainer.appendChild(lastBtn);
 }
+
 // HÀM HỖ TRỢ: Cuộn màn hình đến khu vực "Sách hay" một cách mượt mà
 function scrollToBooks() {
   const bookGrid = document.getElementById("book-grid");
@@ -193,19 +194,36 @@ function renderBooks(booksToRender) {
 }
 
 // ===================================================================
-// TÍNH NĂNG SLIDER ĐỀ XUẤT SÁCH (SWIPER.JS)
-// ===================================================================
+// đề xuất sách
 async function loadRecommendedSlider() {
   const username =
     localStorage.getItem("username") == null
       ? ""
       : localStorage.getItem("username");
-  // Tìm đúng khung HTML bạn đã tạo
   const sliderWrapper = document.getElementById("slider-wrapper");
   if (!sliderWrapper) return;
 
+  let loadingAnimation = "";
+  for (let i = 0; i < 4; i++) {
+    loadingAnimation += `
+      <div class="swiper-slide !h-auto flex mr-4" style="width: 23%;">
+          <div class="relative flex flex-col w-full h-full p-3 bg-white border border-transparent rounded-lg shadow">
+              <div class="relative mb-3 overflow-hidden rounded-md h-56 bg-gray-200 animate-pulse"></div>
+              
+              <div class="h-4 bg-gray-200 animate-pulse rounded w-full mb-2"></div>
+              <div class="h-4 bg-gray-200 animate-pulse rounded w-2/3 mb-2"></div>
+              
+              <div class="mt-auto h-3 bg-gray-200 animate-pulse rounded w-1/2"></div>
+          </div>
+      </div>
+    `;
+  }
+
+  // Đổ khung xương vào HTML ngay lập tức để user xem trong lúc chờ đợi
+  sliderWrapper.innerHTML = loadingAnimation;
+
   try {
-    // Gọi API lấy sách đề xuất (Lấy 10 cuốn để trượt cho đã)
+    //gọi api lấy sách đề xuất
     const response = await fetch(
       `http://localhost:8080/api/books/recommend?username=${username}`,
     );
@@ -215,7 +233,7 @@ async function loadRecommendedSlider() {
 
     sliderWrapper.innerHTML = "";
 
-    // Tạo HTML cho từng Slide sách đề xuất
+    //tạo slide sách
     recommendedBooks.forEach((book) => {
       const vipBadge =
         book.type && book.type.trim().toUpperCase() === "VIP"
@@ -250,7 +268,7 @@ async function loadRecommendedSlider() {
       sliderWrapper.innerHTML += slideHTML;
     });
 
-    // CHẠY HIỆU ỨNG TRƯỢT SAU KHI ĐÃ CÓ HTML
+    //chạy hiệu ứng
     initRecommendedSwiper();
   } catch (error) {
     console.error("Lỗi tải Slider Đề xuất:", error);
@@ -259,14 +277,14 @@ async function loadRecommendedSlider() {
   }
 }
 
-// Cấu hình tính năng trượt (Dùng class "mySwiper" giống file HTML của bạn)
+// cấu hình tính năng trượt
 function initRecommendedSwiper() {
   new Swiper(".mySwiper", {
     slidesPerView: 4, // Trên điện thoại hiện 2 quyển
     spaceBetween: 20, // Khoảng cách 15px
-    loop: true, // Không cuộn vòng lặp
+    loop: true,
     autoplay: {
-      delay: 4000, // Trượt sau 4s
+      delay: 3500, // Trượt sau 4s
       disableOnInteraction: true,
     },
     navigation: {
