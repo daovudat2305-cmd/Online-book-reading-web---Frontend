@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             renderHistory(data.content);
-            renderPaginationUI(data.totalPages, data.number);
+            // Tổng số trang tối đa là 2
+            let maxDisplayPages = Math.min(data.totalPages,2);
+            renderPaginationUI(maxDisplayPages, data.number);
         })
         .catch(error => {
             historyContainer.innerHTML = `<p class="text-center text-red-500 font-bold mt-4">${error.message}</p>`;
