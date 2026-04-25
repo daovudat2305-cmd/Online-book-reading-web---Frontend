@@ -521,17 +521,31 @@ favoriteBtn.addEventListener('click', async function() {
 
 // Lưu số trang
 function handleManualSave() {
-    const pageInput = document.getElementById('manual-page-input');
-    const pageValue = parseInt(pageInput.value);
+        const pageInput = document.getElementById('manual-page-input');
+        // 🟢 ĐỔI THÀNH 'let' để có thể sửa lại giá trị nếu nhập lố
+        let pageValue = parseInt(pageInput.value); 
 
-    if (isNaN(pageValue) || pageValue < 1) {
-        alert("Vui lòng nhập số trang hợp lệ!");
-        return;
+        if (isNaN(pageValue) || pageValue < 1) {
+            alert("Vui lòng nhập số trang hợp lệ!");
+            return;
+        }
+        // Lấy tổng số trang từ currentBook (nếu null thì tạm cho là 1)
+        const totalPages = currentBook.totalPages || 1;
+
+        if (pageValue > totalPages) {
+            // Hiện popup cảnh báo nhẹ nhàng
+            alert(`⚠️ Cuốn sách này chỉ có ${totalPages} trang! Hệ thống sẽ lưu tiến độ của bạn ở trang cuối cùng nhé.`);
+            
+            // Ép số trang về mức tối đa
+            pageValue = totalPages; 
+            
+            // Cập nhật lại luôn con số trên giao diện cho khớp
+            pageInput.value = totalPages;
+        }
+
+        // Truyền thêm chữ 'true' ở cuối để báo đây là lưu thủ công
+        saveReadingHistory(currentBook.bookId, pageValue, true);
     }
-
-    // Truyền thêm chữ 'true' ở cuối để báo đây là lưu thủ công -> cần hiện Alert
-    saveReadingHistory(currentBook.bookId, pageValue, true);
-}
 
 // Hàm lưu lịch sử
 function saveReadingHistory(bookId, page = null, isManual = false) {

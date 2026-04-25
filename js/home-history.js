@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if(!historyContainer) return;
 
         historyContainer.innerHTML = '<p class="text-center animate-pulse mt-4 font-bold text-gray-500">Đang tải lịch sử của bạn...</p>';
-        // Xóa sạch mọi dấu ngoặc kép hoặc khoảng trắng thừa nếu có
         let cleanToken = token.replace(/['"]+/g, '').trim();
         // Kiểm tra xem đã có chữ 'Bearer ' chưa, nếu chưa thì tự ghép vào
         let finalHeader = cleanToken.startsWith('Bearer ') ? cleanToken : `Bearer ${cleanToken}`;
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // In ra màn hình F12 (Console) để xem Token gửi đi có chuẩn không
         console.log("Token đang gửi đi là:", finalHeader); 
 
-        // --- GỌI API ---
+        // GỌI API
         fetch(`http://localhost:8080/api/user/history/list?page=${currentPage}&size=${pageSize}`, {
             method: 'GET',
             headers: {
@@ -54,36 +53,24 @@ document.addEventListener("DOMContentLoaded", function() {
             historyContainer.innerHTML = `<p class="text-center text-red-500 font-bold mt-4">${error.message}</p>`;
         });
     }
-
-    // Hàm chuyển đổi giây thành giờ/phút
+    // Hàm chuyển đổi giây thành Giờ / Phút / Giây
     function formatReadingTime(totalSeconds) {
-        if (!totalSeconds || totalSeconds < 60) return "Chưa tới 1 phút";
+        if (!totalSeconds || totalSeconds <= 0) return "0 giây";
         
+        // Tính toán Giờ, Phút, Giây
         let hours = Math.floor(totalSeconds / 3600);
         let minutes = Math.floor((totalSeconds % 3600) / 60);
+        let seconds = totalSeconds % 60;
         
-        if (hours > 0) return `${hours} giờ ${minutes} phút`;
-        return `${minutes} phút`;
+        // Gom các đoạn text lại
+        let parts = [];
+        if (hours > 0) parts.push(`${hours} giờ`);
+        if (minutes > 0) parts.push(`${minutes} phút`);
+        if (seconds > 0) parts.push(`${seconds} giây`);
+        
+        // Nối chúng lại bằng dấu cách
+        return parts.join(' ');
     }
-
-// Hàm chuyển đổi giây thành Giờ / Phút / Giây
-function formatReadingTime(totalSeconds) {
-    if (!totalSeconds || totalSeconds <= 0) return "0 giây";
-    
-    // Tính toán Giờ, Phút, Giây
-    let hours = Math.floor(totalSeconds / 3600);
-    let minutes = Math.floor((totalSeconds % 3600) / 60);
-    let seconds = totalSeconds % 60;
-    
-    // Gom các đoạn text lại
-    let parts = [];
-    if (hours > 0) parts.push(`${hours} giờ`);
-    if (minutes > 0) parts.push(`${minutes} phút`);
-    if (seconds > 0) parts.push(`${seconds} giây`);
-    
-    // Nối chúng lại bằng dấu cách
-    return parts.join(' ');
-}
 
     // HÀM RENDER LỊCH SỬ
     function renderHistory(historyList) {
@@ -104,6 +91,11 @@ function formatReadingTime(totalSeconds) {
             const categoryNames = (book.categories && book.categories.length > 0) 
                                 ? book.categories.map(c => c.categoryName).join(', ') 
                                 : 'Chưa cập nhật';
+            
+            let currentPage = item.currentPage || 1; 
+            let totalPages = book.totalPages || 1; // Lấy tổng trang từ Database
+            let percent = Math.round((currentPage / totalPages) * 100);
+            if (percent > 100) percent = 100; // Chống vượt quá 100%
 
             const html = `
                 <div class="flex bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition mb-4">
@@ -118,7 +110,7 @@ function formatReadingTime(totalSeconds) {
                             </div>
                             
                             <p class="text-xs text-gray-400 mt-3 flex items-center gap-3">
-                                <span>Đã đọc: <span class="text-gray-600 font-semibold">${formattedDate}</span> ${item.currentPage ? `<span class="text-blue-500 font-bold ml-1">(Trang ${item.currentPage})</span>` : ''}</span>
+                                <span>Đã đọc: <span class="text-gray-600 font-semibold">${formattedDate}</span> ${item.currentPage ? `<span class="text-blue-500 font-bold ml-1">(Trang ${item.currentPage} | ${percent}%)</span>` : ''}</span>
                                 
                                 <span class="text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded border border-green-100">
                                     <i class="fa-regular fa-clock mr-1"></i>Thời gian: ${formatReadingTime(item.totalReadingTimeSeconds)}
