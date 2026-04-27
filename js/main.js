@@ -1,100 +1,113 @@
 //kiểm tra đăng nhập và hiện thị avatar cùng username ở trang chủ hoặc thay bằng nút đăng nhập/đăng ký
 //nếu chưa đăng nhập thì hiển thị nút đăng nhập / đăng ký
-let isLogin = false
-let isVip = false
-let user = null
-document.addEventListener('DOMContentLoaded', function(){
-    checkLoginState()
-})
+let isLogin = false;
+let isVip = false;
+let user = null;
+document.addEventListener("DOMContentLoaded", function () {
+  checkLoginState();
+
+  // hiện thị thông báo thành công từ trang đăng nhập
+  const message = sessionStorage.getItem("toastMessage");
+  const type = sessionStorage.getItem("toastType");
+
+  if (message && type) {
+    showToast(message, type);
+
+    sessionStorage.removeItem("toastMessage");
+    sessionStorage.removeItem("toastType");
+  }
+});
 
 function checkLoginState() {
-    // đọc token
-    const token = localStorage.getItem('jwtToken')
-    const username = localStorage.getItem('username')
-    const role = localStorage.getItem('role')
+  // đọc token
+  const token = localStorage.getItem("jwtToken");
+  const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
 
-    const guestMenu = document.getElementById('guest-menu')
-    const userMenu = document.getElementById('user-menu')
+  const guestMenu = document.getElementById("guest-menu");
+  const userMenu = document.getElementById("user-menu");
 
-    if(token) {
-        //nếu có
-        isLogin = true
-        guestMenu.style.display = 'none' 
-        userMenu.style.display = 'flex'
-        document.getElementById('display-username').innerText = username
-        document.getElementById('profileBtn').href = role == "USER" ? "profile.html" : "profile-author.html"
-        window.userLoadPromise = loadAvatar()
-    }
-    else {
-        guestMenu.style.display = 'block'
-        userMenu.style.display = 'none'
-    }
+  if (token) {
+    //nếu có
+    isLogin = true;
+    guestMenu.style.display = "none";
+    userMenu.style.display = "flex";
+    document.getElementById("display-username").innerText = username;
+    document.getElementById("profileBtn").href =
+      role == "USER" ? "profile.html" : "profile-author.html";
+    window.userLoadPromise = loadAvatar();
+  } else {
+    guestMenu.style.display = "block";
+    userMenu.style.display = "none";
+  }
 }
 
 // Hàm xử lý khi bấm Đăng xuất
 function logout() {
-    // Chỉ cần xóa Token khỏi LocalStorage
-    localStorage.removeItem('jwtToken')
-    localStorage.removeItem('username')
-    localStorage.removeItem('role')
-    isLogin = false
+  // Chỉ cần xóa Token khỏi LocalStorage
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("username");
+  localStorage.removeItem("role");
+  isLogin = false;
 
-    // Tải lại trang chủ để giao diện cập nhật lại thành nút Đăng nhập
-    window.location.reload()
+  // Tải lại trang chủ để giao diện cập nhật lại thành nút Đăng nhập
+  window.location.reload();
 }
 
-
 // click vào phần avatar
-const avatarBtn = document.getElementById("avatarBtn")
-const avatarMenu = document.getElementById("avatarMenu")
+const avatarBtn = document.getElementById("avatarBtn");
+const avatarMenu = document.getElementById("avatarMenu");
 
 avatarBtn.addEventListener("click", () => {
-    avatarMenu.classList.toggle("hidden")
-})
+  avatarMenu.classList.toggle("hidden");
+});
 
 // click ra ngoài thì đóng
 document.addEventListener("click", (e) => {
-    if (!avatarBtn.contains(e.target) && !avatarMenu.contains(e.target)) {
-    avatarMenu.classList.add("hidden")
-    }
-})
+  if (!avatarBtn.contains(e.target) && !avatarMenu.contains(e.target)) {
+    avatarMenu.classList.add("hidden");
+  }
+});
 
 //hiển thị avatar
-const API_URL = "http://localhost:8080/api/users"
-const token = localStorage.getItem('jwtToken')
+const API_URL = "http://localhost:8080/api/users";
+const token = localStorage.getItem("jwtToken");
 async function loadAvatar() {
-    try {
-        // gọi API
-        const response = await fetch(`${API_URL}/myInfo`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-        })
+  try {
+    // gọi API
+    const response = await fetch(`${API_URL}/myInfo`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-        if(!response.ok) {
-            const errData = await response.json();
-            const errMessage = errData.error || JSON.stringify(errData)
-            throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ")
-        }
-        //hien thi du lieu
-        const data = await response.json()
-        user = data
-        const avatarBtn = document.getElementById("avatarBtn")
-        const avatar = document.getElementById('avatarPreview')
-        avatar.src = data.avatar
-        if(document.getElementById('comment-avatar')) document.getElementById('comment-avatar').src = data.avatar
-        if(data.isVip) {
-            isVip = true
-            avatar.classList.add("border-3", "border-yellow-400")
-            avatarBtn.insertAdjacentHTML("beforeend", `<i class="fa-solid fa-crown text-yellow-400"></i>`)
-        }
-        else {
-            avatar.classList.add("border-3", "border-n-500")
-        }
-    } catch (error) {
-        alert(error.message)
-        console.error('Error: ', error)
+    if (!response.ok) {
+      const errData = await response.json();
+      const errMessage = errData.error || JSON.stringify(errData);
+      throw new Error(errMessage || "Có lỗi xảy ra ở máy chủ");
     }
+    //hien thi du lieu
+    const data = await response.json();
+    user = data;
+    const avatarBtn = document.getElementById("avatarBtn");
+    const avatar = document.getElementById("avatarPreview");
+    avatar.src = data.avatar;
+    if (document.getElementById("comment-avatar"))
+      document.getElementById("comment-avatar").src = data.avatar;
+    if (data.isVip) {
+      isVip = true;
+      avatar.classList.add("border-3", "border-yellow-400");
+      avatarBtn.insertAdjacentHTML(
+        "beforeend",
+        `<i class="fa-solid fa-crown text-yellow-400"></i>`,
+      );
+    } else {
+      avatar.classList.add("border-3", "border-n-500");
+    }
+  } catch (error) {
+    alert(error.message);
+    console.error("Error: ", error);
+  }
 }
