@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 2. HÀM LẤY SÁCH TỪ SERVER (ĐÃ NÂNG CẤP DÙNG API FILTER ĐA NĂNG)
+  // 2. HÀM LẤY SÁCH TỪ SERVER
 
   function fetchBooks(apiUrl) {
     const token =
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .map((cb) => cb.value)
       .join(",");
 
-    // C. THAY ĐỔI: Lấy giá trị sắp xếp từ Radio Button được chọn
+    // C. Lấy giá trị sắp xếp từ Radio Button được chọn
     const activeSort = document.querySelector(
       'input[name="admin-sort"]:checked',
     );
@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const status = isCurrentPending ? 0 : 1;
 
-    // D. QUAN TRỌNG: URL khớp với Context Path '/api' và Controller '/admin/books/filter'
     const url = `http://localhost:8080/api/admin/books/filter?keyword=${query}&categories=${checkedCats}&status=${status}&page=${currentPage}&size=${pageSize}&sort=${sortValue}`;
 
     fetchBooks(url);
@@ -264,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ),
     );
 
-    // TÍNH TOÁN CỬA SỔ HIỂN THỊ TRANG (Hiển thị tối đa 5 nút số như hình)
+    // TÍNH TOÁN CỬA SỔ HIỂN THỊ TRANG
     const maxVisiblePages = 5;
     let startPage = Math.max(0, page - Math.floor(maxVisiblePages / 2));
     let endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 1);

@@ -76,7 +76,7 @@ function openQR(data) {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`, // Đảm bảo bạn đã khai báo biến token ở trên cùng file
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -128,7 +128,7 @@ function openQR(data) {
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal || e.target.closest(".close-btn")) {
-      // RẤT QUAN TRỌNG: Phải tắt vòng lặp kiểm tra API khi đóng khung
+      // tắt vòng lặp kiểm tra API khi đóng khung
       clearInterval(checkStatusInterval);
       modal.remove();
 
