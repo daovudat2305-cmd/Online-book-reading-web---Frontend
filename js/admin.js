@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const token = localStorage.getItem("jwtToken");
+  const role = localStorage.getItem("role");
+
+  if (!token || role !== "ADMIN") {
+    alert("Cảnh báo: Bạn không có quyền truy cập trang quản trị!");
+    window.location.href = "login.html";
+    return;
+  }
+
   // hiện thị thông báo thành công từ trang đăng nhập
   const message = sessionStorage.getItem("toastMessage");
   const type = sessionStorage.getItem("toastType");

@@ -83,6 +83,13 @@ async function loadAvatar() {
       },
     });
 
+    if (response.status === 401) {
+      alert("Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!");
+      localStorage.clear();
+      window.location.href = "login.html";
+      return;
+    }
+
     if (!response.ok) {
       const errData = await response.json();
       const errMessage = errData.error || JSON.stringify(errData);
